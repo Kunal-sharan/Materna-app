@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import saveIcon from "@/assets/save.png";
 import savedIcon from "@/assets/saved.png";
@@ -31,6 +31,11 @@ const Wellness = () => {
   const [showFavorites, setShowFavorites] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLoginPrompt, setShowLoginPrompt] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("maternaUserToken");
+    setIsLoggedIn(!!token);
+  }, []);
 
   const applyFilters = () => {
     let cards = allCards;

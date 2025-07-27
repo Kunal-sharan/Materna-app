@@ -13,6 +13,7 @@ export default function Login() {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const token = await userCredential.user.getIdToken();
+      localStorage.setItem("maternaUserToken", token);
       console.log("Firebase ID token:", token);
       // You can now send this token to the Django backend for verification
       navigate("/profile");

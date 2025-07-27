@@ -48,14 +48,18 @@ const Journal = () => {
 
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
 
-  useEffect(() => {
-    document.body.classList.add('journal-page');
-    document.documentElement.classList.add('journal-page');
-    return () => {
-      document.body.classList.remove('journal-page');
-      document.documentElement.classList.remove('journal-page');
-    };
-  }, []);
+useEffect(() => {
+  document.body.classList.add('journal-page');
+  document.documentElement.classList.add('journal-page');
+
+  const token = localStorage.getItem("maternaUserToken");
+  setIsLoggedIn(!!token);
+
+  return () => {
+    document.body.classList.remove('journal-page');
+    document.documentElement.classList.remove('journal-page');
+  };
+}, []);
   const moods = [angryFace, happy, crying, unhappy, sleeping, puke, smile, annoyed];
   const pastelColors = [
     "#ffe0e0", // light red
