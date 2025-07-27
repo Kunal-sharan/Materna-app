@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile } from "firebase/auth";
 import { auth } from "../firebase";
 import selfCareImage from "../assets/self-care.svg";
 import trackerImage from "../assets/tracker.svg";
@@ -39,6 +39,19 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const handleGoogleSignup = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const token = await result.user.getIdToken();
+      console.log("Google Firebase ID token:", token);
+      navigate("/profile");
+    } catch (error) {
+      console.error("Google sign-in error:", error.message);
+      setErrorMessage(error.message);
+    }
+  };
+
   const handleSignup = async () => {
     setErrorMessage(""); // Clear previous errors
 
@@ -58,9 +71,14 @@ export default function Signup() {
 
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+      await updateProfile(userCredential.user, {
+        displayName: nickname,
+      });
+
       const token = await userCredential.user.getIdToken();
       console.log("Firebase ID token:", token);
-      navigate("/");
+      navigate("/profile");
     } catch (error) {
       console.error("Signup error:", error.message);
       setErrorMessage(error.message);
@@ -88,7 +106,10 @@ export default function Signup() {
         <h2 className="text-2xl font-bold text-[#234451]">Are you ready for a journey?</h2>
         <p className="text-sm text-[#234451] mt-2">Create your account.</p>
 
-        <button className="mt-6 border border-gray-300 rounded-lg py-2 flex items-center justify-center">
+        <button
+          onClick={handleGoogleSignup}
+          className="mt-6 border border-gray-300 rounded-lg py-2 flex items-center justify-center"
+        >
           <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5 mr-2" />
           <span className="text-sm">Sign up with Google</span>
         </button>

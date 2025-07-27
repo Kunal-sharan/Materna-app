@@ -15,7 +15,7 @@ export default function Login() {
       const token = await userCredential.user.getIdToken();
       console.log("Firebase ID token:", token);
       // You can now send this token to the Django backend for verification
-      navigate("/");
+      navigate("/profile");
     } catch (error) {
       console.error("Login error:", error.message);
     }

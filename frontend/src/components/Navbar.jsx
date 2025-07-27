@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -14,6 +15,7 @@ const navItems = [
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +25,15 @@ export const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+    return () => unsubscribe();
+  }, []);
+
   return (
     <nav
       className={cn(
@@ -60,12 +71,22 @@ export const Navbar = () => {
           ))}
         </div>
 
-        <Link
-          to="/signup"
-          className="hidden md:inline-block px-4 py-2 text-sm font-semibold text-white bg-[#a48bc3] rounded-xl hover:bg-[#9771bc] transition"
-        >
-          Login / Sign Up
-        </Link>
+        {user ? (
+          <Link to="/profile">
+            <img
+              src={user.photoURL || "https://i.pinimg.com/236x/40/41/6f/40416fe5cfc9de788b1fcd769c93013a.jpg"}
+              alt="profile"
+              className="hidden md:inline-block h-10 w-10 rounded-full object-cover"
+            />
+          </Link>
+        ) : (
+          <Link
+            to="/signup"
+            className="hidden md:inline-block px-4 py-2 text-sm font-semibold text-white bg-[#a48bc3] rounded-xl hover:bg-[#9771bc] transition"
+          >
+            Login / Sign Up
+          </Link>
+        )}
 
         {/* mobile nav */}
 
@@ -97,13 +118,23 @@ export const Navbar = () => {
                 {item.name}
               </Link>
             ))}
-            <Link
-              to="/signup"
-              className="text-[#a48bc3] hover:text-[#9771bc] transition text-lg font-semibold"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Login / Sign Up
-            </Link>
+            {user ? (
+              <Link
+                to="/profile"
+                className="text-[#a48bc3] hover:text-[#9771bc] transition text-lg font-semibold"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                View Profile
+              </Link>
+            ) : (
+              <Link
+                to="/signup"
+                className="text-[#a48bc3] hover:text-[#9771bc] transition text-lg font-semibold"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Login / Sign Up
+              </Link>
+            )}
           </div>
         </div>
       </div>
