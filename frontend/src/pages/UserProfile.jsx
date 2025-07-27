@@ -7,6 +7,13 @@ import bgVideo from "@/assets/sky1.mp4";
 import { StarStill } from "@/components/StarStill";
 import { Toaster, toast } from "react-hot-toast";
 import editIcon from "@/assets/editing.png";
+import babyIcon from "@/assets/baby.png";
+import weight from "@/assets/bbweight.png";
+import size from "@/assets/bbsize.png";
+import calendarIcon from "@/assets/calendar.png";
+import clockIcon from "@/assets/clock.png";
+import phoneIcon from "@/assets/phone-call.png";
+import increaseIcon from "@/assets/increase.png";
 
 export default function UserProfile() {
   const navigate = useNavigate();
@@ -15,6 +22,7 @@ export default function UserProfile() {
   const [userData, setUserData] = useState({});
   const [isEditingPersonal, setIsEditingPersonal] = useState(false);
   const [isEditingJourney, setIsEditingJourney] = useState(false);
+  const [growthView, setGrowthView] = useState("today");
 
   const fileInputRef = useRef(null);
 
@@ -325,28 +333,103 @@ export default function UserProfile() {
             </div>
           </div>
 
-          {/* Quick Actions */}
+          {/* Upcoming Appointments */}
           <div className="bg-white/30 backdrop-blur-lg border border-white/20 rounded-2xl shadow p-6 md:col-start-3 md:row-start-1">
-            <h2 className="font-semibold text-lg mb-4">Quick Actions</h2>
-            <div className="space-y-2 text-sm">
-              <button
-                className="w-full bg-[#f3ecfc] hover:bg-[#e8d8f8] text-[#6f4fa1] font-semibold py-2 rounded-xl"
-                onClick={() => navigate("/journal")}
-              >
-                Log Today’s Symptoms
-              </button>
-              <button
-                className="w-full bg-[#f3ecfc] hover:bg-[#e8d8f8] text-[#6f4fa1] font-semibold py-2 rounded-xl"
-                onClick={() => navigate("/wellness")}
-              >
-                View Saved Resources
-              </button>
-              <button
-                className="w-full bg-[#f3ecfc] hover:bg-[#e8d8f8] text-[#6f4fa1] font-semibold py-2 rounded-xl"
-                onClick={() => navigate("/community")}
-              >
-                Join Community
-              </button>
+            <h2 className="font-semibold text-lg mb-4">Upcoming Appointments</h2>
+            <div className="bg-[#f3ecfc] text-[#6f4fa1] rounded-xl p-4 shadow-lg flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <img
+                    src="https://randomuser.me/api/portraits/women/44.jpg"
+                    alt="Dr. Lila Everly"
+                    className="w-10 h-10 rounded-full object-cover"
+                  />
+                  <div>
+                    <p className="font-semibold text-sm">Dr. Lila Everly</p>
+                    <p className="text-xs text-[#9771bc]">Gynecologist</p>
+                  </div>
+                </div>
+                <div className="bg-[#9771bc] text-white p-2 rounded-full cursor-pointer flex items-center justify-center">
+                  <img src={phoneIcon} alt="Phone" className="w-4 h-4" />
+                </div>
+              </div>
+              <div className="flex justify-between items-center text-sm mt-2">
+                <div className="flex items-center gap-1">
+                  <img src={calendarIcon} alt="Calendar" className="w-4 h-4" /> <span>11 Dec. '24</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <img src={clockIcon} alt="Clock" className="w-4 h-4" /> <span>09:15 AM</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Growth Tracker */}
+          <div className="col-span-3 bg-white/30 backdrop-blur-lg border border-white/20 rounded-3xl p-6 shadow-lg text-[#234451]">
+            <h2 className="text-xl font-bold text-[#6f4fa1] mb-4">Growth tracker</h2>
+            <div className="flex justify-start gap-6 mb-4">
+              {["today", "weekly", "trimester"].map((view) => (
+                <button
+                  key={view}
+                  className={`${
+                    growthView === view
+                      ? "bg-[#a48bc3] text-white"
+                      : "bg-[#e8d8f8] text-[#6f4fa1]"
+                  } text-sm font-medium px-4 py-1 rounded-full shadow`}
+                  onClick={() => setGrowthView(view)}
+                >
+                  {view.charAt(0).toUpperCase() + view.slice(1)}
+                </button>
+              ))}
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-4 items-center">
+              {/* Illustration */}
+              <div className="col-span-1 flex justify-center">
+                <div className="w-40 h-40 rounded-full bg-[#e8d8f8] flex items-center justify-center relative">
+                  <img
+                    src={babyIcon}
+                    alt="Fetus"
+                    className="w-28 h-28 object-contain"
+                  />
+                </div>
+              </div>
+
+              {/* Metrics */}
+              <div className="col-span-2 grid grid-cols-2 gap-4">
+                {/* Weight */}
+                <div className="bg-white/30 backdrop-blur-sm rounded-xl p-4 shadow-sm border border-white/20 flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-white/50 p-2 rounded-xl">
+                      <img src={weight} alt="Weight" className="w-7 h-7" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-[#444]">Weight</p>
+                      <p className="text-xl font-bold text-[#234451]">1,8 kg</p>
+                    </div>
+                  </div>
+                  <p className="text-xs text-[#f87171] font-semibold">
+                    <img src={increaseIcon} alt="Increase" className="w-3 h-3 inline mr-1" />
+                    3.6%
+                  </p>
+                </div>
+
+                {/* Size */}
+                <div className="bg-white/30 backdrop-blur-sm rounded-xl p-4 shadow-sm border border-white/20 flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-white/50 p-2 rounded-xl">
+                      <img src={size} alt="Size" className="w-7 h-7" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-[#444]">Size</p>
+                      <p className="text-xl font-bold text-[#234451]">1.8 in</p>
+                    </div>
+                  </div>
+                  <p className="text-xs text-[#f87171] font-semibold">
+                    <img src={increaseIcon} alt="Increase" className="w-3 h-3 inline mr-1" />
+                    3.6%
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
