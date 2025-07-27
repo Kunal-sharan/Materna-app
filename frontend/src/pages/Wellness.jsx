@@ -29,6 +29,8 @@ const Wellness = () => {
   const [filters, setFilters] = useState({ trimester: "All", category: "All", fitness: "All" });
   const [favorites, setFavorites] = useState([]);
   const [showFavorites, setShowFavorites] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false);
 
   const applyFilters = () => {
     let cards = allCards;
@@ -70,130 +72,152 @@ const Wellness = () => {
     <>
       <Navbar />
       <StarStill />
-      <main className="min-h-screen pt-32 px-8 relative overflow-hidden">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="fixed top-0 left-0 w-full h-screen object-cover -z-10"
-        >
-          <source src={bgVideo} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <div className="fixed top-0 left-0 w-full h-screen bg-white/50 backdrop-blur-sm -z-10"></div>
-        <div className="max-w-7xl mx-auto">
-          <section className="bg-white/40 backdrop-blur-md rounded-lg shadow p-6 text-center">
-            <h1 className="text-3xl font-bold text-[#234451]">A healthy baby starts with you.</h1>
-            <p className="mt-2 text-lg text-[#234451]">
-              From pregnancy safe recipes to gentle exercises, we've got you covered.
-            </p>
-            <div className="mt-4 flex justify-center gap-2 flex-wrap">
-              <span className="bg-[#DFA69F] text-[#234451] text-xs px-2 py-1 rounded-full">Personalized for you</span>
-            </div>
-          </section>
-
-          <div className="flex flex-col lg:flex-row mt-8 gap-8">
-            <aside className="lg:w-1/4 space-y-6">
-              <div className="bg-white/40 backdrop-blur-md rounded-lg shadow p-4">
-                <h2 className="text-lg font-semibold text-[#234451]">Quick Categories</h2>
-                <ul className="mt-2 space-y-1 text-[#234451] text-sm">
-                  {["Recipe", "Exercise", "Meditation", "Self-Care"].map((cat, i) => (
-                    <li
-                      key={i}
-                      onClick={() => {
-                        setFilters({ ...filters, category: cat });
-                        applyFilters();
-                      }}
-                      className={`cursor-pointer hover:underline ${filters.category === cat ? 'font-semibold' : ''}`}
-                    >
-                      {cat} <span className="text-xs text-[#234451]">({allCards.filter(c => c.category === cat).length})</span>
-                    </li>
-                  ))}
-                </ul>
+      <div onClick={() => { if (!isLoggedIn) setShowLoginPrompt(true); }}>
+        <main className="min-h-screen pt-32 px-8 relative overflow-hidden">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="fixed top-0 left-0 w-full h-screen object-cover -z-10"
+          >
+            <source src={bgVideo} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div className="fixed top-0 left-0 w-full h-screen bg-white/50 backdrop-blur-sm -z-10"></div>
+          <div className="max-w-7xl mx-auto">
+            <section className="bg-white/40 backdrop-blur-md rounded-lg shadow p-6 text-center">
+              <h1 className="text-3xl font-bold text-[#234451]">A healthy baby starts with you.</h1>
+              <p className="mt-2 text-lg text-[#234451]">
+                From pregnancy safe recipes to gentle exercises, we've got you covered.
+              </p>
+              <div className="mt-4 flex justify-center gap-2 flex-wrap">
+                <span className="bg-[#DFA69F] text-[#234451] text-xs px-2 py-1 rounded-full">Personalized for you</span>
               </div>
+            </section>
 
-              <div className="bg-white/40 backdrop-blur-md rounded-lg shadow p-4">
-                <div className="flex justify-between items-center cursor-pointer" onClick={() => setShowFavorites(!showFavorites)}>
-                  <h2 className="text-lg font-semibold text-[#234451]">Your Favorites</h2>
-                  <span className="text-[#234451] text-xl">{showFavorites ? "–" : "+"}</span>
-                </div>
-                {showFavorites && (
+            <div className="flex flex-col lg:flex-row mt-8 gap-8">
+              <aside className="lg:w-1/4 space-y-6">
+                <div className="bg-white/40 backdrop-blur-md rounded-lg shadow p-4">
+                  <h2 className="text-lg font-semibold text-[#234451]">Quick Categories</h2>
                   <ul className="mt-2 space-y-1 text-[#234451] text-sm">
-                    {favorites.length === 0 ? (
-                      <li>No favorites yet.</li>
-                    ) : (
-                      favorites.map((fav, i) => <li key={i}>♡ {fav}</li>)
-                    )}
+                    {["Recipe", "Exercise", "Meditation", "Self-Care"].map((cat, i) => (
+                      <li
+                        key={i}
+                        onClick={() => {
+                          setFilters({ ...filters, category: cat });
+                          applyFilters();
+                        }}
+                        className={`cursor-pointer hover:underline ${filters.category === cat ? 'font-semibold' : ''}`}
+                      >
+                        {cat} <span className="text-xs text-[#234451]">({allCards.filter(c => c.category === cat).length})</span>
+                      </li>
+                    ))}
                   </ul>
+                </div>
+
+                <div className="bg-white/40 backdrop-blur-md rounded-lg shadow p-4">
+                  <div className="flex justify-between items-center cursor-pointer" onClick={() => setShowFavorites(!showFavorites)}>
+                    <h2 className="text-lg font-semibold text-[#234451]">Your Favorites</h2>
+                    <span className="text-[#234451] text-xl">{showFavorites ? "–" : "+"}</span>
+                  </div>
+                  {showFavorites && (
+                    <ul className="mt-2 space-y-1 text-[#234451] text-sm">
+                      {favorites.length === 0 ? (
+                        <li>No favorites yet.</li>
+                      ) : (
+                        favorites.map((fav, i) => <li key={i}>♡ {fav}</li>)
+                      )}
+                    </ul>
+                  )}
+                </div>
+              </aside>
+
+              <div className="flex-1 space-y-6">
+                <div className="flex gap-2 flex-wrap">
+                  <select onChange={(e) => setFilters({ ...filters, trimester: e.target.value })} className="border border-[#EAE3CA] rounded px-2 py-1 text-sm text-[#234451] bg-white/20 backdrop-blur-md">
+                    <option>All</option>
+                    <option>1st Trimester</option>
+                    <option>2nd Trimester</option>
+                    <option>3rd Trimester</option>
+                    <option>Postpartum</option>
+                  </select>
+                  <select onChange={(e) => setFilters({ ...filters, category: e.target.value })} className="border border-[#EAE3CA] rounded px-2 py-1 text-sm text-[#234451] bg-white/20 backdrop-blur-md">
+                    <option>All</option>
+                    <option>Recipe</option>
+                    <option>Exercise</option>
+                    <option>Meditation</option>
+                    <option>Self-Care</option>
+                  </select>
+                  <select onChange={(e) => setFilters({ ...filters, fitness: e.target.value })} className="border border-[#EAE3CA] rounded px-2 py-1 text-sm text-[#234451] bg-white/20 backdrop-blur-md">
+                    <option>All</option>
+                    <option>Beginner</option>
+                  </select>
+                  <button onClick={applyFilters} className="bg-[#DFA69F] text-[#234451] px-4 py-1 rounded text-sm font-bold hover:bg-[#e8bbb5] transition">Apply</button>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                  {filteredCards.slice(0, visibleCount).map((card, i) => (
+                    <div
+                      key={i}
+                      className="bg-white/40 backdrop-blur-md rounded-lg shadow overflow-hidden cursor-pointer hover:shadow-lg transition"
+                      onClick={() => navigate(`/wellness/${i}`)}
+                    >
+                      <div className="w-full h-40 overflow-hidden">
+                        <img src={getImageForCategory(card.category)} alt={card.category} className="w-full h-full object-cover" />
+                      </div>
+                      <div className="p-4 space-y-2">
+                        <div className="flex gap-2 flex-wrap text-xs text-[#fff]">
+                          {card.tags.map((t, j) => (
+                            <span key={j} className="bg-[#99C8C1] text-[#234451] px-2 py-0.5 rounded">{t}</span>
+                          ))}
+                        </div>
+                        <h3 className="font-semibold text-[#234451] min-h-[3rem]">{card.title}</h3>
+                        <div className="flex justify-between items-center">
+                          <div className="text-xs text-[#234451]">{card.time}</div>
+                          <button onClick={(e) => { e.stopPropagation(); toggleFavorite(card.title); }}>
+                            <img
+                              src={favorites.includes(card.title) ? savedIcon : saveIcon}
+                              alt="Save Icon"
+                              className="w-5 h-5"
+                            />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {visibleCount < filteredCards.length && (
+                  <div className="flex justify-center">
+                    <button onClick={() => setVisibleCount(visibleCount + 3)} className="bg-[#DFA69F] text-[#234451] px-6 py-2 rounded text-sm font-bold hover:bg-[#e8bbb5] transition">Load More</button>
+                  </div>
                 )}
               </div>
-            </aside>
-
-            <div className="flex-1 space-y-6">
-              <div className="flex gap-2 flex-wrap">
-                <select onChange={(e) => setFilters({ ...filters, trimester: e.target.value })} className="border border-[#EAE3CA] rounded px-2 py-1 text-sm text-[#234451] bg-white/20 backdrop-blur-md">
-                  <option>All</option>
-                  <option>1st Trimester</option>
-                  <option>2nd Trimester</option>
-                  <option>3rd Trimester</option>
-                  <option>Postpartum</option>
-                </select>
-                <select onChange={(e) => setFilters({ ...filters, category: e.target.value })} className="border border-[#EAE3CA] rounded px-2 py-1 text-sm text-[#234451] bg-white/20 backdrop-blur-md">
-                  <option>All</option>
-                  <option>Recipe</option>
-                  <option>Exercise</option>
-                  <option>Meditation</option>
-                  <option>Self-Care</option>
-                </select>
-                <select onChange={(e) => setFilters({ ...filters, fitness: e.target.value })} className="border border-[#EAE3CA] rounded px-2 py-1 text-sm text-[#234451] bg-white/20 backdrop-blur-md">
-                  <option>All</option>
-                  <option>Beginner</option>
-                </select>
-                <button onClick={applyFilters} className="bg-[#DFA69F] text-[#234451] px-4 py-1 rounded text-sm font-bold hover:bg-[#e8bbb5] transition">Apply</button>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {filteredCards.slice(0, visibleCount).map((card, i) => (
-                  <div
-                    key={i}
-                    className="bg-white/40 backdrop-blur-md rounded-lg shadow overflow-hidden cursor-pointer hover:shadow-lg transition"
-                    onClick={() => navigate(`/wellness/${i}`)}
-                  >
-                    <div className="w-full h-40 overflow-hidden">
-                      <img src={getImageForCategory(card.category)} alt={card.category} className="w-full h-full object-cover" />
-                    </div>
-                    <div className="p-4 space-y-2">
-                      <div className="flex gap-2 flex-wrap text-xs text-[#fff]">
-                        {card.tags.map((t, j) => (
-                          <span key={j} className="bg-[#99C8C1] text-[#234451] px-2 py-0.5 rounded">{t}</span>
-                        ))}
-                      </div>
-                      <h3 className="font-semibold text-[#234451] min-h-[3rem]">{card.title}</h3>
-                      <div className="flex justify-between items-center">
-                        <div className="text-xs text-[#234451]">{card.time}</div>
-                        <button onClick={(e) => { e.stopPropagation(); toggleFavorite(card.title); }}>
-                          <img
-                            src={favorites.includes(card.title) ? savedIcon : saveIcon}
-                            alt="Save Icon"
-                            className="w-5 h-5"
-                          />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {visibleCount < filteredCards.length && (
-                <div className="flex justify-center">
-                  <button onClick={() => setVisibleCount(visibleCount + 3)} className="bg-[#DFA69F] text-[#234451] px-6 py-2 rounded text-sm font-bold hover:bg-[#e8bbb5] transition">Load More</button>
-                </div>
-              )}
             </div>
           </div>
+        </main>
+      </div>
+      {!isLoggedIn && showLoginPrompt && (
+        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
+          <div className="bg-white p-6 rounded-lg text-center shadow-lg space-y-4 relative w-80">
+            <button
+              onClick={() => setShowLoginPrompt(false)}
+              className="absolute top-2 right-2 text-gray-500 text-sm hover:text-black"
+            >
+              ✕
+            </button>
+            <h2 className="text-lg font-semibold text-[#234451]">Login Required</h2>
+            <p className="text-sm text-[#234451]">You need to be logged in to access wellness content.</p>
+            <a
+              href="/login"
+              className="block w-full bg-[#DFA69F] hover:bg-[#c9786d] text-white text-sm py-2 rounded mt-2"
+            >
+              Log In
+            </a>
+          </div>
         </div>
-      </main>
+      )}
       <Footer />
     </>
   );
