@@ -336,7 +336,7 @@ export default function UserProfile() {
           {/* Upcoming Appointments */}
           <div className="bg-white/30 backdrop-blur-lg border border-white/20 rounded-2xl shadow p-6 md:col-start-3 md:row-start-1">
             <h2 className="font-semibold text-lg mb-4">Upcoming Appointments</h2>
-            <div className="bg-[#f3ecfc] text-[#6f4fa1] rounded-xl p-4 shadow-lg flex flex-col gap-2">
+            <div className="bg-white/60 border border-gray-300 text-[#234451] rounded-xl p-4 shadow-lg flex flex-col gap-2">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <img
