@@ -1,8 +1,26 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import base from "../assets/base.svg"
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogin = async () => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const token = await userCredential.user.getIdToken();
+      console.log("Firebase ID token:", token);
+      // You can now send this token to the Django backend for verification
+      navigate("/");
+    } catch (error) {
+      console.error("Login error:", error.message);
+    }
+  };
+
   return (
     <div className="flex min-h-screen bg-gradient-to-r from-[#f5f7fa] to-[#e3ebf4] font-sans">
       {/* Left: Login Form */}
@@ -26,14 +44,21 @@ export default function Login() {
         <input
           className="mt-4 px-4 py-3 w-full border border-gray-200 rounded-xl placeholder-gray-400"
           placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
           className="mt-3 px-4 py-3 w-full border border-gray-200 rounded-xl placeholder-gray-400"
           placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button className="mt-6 bg-[#a48bc3] text-white py-3 rounded-xl font-semibold hover:bg-[#9771bc]">
+        <button
+          onClick={handleLogin}
+          className="mt-6 bg-[#a48bc3] text-white py-3 rounded-xl font-semibold hover:bg-[#9771bc]"
+        >
           Log in
         </button>
 

@@ -1,12 +1,15 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 import selfCareImage from "../assets/self-care.svg";
 import trackerImage from "../assets/tracker.svg";
 import needs from "../assets/needs.svg";
 import connect from "../assets/connect.svg";
 import welcome from "../assets/welcome.svg";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Signup() {
+  const navigate = useNavigate();
   const slides = [
     {
       title: "Track your symptoms effortlessly",
@@ -31,6 +34,38 @@ export default function Signup() {
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [nickname, setNickname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSignup = async () => {
+    setErrorMessage(""); // Clear previous errors
+
+    // Password requirements
+    if (password.length < 6) {
+      setErrorMessage("Password must be at least 6 characters long.");
+      return;
+    }
+
+    const hasNumber = /\d/.test(password);
+    const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    if (!hasNumber || !hasSymbol) {
+      setErrorMessage("Password must include at least one number and one symbol.");
+      return;
+    }
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const token = await userCredential.user.getIdToken();
+      console.log("Firebase ID token:", token);
+      navigate("/");
+    } catch (error) {
+      console.error("Signup error:", error.message);
+      setErrorMessage(error.message);
+    }
+  };
 
   const handlePrev = () => {
     setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
@@ -63,20 +98,33 @@ export default function Signup() {
         <input
           className="mt-4 px-4 py-3 w-full border border-gray-200 rounded-xl placeholder-gray-400"
           placeholder="Nickname"
+          value={nickname}
+          onChange={(e) => setNickname(e.target.value)}
         />
         <input
           className="mt-3 px-4 py-3 w-full border border-gray-200 rounded-xl placeholder-gray-400"
           placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
           className="mt-3 px-4 py-3 w-full border border-gray-200 rounded-xl placeholder-gray-400"
           placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button className="mt-6 bg-[#a48bc3] text-white py-3 rounded-xl font-semibold hover:bg-[#9771bc]">
+        <button
+          onClick={handleSignup}
+          className="mt-6 bg-[#a48bc3] text-white py-3 rounded-xl font-semibold hover:bg-[#9771bc]"
+        >
           Sign up
         </button>
+
+        {errorMessage && (
+          <p className="text-sm text-red-500 text-center mt-2">{errorMessage}</p>
+        )}
 
         <p className="mt-4 text-sm text-center text-[#234451]">
           Already have an account? <a href="/login" className="text-[#a48bc3] font-semibold">Log in</a>
