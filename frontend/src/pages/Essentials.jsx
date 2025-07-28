@@ -146,7 +146,10 @@ const ProductRecommendations = () => (
       {productRecommendations.map((product) => (
         <div key={product.name} className="bg-white/80 rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow backdrop-blur-sm">
           <h3 className="text-xl font-semibold text-[#234451] mb-1">{product.name}</h3>
-          <p className="text-sm text-[#666] mb-1">⭐ {product.rating} · {product.price}</p>
+          <p className="text-sm text-[#666] mb-1 flex items-center gap-1">
+            <img src="https://www.iconpacks.net/icons/1/free-star-icon-984-thumb.png" alt="star" className="w-4 h-4 inline" />
+            {product.rating} · {product.price}
+          </p>
           <p className="text-[#444]">“{product.why}”</p>
         </div>
       ))}
