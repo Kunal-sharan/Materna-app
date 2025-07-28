@@ -11,6 +11,7 @@ import Signup from "./pages/Signup";
 import UserProfile from "./pages/UserProfile";
 import Milestones from "./pages/Milestones";
 import Vaccines from "./pages/Vaccines"
+import Essentials from "./pages/Essentials"
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/milestones" element={<Milestones />} />
           <Route path="/vaccination" element={<Vaccines />} />
+          <Route path="/essentials" element={<Essentials />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
