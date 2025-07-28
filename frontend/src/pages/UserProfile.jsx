@@ -344,7 +344,7 @@ export default function UserProfile() {
                     alt="Dr. Lila Everly"
                     className="w-10 h-10 rounded-full object-cover"
                   />
-                  <div>
+                  <div className="leading-tight space-y-0.5">
                     <p className="font-semibold text-sm">Dr. Lila Everly</p>
                     <p className="text-xs text-[#9771bc]">Gynecologist</p>
                   </div>
