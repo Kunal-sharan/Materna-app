@@ -69,6 +69,16 @@ export const Navbar = () => {
               {item.name}
             </Link>
           ))}
+          <div className="relative group">
+            <button className="text-[#234451] hover:text-primary transition-colors duration-300 font-sans">
+              Postpartum
+            </button>
+            <div className="absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50">
+              <Link to="/essentials" className="block px-4 py-2 hover:bg-gray-100">Newborn Essentials</Link>
+              <Link to="/vaccination" className="block px-4 py-2 hover:bg-gray-100">Vaccination Reminder</Link>
+              <Link to="/milestones" className="block px-4 py-2 hover:bg-gray-100">My Baby Milestones</Link>
+            </div>
+          </div>
         </div>
 
         {user ? (
@@ -118,6 +128,12 @@ export const Navbar = () => {
                 {item.name}
               </Link>
             ))}
+            <div className="flex flex-col space-y-2 text-lg">
+              <span className="text-[#234451] font-semibold">Postpartum</span>
+              <Link to="/essentials" className="text-[#234451] hover:text-primary transition">Newborn Essentials</Link>
+              <Link to="/vaccination" className="text-[#234451] hover:text-primary transition">Vaccination Reminder</Link>
+              <Link to="/milestones" className="text-[#234451] hover:text-primary transition">My Baby Milestones</Link>
+            </div>
             {user ? (
               <Link
                 to="/profile"

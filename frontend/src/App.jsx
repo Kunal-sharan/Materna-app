@@ -9,6 +9,7 @@ import Community from "./pages/Community";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import UserProfile from "./pages/UserProfile";
+import Milestones from "./pages/Milestones";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/profile" element={<UserProfile />} />
+          <Route path="/milestones" element={<Milestones />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
