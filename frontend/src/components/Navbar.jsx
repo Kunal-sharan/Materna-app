@@ -85,6 +85,10 @@ export const Navbar = () => {
           <Link to="/profile">
             <img
               src={user.photoURL || "https://i.pinimg.com/236x/40/41/6f/40416fe5cfc9de788b1fcd769c93013a.jpg"}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "https://i.pinimg.com/236x/40/41/6f/40416fe5cfc9de788b1fcd769c93013a.jpg";
+              }}
               alt="profile"
               className="hidden md:inline-block h-10 w-10 rounded-full object-cover"
             />

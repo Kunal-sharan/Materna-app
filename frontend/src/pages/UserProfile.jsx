@@ -32,7 +32,7 @@ export default function UserProfile() {
       setUserData({
         name: user.displayName || "Mama",
         email: user.email || "No email",
-        photo: user.photoURL || ""
+        photo: user.photoURL && user.photoURL.trim() !== "" ? user.photoURL : ""
       });
     }
   }, [auth]);
@@ -64,7 +64,11 @@ export default function UserProfile() {
             <div className="flex items-center gap-6">
               <div className="relative">
                 <img
-                  src={userData.photo || "https://i.pinimg.com/236x/40/41/6f/40416fe5cfc9de788b1fcd769c93013a.jpg"}
+                  src={userData.photo && userData.photo.trim() !== "" ? userData.photo : "https://i.pinimg.com/236x/40/41/6f/40416fe5cfc9de788b1fcd769c93013a.jpg"}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "https://i.pinimg.com/236x/40/41/6f/40416fe5cfc9de788b1fcd769c93013a.jpg";
+                  }}
                   alt="profile"
                   className="w-20 h-20 rounded-full border-4 border-white object-cover cursor-pointer"
                   onClick={() => fileInputRef.current && fileInputRef.current.click()}
@@ -78,11 +82,20 @@ export default function UserProfile() {
                     const file = e.target.files[0];
                     if (file) {
                       const reader = new FileReader();
-                      reader.onload = () => {
+                      reader.onload = async () => {
+                        const base64 = reader.result;
                         setUserData((prev) => ({
                           ...prev,
-                          photo: reader.result
+                          photo: base64
                         }));
+
+                        try {
+                          await updateProfile(auth.currentUser, {
+                            photoURL: base64
+                          });
+                        } catch (err) {
+                          console.error("Failed to update photo:", err);
+                        }
                       };
                       reader.readAsDataURL(file);
                     }
