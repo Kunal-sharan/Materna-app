@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import { Apple, MessageCircle, CalendarCheck } from "lucide-react";
 
 export const AboutSection = () => {
+  const navigate = useNavigate();
   return (
     <section id="about" className="py-24 px-4 relative">
       {" "}
@@ -22,13 +24,6 @@ export const AboutSection = () => {
             <p className="text-muted-foreground">
               We believe that every mother deserves personalized, stigma-free care, no matter where she lives or what stage of motherhood she’s in. Our mission is to bridge the gap in maternal healthcare with technology and compassion.
             </p>
-
-            <div className="flex justify-center pt-4">
-              <a href="#contact" className="cosmic-button">
-                {" "}
-                Get In Touch
-              </a>
-            </div>
           </div>
 
           <div className="grid grid-cols-1 gap-6">
