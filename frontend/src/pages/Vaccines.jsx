@@ -70,9 +70,9 @@ function VaccineCard({
       className={`${pastelCard} rounded-2xl shadow-md p-4 mb-4 transition-all`}
       style={{
         borderLeft: completed
-          ? "6px solid #b7e6c8"
-          : "6px solid #b2c9f7",
-        background: completed ? "#f7fff7" : "rgba(255,255,255,0.85)",
+          ? "6px solid #bcb2da"
+          : "6px solid #a48bc3",
+        background: completed ? "#fef6f5" : "rgba(255,255,255,0.9)",
       }}
     >
       <div className="flex justify-between items-center">
@@ -82,10 +82,10 @@ function VaccineCard({
         >
           <span
             className={`inline-block w-3 h-3 rounded-full ${
-              completed ? "bg-green-300" : "bg-blue-200"
+              completed ? "bg-[#bcb2da]" : "bg-[#a48bc3]"
             }`}
           />
-          <span className="font-semibold text-lg text-blue-900">
+          <span className="font-semibold text-lg text-[#234451]">
             {vaccine.name}
           </span>
           <span className="ml-2 text-xs text-gray-500">
@@ -97,7 +97,7 @@ function VaccineCard({
             type="checkbox"
             checked={completed}
             onChange={onToggle}
-            className="accent-green-400 w-5 h-5"
+            className="accent-[#DFA69F] w-5 h-5"
           />
           <span className="text-xs text-gray-500">Completed</span>
         </label>
@@ -142,12 +142,12 @@ function UpcomingReminders({ schedule, completed, birthdate }) {
     <div
       className={`${pastelCard} rounded-2xl shadow p-4 mb-4 flex flex-col gap-2`}
     >
-      <div className="text-base font-semibold text-purple-800 mb-1">
+      <div className="text-base font-semibold text-[#a48bc3] mb-1">
         Upcoming Vaccines
       </div>
       {upcoming.map((v, i) => (
         <div key={i} className="flex items-center gap-2">
-          <span className="text-blue-700 font-medium">{v.name}</span>
+          <span className="text-[#234451] font-medium">{v.name}</span>
           <span className="text-xs text-gray-500">
             {daysBetween(today, v.dueDate) === 0
               ? "Today!"
@@ -284,10 +284,10 @@ export default function Vaccines() {
           {/* Header */}
           <div className="flex flex-col sm:flex-row items-center justify-between mb-6 gap-4">
             <div className="w-full">
-              <h1 className="text-3xl font-bold text-blue-900 mb-1 text-left">
+              <h1 className="text-3xl font-bold text-[#234451] mb-1 text-left">
                 Vaccination Reminder
               </h1>
-              <div className="text-purple-700 font-medium text-base text-left">
+              <div className="text-[#a48bc3] font-medium text-base text-left">
                 Track your baby's vaccines with gentle reminders.
               </div>
             </div>
@@ -304,14 +304,14 @@ export default function Vaccines() {
           </div>
           {/* Birthdate input */}
           <div className="mb-6 flex flex-col sm:flex-row items-center gap-3">
-            <label className="text-blue-800 font-medium">
+            <label className="text-[#234451] font-medium">
               Baby's Birthdate:
             </label>
             <input
               type="date"
               value={birthdate}
               onChange={e => setBirthdate(e.target.value)}
-              className="rounded-xl px-3 py-2 bg-gray-50 border border-gray-200 text-blue-900 font-semibold"
+              className="rounded-xl px-3 py-2 bg-gray-50 border border-gray-200 text-[#234451] font-semibold"
               style={{ minWidth: 160 }}
             />
           </div>
