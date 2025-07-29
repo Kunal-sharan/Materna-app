@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import base from "../assets/base.svg"
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../firebase";
 
 export default function Login() {
@@ -22,6 +22,19 @@ export default function Login() {
     }
   };
 
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const token = await result.user.getIdToken();
+      localStorage.setItem("maternaUserToken", token);
+      console.log("Google login token:", token);
+      navigate("/profile");
+    } catch (error) {
+      console.error("Google login error:", error.message);
+    }
+  };
+
   return (
     <div className="flex min-h-screen bg-gradient-to-r from-[#f5f7fa] to-[#e3ebf4] font-sans">
       {/* Left: Login Form */}
@@ -35,7 +48,10 @@ export default function Login() {
         <h2 className="text-2xl font-bold text-[#234451]">Welcome back!</h2>
         <p className="text-sm text-[#234451] mt-2">Log in to continue your journey.</p>
 
-        <button className="mt-6 border border-gray-300 rounded-lg py-2 flex items-center justify-center">
+        <button
+          onClick={handleGoogleLogin}
+          className="mt-6 border border-gray-300 rounded-lg py-2 flex items-center justify-center"
+        >
           <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5 mr-2" />
           <span className="text-sm">Log in with Google</span>
         </button>
