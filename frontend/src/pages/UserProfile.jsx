@@ -143,7 +143,21 @@ export default function UserProfile() {
     <>
       <Navbar />
       <Toaster position="top-center" />
-      <video autoPlay muted loop playsInline className="fixed top-0 left-0 w-full h-screen object-cover -z-20">
+      <video
+        autoPlay
+        muted
+        playsInline
+        loop
+        onEnded={(e) => {
+          e.target.style.opacity = 0;
+          setTimeout(() => {
+            e.target.currentTime = 0;
+            e.target.play();
+            e.target.style.opacity = 1;
+          }, 200);
+        }}
+        className="fixed top-0 left-0 w-full h-screen object-cover -z-20 transition-opacity duration-500"
+      >
         <source src={bgVideo} type="video/mp4" />
         Your browser does not support the video tag.
       </video>

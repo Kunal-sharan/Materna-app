@@ -269,10 +269,17 @@ export default function Vaccines() {
       <main className="min-h-screen relative overflow-hidden pt-32 p-8">
         <video
           autoPlay
-          loop
           muted
           playsInline
-          className="fixed top-0 left-0 w-full h-screen object-cover -z-10"
+          className="fixed top-0 left-0 w-full h-screen object-cover -z-10 transition-opacity duration-1000"
+          onEnded={(e) => {
+            e.target.style.opacity = 0;
+            setTimeout(() => {
+              e.target.currentTime = 0;
+              e.target.play();
+              e.target.style.opacity = 1;
+            }, 500);
+          }}
         >
           <source src={bgVideo} type="video/mp4" />
           Your browser does not support the video tag.

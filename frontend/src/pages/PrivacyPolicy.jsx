@@ -9,22 +9,23 @@ import sky1 from "../assets/sky1.mp4";
 const PrivacyPolicy = () => {
   return (
     <div className="relative min-h-screen overflow-hidden bg-black">
-      {/*
       <video
-        className="absolute top-0 left-0 w-full h-full object-cover -z-20"
-        src={sky1}
         autoPlay
         muted
-        loop
         playsInline
+        className="absolute top-0 left-0 w-full h-full object-cover -z-20 transition-opacity duration-1000"
+        src={sky1}
+        onEnded={(e) => {
+          e.target.style.opacity = 0;
+          setTimeout(() => {
+            e.target.currentTime = 0;
+            e.target.play();
+            e.target.style.opacity = 1;
+          }, 500);
+        }}
       />
-      */}
-      {/*
       <div className="fixed top-0 left-0 w-full h-screen bg-white/50 backdrop-blur-sm -z-10" />
-      */}
-      {/*
       <Navbar />
-      */}
       <main className="min-h-screen pt-32 px-6 pb-20 text-[#234451] max-w-4xl mx-auto">
         <div className="space-y-6 bg-white/80 backdrop-blur-md p-6 rounded-lg">
           <h1 className="text-4xl font-bold">Materna Privacy Policy Agreement</h1>
@@ -102,10 +103,8 @@ const PrivacyPolicy = () => {
           </p>
         </div>
       </main>
-      {/*
       <Footer />
       <StarStill />
-      */}
     </div>
   );
 };
