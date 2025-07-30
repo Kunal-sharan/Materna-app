@@ -324,6 +324,22 @@ export default function UserProfile() {
                   : undefined}
                 />
               </div>
+              {/* Partner Access Section */}
+              <div className="flex flex-col">
+                <label className="text-sm font-medium mb-1 text-left">Partner Email</label>
+                <input
+                  type="email"
+                  className="bg-white/60 border border-gray-300 text-[#234451] py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a48bc3]"
+                  value={userData.partnerEmail || ""}
+                  readOnly={!isEditingJourney}
+                  onChange={isEditingJourney ? (e) =>
+                    setUserData((prev) => ({ ...prev, partnerEmail: e.target.value }))
+                  : undefined}
+                />
+                <p className="text-[10px] text-[#555] mt-1 text-left">
+                  Your partner can log in using this email to view shared data like symptom charts, vaccine reminders, appointments, and milestones.
+                </p>
+              </div>
             </div>
           </div>
 
