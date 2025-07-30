@@ -180,7 +180,7 @@ useEffect(() => {
             loop
             muted
             playsInline
-            className="fixed top-0 left-0 w-full h-screen object-cover -z-10 transition-opacity duration-1000 opacity-100"
+            className="fixed top-0 left-0 w-full h-screen object-cover -z-10 opacity-100"
           >
             <source src={bgVideo} type="video/mp4" />
             Your browser does not support the video tag.

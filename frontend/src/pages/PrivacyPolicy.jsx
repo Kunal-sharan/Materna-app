@@ -12,17 +12,10 @@ const PrivacyPolicy = () => {
       <video
         autoPlay
         muted
+        loop
         playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover -z-20 transition-opacity duration-1000"
+        className="absolute top-0 left-0 w-full h-full object-cover -z-20"
         src={sky1}
-        onEnded={(e) => {
-          e.target.style.opacity = 0;
-          setTimeout(() => {
-            e.target.currentTime = 0;
-            e.target.play();
-            e.target.style.opacity = 1;
-          }, 500);
-        }}
       />
       <div className="fixed top-0 left-0 w-full h-screen bg-white/50 backdrop-blur-sm -z-10" />
       <Navbar />
