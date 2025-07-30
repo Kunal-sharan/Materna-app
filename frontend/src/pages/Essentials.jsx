@@ -156,13 +156,15 @@ const productRecommendations = [
     price: "$69.99",
     why: "Longer sleep with white noise",
     link: "https://a.co/d/dYcPVdT",
+    image: "https://www.hatch.co/_next/image?url=https%3A%2F%2Fwww.datocms-assets.com%2F98401%2F1693243315-carousel-5.jpg&w=3840&q=75",
   },
   {
     name: "FridaBaby NoseFrida SnotSucker",
-    rating: 4.4,
-    price: "$27.99",
+    rating: 4.7,
+    price: "$14.97",
     why: "Clearer breathing = better sleep",
-    link: "https://a.co/d/bOy0039",
+    link: "https://a.co/d/hJhXO4g",
+    image: "https://frida.com/cdn/shop/files/NoseFridaSnotSuckerASIN_B00171WXI__NoseFridaASIN_B00171WXII_Frame3_992x.progressive.jpg?v=1706049614",
   },
   {
     name: "Aquaphor Baby Healing Ointment",
@@ -170,6 +172,7 @@ const productRecommendations = [
     price: "$18.37",
     why: "Soothes & protects baby skin",
     link: "https://www.amazon.com/dp/B006IB5T4W",
+    image: "https://threebs.co/cdn/shop/files/aquaphor-baby-healing-ointment-advanced-therapy-396g-IMG1-20250701_8827f650-60f3-4f60-9164-7a7baaae05af.jpg?v=1751343261",
   },
   {
     name: "Philips Avent Natural Baby Bottles",
@@ -177,6 +180,7 @@ const productRecommendations = [
     price: "$18.53",
     why: "Reduces gas and fussiness",
     link: "https://a.co/d/3Xnzu2p",
+    image: "https://images.philips.com/is/image/philipsconsumer/d984b3980cb84c04b238ac540186670d?$pnglarge$&wid=1250",
   },
   {
     name: "Owlet Dream Sock Baby Monitor",
@@ -184,6 +188,7 @@ const productRecommendations = [
     price: "$273.89",
     why: "Peace of mind for parents",
     link: "https://a.co/d/e1eNRRR",
+    image: "https://owletcare.com/cdn/shop/files/DreamSock-1.jpg?v=1704675164&width=1400",
   },
   {
     name: "Love to Dream Swaddle UP",
@@ -191,6 +196,7 @@ const productRecommendations = [
     price: "$34.95",
     why: "Arms-up = better sleep",
     link: "https://www.amazon.com/dp/B0081GJ038",
+    image: "https://m.media-amazon.com/images/I/61qNHTMjmvL._UF894,1000_QL80_.jpg",
   },
 ];
 
@@ -207,12 +213,18 @@ const ProductRecommendations = () => (
           rel="noopener noreferrer"
           className="block bg-white/80 rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow backdrop-blur-sm"
         >
-          <h3 className="text-xl font-semibold text-[#234451] mb-1">{product.name}</h3>
-          <p className="text-sm text-[#666] mb-1 flex items-center gap-1 justify-center">
-            <img src="https://www.iconpacks.net/icons/1/free-star-icon-984-thumb.png" alt="star" className="w-4 h-4 inline" />
-            {product.rating} · {product.price}
-          </p>
-          <p className="text-[#444]">“{product.why}”</p>
+          <div className="flex gap-4 items-start">
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-20 h-20 object-contain rounded-md"
+            />
+            <div>
+              <h3 className="text-sm font-semibold text-[#234451]">{product.name}</h3>
+              <p className="text-sm text-[#666] mt-1">{product.rating} · {product.price}</p>
+              <p className="text-sm text-[#444] mt-2">{product.why}</p>
+            </div>
+          </div>
         </a>
       ))}
     </div>
