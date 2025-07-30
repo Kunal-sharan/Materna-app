@@ -361,14 +361,14 @@ const BudgetPicks = () => {
 
   const picks = {
     Amazon: [
-      { name: "Luvs Diapers", price: "$18.99", compareUrl: "#" },
-      { name: "Munchkin Bottles", price: "$14.99", compareUrl: "#" },
-      { name: "Bottle Warmer (Optional)", price: "$29.99", compareUrl: "#" },
+      { name: "Luvs Diapers x19", price: "$5.57", compareUrl: "https://a.co/d/hxc4CpL" },
+      { name: "Lansinoh Bottles x3", price: "$15.57", compareUrl: "https://a.co/d/5c2EVyo" },
+      { name: "Dr.Brown Bottle Warmer (Optional)", price: "$17.47", compareUrl: "https://a.co/d/duB2sDO" },
     ],
     Walmart: [
-      { name: "Parent's Choice Diapers", price: "$16.49", compareUrl: "#" },
-      { name: "Equate Baby Wipes", price: "$12.29", compareUrl: "#" },
-      { name: "Wipe Warmer (Optional)", price: "$24.99", compareUrl: "#" },
+      { name: "Luvs Platinum Diapers", price: "$7.47", compareUrl: "https://www.walmart.com/ip/Luvs-Platinum-Protection-Baby-Diapers-Size-6-20-Count-Select-for-More-Options/5431562129?classType=VARIANT&from=%2Fsearch&sid=370f42a1-a388-4e85-a3cb-f572b6ba05b6" },
+      { name: "Parent's Choice Baby Wipes", price: "$0.98", compareUrl: "https://www.walmart.com/ip/Parent-s-Choice-Fragrance-Free-Baby-Wipes-Travel-Pack-50-Count/1190727227?classType=REGULAR&athbdg=L1200&from=%2Fsearch&sid=1150ef0b-ce9c-4346-9b0c-ca4935631021" },
+      { name: "Munchkin Wipe Warmer (Optional)", price: "$15.10", compareUrl: "https://www.walmart.com/ip/Munchkin-Warm-Glow-Baby-and-Infant-Wipe-Warmer-White/8032825?classType=VARIANT&athbdg=L1103&from=%2Fsearch&sid=b22283f5-1aa4-4dd2-bf14-ef99d59a3ac9" },
     ],
   };
 
@@ -394,14 +394,16 @@ const BudgetPicks = () => {
         {picks[tab].map((item) => (
           <li
             key={item.name}
-            className="bg-white/80 p-4 rounded-lg shadow flex justify-between items-center backdrop-blur-sm"
+            className="bg-white/80 p-4 rounded-lg shadow flex justify-between backdrop-blur-sm"
           >
-            <div>
+            <div className="flex flex-col items-start">
               <p className="text-[#234451] font-medium">{item.name}</p>
-              <p className="text-[#666] text-sm">{item.price}</p>
+              <p className="text-[#666] text-sm mt-1">{item.price}</p>
             </div>
             <a
               href={item.compareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-[#DFA69F] underline hover:text-[#DFA69F] text-sm"
             >
               Compare prices
