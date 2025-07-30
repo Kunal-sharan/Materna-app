@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 export const Footer = () => {
   return (
@@ -41,7 +42,7 @@ export const Footer = () => {
           <div>
             <h3 className="font-semibold mb-2">Legal</h3>
             <ul className="space-y-1 text-sm text-white/90">
-              <li><Link to="/privacy">Privacy policy</Link></li>
+              <li><Link to="/privacypolicy">Privacy policy</Link></li>
               <li><Link to="/terms">Terms of services</Link></li>
             </ul>
           </div>
