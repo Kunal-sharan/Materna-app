@@ -1,0 +1,42 @@
+{
+  "navbar": {
+    "home": "Inicio",
+    "profile": "Perfil",
+    "logout": "Cerrar sesión",
+    "language": "Idioma"
+  },
+  "profile": {
+    "greeting": "¡Hola {{name}}!",
+    "personal_info": "Información personal",
+    "email": "Correo electrónico",
+    "full_name": "Nombre completo",
+    "due_date": "Fecha de parto",
+    "partner_email": "Correo electrónico de la pareja",
+    "partner_help": "Esto permite que tu pareja acceda a tu viaje compartido y vea actualizaciones relevantes.",
+    "appointments": "Citas",
+    "add_appointment": "Agregar cita",
+    "doctor_name": "Nombre del doctor",
+    "appointment_done": "Hecho",
+    "appointment_delete": "Eliminar",
+    "notes_placeholder": "Notas opcionales sobre esta cita...",
+    "upcoming_appointments": "Próximas citas",
+    "past_appointments": "Citas anteriores",
+    "no_upcoming": "No hay próximas citas",
+    "no_past": "No hay citas anteriores"
+  },
+  "growth": {
+    "growth_tracker": "Seguimiento del crecimiento",
+    "today": "Hoy",
+    "weight": "Peso",
+    "size": "Tamaño",
+    "weekly_view": "Semanal",
+    "trimester_view": "Trimestre"
+  },
+  "buttons": {
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "add": "Agregar",
+    "edit": "Editar",
+    "close": "Cerrar"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "navbar": {
+    "home": "首页",
+    "profile": "个人资料",
+    "logout": "退出登录",
+    "language": "语言"
+  },
+  "profile": {
+    "greeting": "你好 {{name}}！",
+    "personal_info": "个人信息",
+    "email": "电子邮件",
+    "full_name": "全名",
+    "due_date": "预产期",
+    "partner_email": "伴侣电子邮件",
+    "partner_help": "这允许您的伴侣访问您共享的旅程并查看相关更新。",
+    "appointments": "预约",
+    "add_appointment": "添加预约",
+    "doctor_name": "医生姓名",
+    "appointment_done": "完成",
+    "appointment_delete": "删除",
+    "notes_placeholder": "关于此次预约的备注（可选）...",
+    "upcoming_appointments": "即将到来的预约",
+    "past_appointments": "过往预约",
+    "no_upcoming": "没有即将到来的预约",
+    "no_past": "没有过往预约"
+  },
+  "growth": {
+    "growth_tracker": "成长跟踪器",
+    "today": "今天",
+    "weight": "体重",
+    "size": "大小",
+    "weekly_view": "每周",
+    "trimester_view": "孕期"
+  },
+  "buttons": {
+    "cancel": "取消",
+    "save": "保存",
+    "add": "添加",
+    "edit": "编辑",
+    "close": "关闭"
+  }
+}

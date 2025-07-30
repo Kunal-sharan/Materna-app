@@ -452,6 +452,24 @@ export default function UserProfile() {
                 <span>Community Notifications</span>
                 <input type="checkbox" className="toggle" readOnly />
               </div>
+              {/* Language Dropdown */}
+              <div className="flex flex-col mt-4">
+                <label htmlFor="language" className="text-sm font-medium mb-1 text-left">Language</label>
+                <select
+                  id="language"
+                  className="bg-white/60 border border-gray-300 text-[#234451] py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a48bc3]"
+                  value={localStorage.getItem("i18nextLng") || "en"}
+                  onChange={(e) => {
+                    localStorage.setItem("i18nextLng", e.target.value);
+                    window.location.reload();
+                  }}
+                >
+                  <option value="en">English</option>
+                  <option value="es">Spanish</option>
+                  <option value="hi">Hindi</option>
+                  <option value="zh">Chinese</option>
+                </select>
+              </div>
             </div>
           </div>
 

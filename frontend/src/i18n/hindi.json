@@ -1,0 +1,42 @@
+{
+  "navbar": {
+    "home": "मुख्य पृष्ठ",
+    "profile": "प्रोफ़ाइल",
+    "logout": "लॉग आउट",
+    "language": "भाषा"
+  },
+  "profile": {
+    "greeting": "नमस्ते {{name}}!",
+    "personal_info": "व्यक्तिगत जानकारी",
+    "email": "ईमेल",
+    "full_name": "पूरा नाम",
+    "due_date": "डिलीवरी की तारीख",
+    "partner_email": "साथी का ईमेल",
+    "partner_help": "यह आपके साथी को आपकी यात्रा में शामिल होने और संबंधित अपडेट देखने की अनुमति देता है।",
+    "appointments": "नियुक्तियाँ",
+    "add_appointment": "नई नियुक्ति जोड़ें",
+    "doctor_name": "डॉक्टर का नाम",
+    "appointment_done": "पूरा हुआ",
+    "appointment_delete": "हटाएं",
+    "notes_placeholder": "इस नियुक्ति के बारे में वैकल्पिक नोट्स...",
+    "upcoming_appointments": "आगामी नियुक्तियाँ",
+    "past_appointments": "पूर्व की नियुक्तियाँ",
+    "no_upcoming": "कोई आगामी नियुक्ति नहीं",
+    "no_past": "कोई पिछली नियुक्ति नहीं"
+  },
+  "growth": {
+    "growth_tracker": "विकास ट्रैकर",
+    "today": "आज",
+    "weight": "वजन",
+    "size": "लंबाई",
+    "weekly_view": "साप्ताहिक",
+    "trimester_view": "त्रैमासिक"
+  },
+  "buttons": {
+    "cancel": "रद्द करें",
+    "save": "सहेजें",
+    "add": "जोड़ें",
+    "edit": "संपादित करें",
+    "close": "बंद करें"
+  }
+}

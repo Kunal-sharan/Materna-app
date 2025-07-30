@@ -1,0 +1,42 @@
+{
+  "navbar": {
+    "home": "Home",
+    "profile": "Profile",
+    "logout": "Logout",
+    "language": "Language"
+  },
+  "profile": {
+    "greeting": "Hi {{name}}!",
+    "personal_info": "Personal Information",
+    "email": "Email",
+    "full_name": "Full Name",
+    "due_date": "Due Date",
+    "partner_email": "Partner Email",
+    "partner_help": "This allows your partner to access your shared journey and see relevant updates.",
+    "appointments": "Appointments",
+    "add_appointment": "Add Appointment",
+    "doctor_name": "Doctor's Name",
+    "appointment_done": "Done",
+    "appointment_delete": "Delete",
+    "notes_placeholder": "Optional notes about the appointment...",
+    "upcoming_appointments": "Upcoming Appointments",
+    "past_appointments": "Past Appointments",
+    "no_upcoming": "No upcoming appointments",
+    "no_past": "No past appointments"
+  },
+  "growth": {
+    "growth_tracker": "Growth Tracker",
+    "today": "Today",
+    "weight": "Weight",
+    "size": "Size",
+    "weekly_view": "Weekly",
+    "trimester_view": "Trimester"
+  },
+  "buttons": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "add": "Add",
+    "edit": "Edit",
+    "close": "Close"
+  }
+}
