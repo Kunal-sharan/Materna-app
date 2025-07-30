@@ -151,51 +151,69 @@ const Checklist = () => {
 
 const productRecommendations = [
   {
-    name: "Pampers Swaddlers",
-    rating: 4.8,
-    price: "$24.99",
-    why: "Super soft and absorbent for newborns.",
-  },
-  {
-    name: "Philips Avent Bottles",
-    rating: 4.6,
-    price: "$19.99",
-    why: "Anti-colic design loved by moms.",
-  },
-  {
-    name: "Hatch Rest Sound Machine",
-    rating: 4.7,
-    price: "$59.99",
-    why: "Helps baby sleep with white noise and light.",
-  },
-  {
-    name: "Blackout EZ Curtains",
+    name: "Hatch Rest Sound Machine & Night Light",
     rating: 4.5,
-    price: "$39.99",
-    why: "Helps baby sleep longer during naps.",
+    price: "$69.99",
+    why: "Longer sleep with white noise",
+    link: "https://a.co/d/dYcPVdT",
   },
   {
-    name: "Lansinoh Nursing Pads",
+    name: "FridaBaby NoseFrida SnotSucker",
     rating: 4.4,
-    price: "$12.99",
-    why: "Soft, leak-proof, and comfy for moms.",
+    price: "$27.99",
+    why: "Clearer breathing = better sleep",
+    link: "https://a.co/d/bOy0039",
+  },
+  {
+    name: "Aquaphor Baby Healing Ointment",
+    rating: 4.8,
+    price: "$18.37",
+    why: "Soothes & protects baby skin",
+    link: "https://www.amazon.com/dp/B006IB5T4W",
+  },
+  {
+    name: "Philips Avent Natural Baby Bottles",
+    rating: 4.8,
+    price: "$18.53",
+    why: "Reduces gas and fussiness",
+    link: "https://a.co/d/3Xnzu2p",
+  },
+  {
+    name: "Owlet Dream Sock Baby Monitor",
+    rating: 4.2,
+    price: "$273.89",
+    why: "Peace of mind for parents",
+    link: "https://a.co/d/e1eNRRR",
+  },
+  {
+    name: "Love to Dream Swaddle UP",
+    rating: 4.6,
+    price: "$34.95",
+    why: "Arms-up = better sleep",
+    link: "https://www.amazon.com/dp/B0081GJ038",
   },
 ];
 
 const ProductRecommendations = () => (
   <section className="my-16 fade-in">
     <h2 className="text-3xl font-semibold text-[#234451] mb-6">Product Recommendations</h2>
-    <p className="text-[#234451] mb-4">Vetted by pediatricians and real moms.</p>
+    <p className="text-[#234451] mb-4">The very best, vetted by pediatricians, scientists and real moms.</p>
     <div className="grid md:grid-cols-2 gap-6">
       {productRecommendations.map((product) => (
-        <div key={product.name} className="bg-white/80 rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow backdrop-blur-sm">
+        <a
+          key={product.name}
+          href={product.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block bg-white/80 rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow backdrop-blur-sm"
+        >
           <h3 className="text-xl font-semibold text-[#234451] mb-1">{product.name}</h3>
-          <p className="text-sm text-[#666] mb-1 flex items-center gap-1">
+          <p className="text-sm text-[#666] mb-1 flex items-center gap-1 justify-center">
             <img src="https://www.iconpacks.net/icons/1/free-star-icon-984-thumb.png" alt="star" className="w-4 h-4 inline" />
             {product.rating} · {product.price}
           </p>
           <p className="text-[#444]">“{product.why}”</p>
-        </div>
+        </a>
       ))}
     </div>
   </section>
