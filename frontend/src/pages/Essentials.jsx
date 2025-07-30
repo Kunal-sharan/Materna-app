@@ -217,7 +217,9 @@ const ProductRecommendations = () => (
             <img
               src={product.image}
               alt={product.name}
-              className="w-20 h-20 object-contain rounded-md"
+              loading="lazy"
+              className="w-20 h-20 object-contain rounded-md bg-[#f4f4f4]"
+              style={{ backgroundColor: "#f4f4f4" }}
             />
             <div>
               <h3 className="text-sm font-semibold text-[#234451]">{product.name}</h3>

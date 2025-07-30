@@ -32,6 +32,23 @@ const Wellness = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLoginPrompt, setShowLoginPrompt] = useState(false);
 
+  // Preload images for categories in the <head> using <link rel="preload">
+  useEffect(() => {
+    const preloadImages = [
+      yogaImage,
+      meditateImage,
+      foodsImage,
+      careImage
+    ];
+    preloadImages.forEach((src) => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = src;
+      document.head.appendChild(link);
+    });
+  }, []);
+
   useEffect(() => {
     const token = localStorage.getItem("maternaUserToken");
     setIsLoggedIn(!!token);
@@ -169,7 +186,13 @@ const Wellness = () => {
                       onClick={() => navigate(`/wellness/${i}`)}
                     >
                       <div className="w-full h-40 overflow-hidden">
-                        <img src={getImageForCategory(card.category)} alt={card.category} className="w-full h-full object-cover" />
+                        <img
+                          loading="lazy"
+                          src={getImageForCategory(card.category)}
+                          alt={card.category}
+                          className="w-full h-full object-cover bg-[#f4f4f4]"
+                          style={{ backgroundColor: "#f4f4f4" }}
+                        />
                       </div>
                       <div className="p-4 space-y-2">
                         <div className="flex gap-2 flex-wrap text-xs text-[#fff]">
@@ -254,7 +277,13 @@ export const WellnessDetail = () => {
   return (
     <div className="min-h-screen pt-32 px-8 bg-white/40 backdrop-blur-md WellnessDetail">
       <div className="max-w-3xl mx-auto bg-white/40 backdrop-blur-md shadow rounded-lg overflow-hidden">
-        <img src={getImageForCategory(card.category)} alt={card.category} className="w-full h-64 object-cover" />
+        <img
+          loading="lazy"
+          src={getImageForCategory(card.category)}
+          alt={card.category}
+          className="w-full h-64 object-cover bg-[#f4f4f4]"
+          style={{ backgroundColor: "#f4f4f4" }}
+        />
         <div className="p-6">
           <h1 className="text-3xl font-bold text-[#234451]">{card.title}</h1>
           <div className="mt-2 text-sm text-[#234451] space-x-2">
