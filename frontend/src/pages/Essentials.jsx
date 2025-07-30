@@ -9,27 +9,59 @@ import pauseIcon from "@/assets/pause.png";
 const checklistData = [
   {
     title: "Diapers & Wipes",
-    items: ["Newborn diapers", "Sensitive wipes", "Diaper rash cream"],
+    items: [
+      "Newborn diapers (cloth or disposable)",
+      "Sensitive wipes (fragrance-free)",
+      "Diaper rash cream (Aquaphor/Boudreaux’s)",
+    ],
   },
   {
     title: "Onesies, Swaddles, Mittens",
-    items: ["Cotton onesies", "Swaddles", "Scratch mittens"],
+    items: [
+      "Zip-up cotton onesies (avoid button-up)",
+      "Swaddles",
+      "Scratch mittens",
+      "Socks and baby hats",
+    ],
   },
   {
     title: "Feeding Supplies",
-    items: ["Bottles", "Formula", "Breast pump"],
+    items: [
+      "Anti-colic bottles",
+      "Nursing pads",
+      "Nipple cream",
+      "Manual breast pump",
+      "Electric breast pump",
+      "Formula (optional if not breastfeeding)",
+    ],
   },
   {
     title: "Bathing Basics",
-    items: ["Baby tub", "Gentle soap", "Soft towels"],
+    items: [
+      "Baby tub",
+      "Gentle baby soap",
+      "Soft washcloths",
+      "Hooded towels",
+    ],
   },
   {
     title: "Sleep Essentials",
-    items: ["Bassinet", "White noise machine", "Sleep sacks"],
+    items: [
+      "Swaddles",
+      "Crib or bassinet",
+      "White noise machine",
+      "Blackout curtains",
+    ],
   },
   {
     title: "First Aid",
-    items: ["Thermometer", "Gas drops", "Nail clippers"],
+    items: [
+      "Digital rectal thermometer",
+      "Nasal aspirator",
+      "Nail clippers",
+      "Gas drops",
+      "Baby Tylenol",
+    ],
   },
 ];
 
@@ -136,12 +168,24 @@ const productRecommendations = [
     price: "$59.99",
     why: "Helps baby sleep with white noise and light.",
   },
+  {
+    name: "Blackout EZ Curtains",
+    rating: 4.5,
+    price: "$39.99",
+    why: "Helps baby sleep longer during naps.",
+  },
+  {
+    name: "Lansinoh Nursing Pads",
+    rating: 4.4,
+    price: "$12.99",
+    why: "Soft, leak-proof, and comfy for moms.",
+  },
 ];
 
 const ProductRecommendations = () => (
   <section className="my-16 fade-in">
     <h2 className="text-3xl font-semibold text-[#234451] mb-6">Product Recommendations</h2>
-    <p className="text-[#ffffff] mb-4">Vetted by pediatricians and real moms.</p>
+    <p className="text-[#234451] mb-4">Vetted by pediatricians and real moms.</p>
     <div className="grid md:grid-cols-2 gap-6">
       {productRecommendations.map((product) => (
         <div key={product.name} className="bg-white/80 rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow backdrop-blur-sm">
@@ -157,42 +201,67 @@ const ProductRecommendations = () => (
   </section>
 );
 
-// Mom-Recommended Tips Carousel and data moved above Essentials
-const momTips = [
-  {
-    id: 1,
-    text: "Always trust your instincts as a mom.",
-    author: "Jessica",
-  },
-  {
-    id: 2,
-    text: "Swaddling helped my baby sleep better.",
-    author: "Maya",
-  },
-  {
-    id: 3,
-    text: "Don't hesitate to ask for help when needed.",
-    author: "Lara",
-  },
-];
 
-const MomTipsCarousel = () => {
-  const [index, setIndex] = useState(0);
+const FAQSection = () => {
+  const faqs = [
+    {
+      question: "How many diapers a day?",
+      answer: "Newborns usually go through 8–12 diapers daily.",
+    },
+    {
+      question: "What size clothes do I start with?",
+      answer: "Start with newborn and 0–3M sizes. It’s good to have both.",
+    },
+    {
+      question: "Is it normal if ___?",
+      answer: "Usually, yes. But when in doubt, don’t hesitate to call your pediatrician.",
+    },
+    {
+      question: "Do I need a bottle sterilizer?",
+      answer: "Not necessarily. Boiling water or dishwasher-safe sterilization usually works just fine.",
+    },
+    {
+      question: "How often should my newborn eat?",
+      answer: "Typically every 2–3 hours, or about 8–12 times in 24 hours.",
+    },
+    {
+      question: "When should I schedule my baby’s first doctor visit?",
+      answer: "Usually within 3–5 days after birth, or as directed by your hospital or pediatrician.",
+    },
+  ];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % momTips.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const toggle = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
   return (
     <section className="my-16 fade-in">
-      <h2 className="text-3xl font-semibold text-[#234451] mb-6">Mom-Recommended Tips</h2>
-      <div className="bg-white/80 rounded-xl p-6 shadow-md backdrop-blur-sm max-w-xl mx-auto text-center">
-        <p className="text-lg text-[#444] mb-4">“{momTips[index].text}”</p>
-        <p className="text-sm font-semibold text-[#234451]">- {momTips[index].author}</p>
-      </div>
+      <h2 className="text-3xl font-semibold text-[#234451] mb-6">Newborn FAQ</h2>
+      <ul className="space-y-4">
+        {faqs.map((faq, idx) => (
+          <li
+            key={idx}
+            className="bg-white/80 p-4 rounded-lg shadow backdrop-blur-sm transition-all"
+          >
+            <button
+              className="w-full text-left text-lg font-medium text-[#234451] flex justify-between items-center"
+              onClick={() => toggle(idx)}
+              aria-expanded={openIndex === idx}
+              aria-controls={`faq-${idx}`}
+            >
+              {faq.question}
+              <span className="ml-3 text-2xl">{openIndex === idx ? "−" : "+"}</span>
+            </button>
+            {openIndex === idx && (
+              <p id={`faq-${idx}`} className="text-[#444] mt-2 animate-fadeIn">
+                {faq.answer}
+              </p>
+            )}
+          </li>
+        ))}
+      </ul>
     </section>
   );
 };
@@ -220,7 +289,7 @@ const Essentials = () => {
           <Checklist />
           <ProductRecommendations />
           <BudgetPicks />
-          <MomTipsCarousel />
+          <FAQSection />
         </div>
       </main>
       <LullabyToggle />
@@ -276,14 +345,12 @@ const BudgetPicks = () => {
     Amazon: [
       { name: "Luvs Diapers", price: "$18.99", compareUrl: "#" },
       { name: "Munchkin Bottles", price: "$14.99", compareUrl: "#" },
+      { name: "Bottle Warmer (Optional)", price: "$29.99", compareUrl: "#" },
     ],
     Walmart: [
       { name: "Parent's Choice Diapers", price: "$16.49", compareUrl: "#" },
       { name: "Equate Baby Wipes", price: "$12.29", compareUrl: "#" },
-    ],
-    Clinics: [
-      { name: "Free Diaper Packs", price: "$0", compareUrl: "#" },
-      { name: "Sample Formula", price: "$0", compareUrl: "#" },
+      { name: "Wipe Warmer (Optional)", price: "$24.99", compareUrl: "#" },
     ],
   };
 
@@ -291,15 +358,15 @@ const BudgetPicks = () => {
     <section className="my-16 fade-in">
       <h2 className="text-3xl font-semibold text-[#234451] mb-6">Budget-Friendly Picks</h2>
       <div className="flex space-x-4 mb-4">
-        {["Amazon", "Walmart", "Clinics"].map((site) => (
+        {["Amazon", "Walmart"].map((site) => (
           <button
             key={site}
             onClick={() => setTab(site)}
-            className={`px-4 py-2 rounded-full ${
+            className={`px-4 py-2 rounded-full font-medium ${
               tab === site
-                ? "bg-[#DFA69F]/20 text-[#234451]"
-                : "bg-white/60 text-[#666]"
-            } shadow hover:bg-[#DFA69F]/20 transition`}
+                ? "bg-[#DFA69F]/40 text-[#234451]"
+                : "bg-white text-[#444] hover:bg-[#DFA69F]/30"
+            } shadow transition`}
           >
             {site}
           </button>
