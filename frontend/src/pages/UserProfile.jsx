@@ -1,4 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
+import { Line, Bar } from "react-chartjs-2";
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, PointElement, LineElement, Tooltip, Legend } from "chart.js";
+ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, Tooltip, Legend);
 import { getAuth, signOut, updateProfile, updateEmail } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
@@ -23,6 +26,64 @@ export default function UserProfile() {
   const [isEditingPersonal, setIsEditingPersonal] = useState(false);
   const [isEditingJourney, setIsEditingJourney] = useState(false);
   const [growthView, setGrowthView] = useState("today");
+
+  // Growth tracking state
+  const [growthData, setGrowthData] = useState({ weight: 0, size: 0, currentWeek: 0, weeklyChart: [], trimesterChart: [] });
+  // Growth estimation utility functions
+  const estimateWeight = (week) => {
+    if (week < 4) return 0.01;
+    if (week < 13) return 0.1 + 0.02 * week;
+    if (week < 28) return 0.2 + 0.1 * (week - 13);
+    if (week <= 40) return 1.5 + 0.15 * (week - 28);
+    return 3.5;
+  };
+
+  const estimateLength = (week) => {
+    if (week < 4) return 1;
+    if (week < 13) return 5 + week * 0.5;
+    if (week < 28) return 10 + (week - 13) * 1;
+    if (week <= 40) return 25 + (week - 28) * 1.2;
+    return 52;
+  };
+
+  useEffect(() => {
+    if (userData.dueDate) {
+      const today = new Date();
+      const due = new Date(userData.dueDate);
+      const conception = new Date(due.getTime() - 280 * 24 * 60 * 60 * 1000);
+      const diffDays = Math.floor((today - conception) / (1000 * 60 * 60 * 24));
+      const week = Math.max(0, Math.min(40, Math.floor(diffDays / 7)));
+
+      const weight = estimateWeight(week);
+      const size = estimateLength(week);
+
+      const weeklyChart = Array.from({ length: week + 1 }, (_, w) => ({
+        week: w,
+        weight: estimateWeight(w),
+        size: estimateLength(w)
+      }));
+
+      const trimesterChart = [
+        {
+          label: "Trimester 1",
+          avgWeight: estimateWeight(13),
+          avgSize: estimateLength(13),
+        },
+        {
+          label: "Trimester 2",
+          avgWeight: estimateWeight(28),
+          avgSize: estimateLength(28),
+        },
+        {
+          label: "Trimester 3",
+          avgWeight: estimateWeight(week),
+          avgSize: estimateLength(week),
+        },
+      ];
+
+      setGrowthData({ weight, size, currentWeek: week, weeklyChart, trimesterChart });
+    }
+  }, [userData.dueDate]);
 
   // Appointments state and handlers
   const [appointments, setAppointments] = useState([]);
@@ -495,7 +556,7 @@ export default function UserProfile() {
                     </div>
                     <div>
                       <p className="text-sm font-medium text-[#444]">Weight</p>
-                      <p className="text-xl font-bold text-[#234451]">1,8 kg</p>
+                      <p className="text-xl font-bold text-[#234451]">{growthData.weight.toFixed(2)} kg</p>
                     </div>
                   </div>
                   <p className="text-xs text-[#f87171] font-semibold">
@@ -512,7 +573,7 @@ export default function UserProfile() {
                     </div>
                     <div>
                       <p className="text-sm font-medium text-[#444]">Size</p>
-                      <p className="text-xl font-bold text-[#234451]">1.8 in</p>
+                      <p className="text-xl font-bold text-[#234451]">{growthData.size.toFixed(1)} cm</p>
                     </div>
                   </div>
                   <p className="text-xs text-[#f87171] font-semibold">
@@ -522,6 +583,51 @@ export default function UserProfile() {
                 </div>
               </div>
             </div>
+
+            {/* Charts for weekly and trimester views */}
+            {growthView === "weekly" && (
+              <div className="mt-6">
+                <Line
+                  data={{
+                    labels: growthData.weeklyChart.map((d) => `Week ${d.week}`),
+                    datasets: [
+                      {
+                        label: "Weight (kg)",
+                        data: growthData.weeklyChart.map((d) => d.weight),
+                        borderColor: "#a48bc3",
+                        backgroundColor: "rgba(164,139,195,0.2)",
+                        tension: 0.4,
+                        fill: true
+                      },
+                    ],
+                  }}
+                  options={{ responsive: true, plugins: { legend: { display: true } } }}
+                />
+              </div>
+            )}
+
+            {growthView === "trimester" && (
+              <div className="mt-6">
+                <Bar
+                  data={{
+                    labels: growthData.trimesterChart.map((d) => d.label),
+                    datasets: [
+                      {
+                        label: "Avg Weight (kg)",
+                        data: growthData.trimesterChart.map((d) => d.avgWeight),
+                        backgroundColor: "#a48bc3",
+                      },
+                      {
+                        label: "Avg Size (cm)",
+                        data: growthData.trimesterChart.map((d) => d.avgSize),
+                        backgroundColor: "#6f4fa1",
+                      },
+                    ],
+                  }}
+                  options={{ responsive: true, plugins: { legend: { display: true } } }}
+                />
+              </div>
+            )}
           </div>
         </div>
 
