@@ -24,6 +24,38 @@ export default function UserProfile() {
   const [isEditingJourney, setIsEditingJourney] = useState(false);
   const [growthView, setGrowthView] = useState("today");
 
+  // Appointments state and handlers
+  const [appointments, setAppointments] = useState([]);
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [newAppt, setNewAppt] = useState({ date: "", time: "", doctor: "" });
+  // Modal and split view state for appointments
+  const [showModal, setShowModal] = useState(false);
+  const [viewPast, setViewPast] = useState(false);
+
+  const handleAddAppointment = () => {
+    if (newAppt.date && newAppt.time && newAppt.doctor) {
+      setAppointments([...appointments, { ...newAppt, done: false }]);
+      setNewAppt({ date: "", time: "", doctor: "" });
+      setShowAddForm(false);
+    }
+  };
+
+  const markAsDone = (index) => {
+    const updated = [...appointments];
+    updated[index].done = true;
+    // Use a prompt for notes, but only set if not null
+    const note = window.prompt("Add notes about this appointment:");
+    if (note !== null) {
+      updated[index].notes = note;
+    }
+    setAppointments(updated);
+  };
+
+  const deleteAppointment = (index) => {
+    const updated = appointments.filter((_, i) => i !== index);
+    setAppointments(updated);
+  };
+
   const fileInputRef = useRef(null);
 
   useEffect(() => {
@@ -362,35 +394,65 @@ export default function UserProfile() {
             </div>
           </div>
 
-          {/* Upcoming Appointments */}
+          {/* Upcoming Appointments with card layout, modal, and split view */}
           <div className="bg-white/30 backdrop-blur-lg border border-white/20 rounded-2xl shadow p-6 md:col-start-3 md:row-start-1">
-            <h2 className="font-semibold text-lg mb-4">Upcoming Appointments</h2>
-            <div className="bg-white/60 border border-gray-300 text-[#234451] rounded-xl p-4 shadow-lg flex flex-col gap-2">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <img
-                    src="https://randomuser.me/api/portraits/women/44.jpg"
-                    alt="Dr. Lila Everly"
-                    className="w-10 h-10 rounded-full object-cover"
-                  />
-                  <div className="leading-tight space-y-0.5">
-                    <p className="font-semibold text-sm">Dr. Lila Everly</p>
-                    <p className="text-xs text-[#9771bc]">Gynecologist</p>
-                  </div>
-                </div>
-                <div className="bg-[#9771bc] text-white p-2 rounded-full cursor-pointer flex items-center justify-center">
-                  <img src={phoneIcon} alt="Phone" className="w-4 h-4" />
-                </div>
-              </div>
-              <div className="flex justify-between items-center text-sm mt-2">
-                <div className="flex items-center gap-1">
-                  <img src={calendarIcon} alt="Calendar" className="w-4 h-4" /> <span>11 Dec. '24</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <img src={clockIcon} alt="Clock" className="w-4 h-4" /> <span>09:15 AM</span>
-                </div>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="font-semibold text-lg">{viewPast ? "Past Appointments" : "Upcoming Appointments"}</h2>
+              <div className="flex items-center gap-2">
+                <button
+                  className="text-xs underline text-[#234451]"
+                  onClick={() => setViewPast(!viewPast)}
+                >
+                  {viewPast ? "View Upcoming" : "View Past"}
+                </button>
+                <button
+                  onClick={() => setShowModal(true)}
+                  className="text-[#9771bc] text-2xl leading-none hover:text-[#745295]"
+                  title="Add Appointment"
+                >
+                  +
+                </button>
               </div>
             </div>
+
+            {(viewPast ? appointments.filter(a => a.done) : appointments.filter(a => !a.done)).length === 0 ? (
+              <p className="text-sm text-[#666]">No {viewPast ? "past" : "upcoming"} appointments</p>
+            ) : (
+              (viewPast ? appointments.filter(a => a.done) : appointments.filter(a => !a.done)).map((appt, idx) => (
+                <div key={idx} className="bg-white/60 border border-gray-300 text-[#234451] rounded-xl p-4 shadow-lg mb-3">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <p className="text-sm font-semibold">{appt.doctor}</p>
+                      <p className="text-sm">{appt.date} at {appt.time}</p>
+                      {appt.notes && <p className="text-xs mt-1 text-[#555] italic">Notes: {appt.notes}</p>}
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      {!appt.done && (
+                        <button onClick={() => markAsDone(idx)} className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Done</button>
+                      )}
+                      <button onClick={() => deleteAppointment(idx)} className="text-xs bg-red-100 text-red-700 px-2 py-1 rounded">Delete</button>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
+
+            {showModal && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+                <div className="bg-white p-6 rounded-lg w-full max-w-md shadow-xl">
+                  <h3 className="text-lg font-semibold mb-4 text-[#234451]">Add Appointment</h3>
+                  <div className="space-y-3">
+                    <input type="date" className="w-full p-2 border border-gray-300 rounded" value={newAppt.date} onChange={(e) => setNewAppt({ ...newAppt, date: e.target.value })} />
+                    <input type="time" className="w-full p-2 border border-gray-300 rounded" value={newAppt.time} onChange={(e) => setNewAppt({ ...newAppt, time: e.target.value })} />
+                    <input type="text" placeholder="Doctor's Name" className="w-full p-2 border border-gray-300 rounded" value={newAppt.doctor} onChange={(e) => setNewAppt({ ...newAppt, doctor: e.target.value })} />
+                  </div>
+                  <div className="flex justify-end gap-3 mt-4">
+                    <button onClick={() => setShowModal(false)} className="text-sm text-[#666] hover:underline">Cancel</button>
+                    <button onClick={() => { handleAddAppointment(); setShowModal(false); }} className="bg-[#a48bc3] text-white px-4 py-1 rounded text-sm">Add</button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           {/* Growth Tracker */}
           <div className="col-span-3 bg-white/30 backdrop-blur-lg border border-white/20 rounded-3xl p-6 shadow-lg text-[#234451]">
