@@ -33,8 +33,8 @@ export const AboutSection = () => {
                   <Apple className="h-6 w-6 text-[#DFA69F]" />
                 </div>
                 <div className="text-left">
-                  <h4 className="font-semibold text-lg text-[#234451] dark:text-[#DFA69F]">Nutrition & Wellness Hub</h4>
-                  <p className="text-[#234451] dark:text-[#DFA69F]">
+                  <h4 className="font-semibold text-lg text-[#234451]">Nutrition & Wellness Hub</h4>
+                  <p className="text-[#234451]">
                     Explore personalized food guidance, pregnancy-safe exercises, and holistic care tailored for every stage of motherhood.
                   </p>
                 </div>
@@ -46,8 +46,8 @@ export const AboutSection = () => {
                   <MessageCircle className="h-6 w-6 text-[#DFA69F]" />
                 </div>
                 <div className="text-left">
-                  <h4 className="font-semibold text-lg text-[#234451] dark:text-[#DFA69F]">Community Forum</h4>
-                  <p className="text-[#234451] dark:text-[#DFA69F]">
+                  <h4 className="font-semibold text-lg text-[#234451]">Community Forum</h4>
+                  <p className="text-[#234451]">
                     Connect with fellow moms in a safe, supportive space to share experiences, ask questions, and offer encouragement.
                   </p>
                 </div>
@@ -60,8 +60,8 @@ export const AboutSection = () => {
                 </div>
 
                 <div className="text-left">
-                  <h4 className="font-semibold text-lg text-[#234451] dark:text-[#DFA69F]">Doctor Appointment Tracker</h4>
-                  <p className="text-[#234451] dark:text-[#DFA69F]">
+                  <h4 className="font-semibold text-lg text-[#234451]">Doctor Appointment Tracker</h4>
+                  <p className="text-[#234451]">
                     Stay on top of all your prenatal and postnatal visits with smart reminders and an easy-to-use appointment log.
                   </p>
                 </div>
