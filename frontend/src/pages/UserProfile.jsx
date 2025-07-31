@@ -17,10 +17,17 @@ import calendarIcon from "@/assets/calendar.png";
 import clockIcon from "@/assets/clock.png";
 import phoneIcon from "@/assets/phone-call.png";
 import increaseIcon from "@/assets/increase.png";
+import useIsMobile from "../hooks/useIsMobile";
+import MobileProfile from "./MobileProfile";
 
 export default function UserProfile() {
   const navigate = useNavigate();
   const auth = getAuth();
+
+  const isMobile = useIsMobile();
+  if (isMobile) {
+    return <MobileProfile />;
+  }
 
   const [userData, setUserData] = useState({});
   const [isEditingPersonal, setIsEditingPersonal] = useState(false);
@@ -155,7 +162,7 @@ export default function UserProfile() {
       </video>
       <StarStill />
       <div className="fixed top-0 left-0 w-full h-screen bg-white/50 backdrop-blur-sm -z-10"></div>
-      <main className="min-h-screen px-6 py-10 font-sans text-[#234451] pt-32">
+      <main className="min-h-screen px-6 sm:px-4 py-10 font-sans text-[#234451] pt-32">
         <div className="max-w-6xl mx-auto">
         {/* Header Card */}
         <div className="bg-white/30 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-sm mb-8">
@@ -251,7 +258,7 @@ export default function UserProfile() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 gap-y-8">
           {/* Personal Info */}
           <div className="col-span-2 bg-white/30 backdrop-blur-lg border border-white/20 rounded-2xl shadow p-6">
             <div className="flex justify-between items-center mb-4">
@@ -289,7 +296,7 @@ export default function UserProfile() {
                 </button>
               )}
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
               <div className="flex flex-col">
                 <label className="text-sm font-medium mb-1 text-left">Full Name</label>
                 <input
@@ -371,7 +378,7 @@ export default function UserProfile() {
                 </button>
               )}
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
               <div className="flex flex-col">
                 <label className="text-sm font-medium mb-1 text-left">Status</label>
                 <select
@@ -524,7 +531,7 @@ export default function UserProfile() {
 
             {showModal && (
               <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-                <div className="bg-white p-6 rounded-lg w-full max-w-md shadow-xl">
+                <div className="bg-white p-6 rounded-lg w-[95%] sm:max-w-md shadow-xl">
                   <h3 className="text-lg font-semibold mb-4 text-[#234451]">Add Appointment</h3>
                   <div className="space-y-3">
                     <input type="date" className="w-full p-2 border border-gray-300 rounded" value={newAppt.date} onChange={(e) => setNewAppt({ ...newAppt, date: e.target.value })} />
@@ -558,10 +565,10 @@ export default function UserProfile() {
               ))}
             </div>
 
-            <div className="grid md:grid-cols-3 gap-4 items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-center">
               {/* Illustration */}
               <div className="col-span-1 flex justify-center">
-                <div className="w-40 h-40 rounded-full bg-[#e8d8f8] flex items-center justify-center relative">
+                <div className="w-40 h-40 rounded-full bg-[#e8d8f8] flex items-center justify-center relative max-w-full">
                   <img
                     src={babyIcon}
                     alt="Fetus"
