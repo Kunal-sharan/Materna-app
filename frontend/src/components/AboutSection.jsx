@@ -18,7 +18,7 @@ export const AboutSection = () => {
             </h3>
 
             <p className="text-muted-foreground">
-              Materna is a platform dedicated to supporting health of mothers before and after pregnancy, by providing accessible, empathetic, and expert-backed resources and tools.
+              Materna is a platform dedicated to supporting health of mothers during and after pregnancy, by providing accessible, empathetic, and expert-backed resources and tools.
             </p>
 
             <p className="text-muted-foreground">
@@ -33,22 +33,9 @@ export const AboutSection = () => {
                   <Apple className="h-6 w-6 text-[#DFA69F]" />
                 </div>
                 <div className="text-left">
-                  <h4 className="font-semibold text-lg text-[#234451]">Nutrition & Wellness Hub</h4>
+                  <h4 className="font-semibold text-lg text-[#234451]">Symptom & Wellness Tracking</h4>
                   <p className="text-[#234451]">
-                    Explore personalized food guidance, pregnancy-safe exercises, and holistic care tailored for every stage of motherhood.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="p-6 card-hover rounded-xl border border-white/30 bg-white/30 backdrop-blur-lg shadow-lg">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-[#fff]">
-                  <MessageCircle className="h-6 w-6 text-[#DFA69F]" />
-                </div>
-                <div className="text-left">
-                  <h4 className="font-semibold text-lg text-[#234451]">Community Forum</h4>
-                  <p className="text-[#234451]">
-                    Connect with fellow moms in a safe, supportive space to share experiences, ask questions, and offer encouragement.
+                    Track symptoms, moods, and get personalized wellness tips to support every stage of your journey.
                   </p>
                 </div>
               </div>
@@ -58,11 +45,24 @@ export const AboutSection = () => {
                 <div className="p-3 rounded-full bg-[#fff]">
                   <CalendarCheck className="h-6 w-6 text-[#DFA69F]" />
                 </div>
+                <div className="text-left">
+                  <h4 className="font-semibold text-lg text-[#234451]">Doctor Appointments & Partner Access</h4>
+                  <p className="text-[#234451]">
+                    Stay organized with appointment reminders and let your partner stay in the loop with shared access.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="p-6 card-hover rounded-xl border border-white/30 bg-white/30 backdrop-blur-lg shadow-lg">
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-full bg-[#fff]">
+                  <MessageCircle className="h-6 w-6 text-[#DFA69F]" />
+                </div>
 
                 <div className="text-left">
-                  <h4 className="font-semibold text-lg text-[#234451]">Doctor Appointment Tracker</h4>
+                  <h4 className="font-semibold text-lg text-[#234451]">Community & Postpartum Support</h4>
                   <p className="text-[#234451]">
-                    Stay on top of all your prenatal and postnatal visits with smart reminders and an easy-to-use appointment log.
+                    Connect with other moms, share your experience, and access vital postpartum resources.
                   </p>
                 </div>
               </div>
