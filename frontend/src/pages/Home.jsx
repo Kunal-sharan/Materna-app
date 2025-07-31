@@ -17,6 +17,7 @@ export const Home = () => {
         muted
         loop
         playsInline
+        preload="auto"
         className="fixed top-0 left-0 w-full h-screen object-cover -z-20"
       >
         <source src={bgVideo} type="video/mp4" />
