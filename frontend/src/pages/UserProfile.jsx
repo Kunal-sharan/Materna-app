@@ -17,17 +17,10 @@ import calendarIcon from "@/assets/calendar.png";
 import clockIcon from "@/assets/clock.png";
 import phoneIcon from "@/assets/phone-call.png";
 import increaseIcon from "@/assets/increase.png";
-import useIsMobile from "../hooks/useIsMobile";
-import MobileProfile from "./MobileProfile";
 
 export default function UserProfile() {
   const navigate = useNavigate();
   const auth = getAuth();
-
-  const isMobile = useIsMobile();
-  if (isMobile) {
-    return <MobileProfile />;
-  }
 
   const [userData, setUserData] = useState({});
   const [isEditingPersonal, setIsEditingPersonal] = useState(false);
