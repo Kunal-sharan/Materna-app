@@ -3,6 +3,7 @@ import useUserProfile from "../hooks/useUserProfileData";
 import { CalendarCheck, Heart, Users } from "lucide-react";
 
 const MobileProfile = () => {
+  const { userData } = useUserProfile();
   return (
     <>
       <header className="bg-[#fff0ee] text-center py-4 shadow-sm">
