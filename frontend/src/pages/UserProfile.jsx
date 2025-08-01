@@ -155,12 +155,12 @@ export default function UserProfile() {
       </video>
       <StarStill />
       <div className="fixed top-0 left-0 w-full h-screen bg-white/50 backdrop-blur-sm -z-10"></div>
-      <main className="min-h-screen px-6 sm:px-4 py-10 font-sans text-[#234451] pt-32">
+      <main className="min-h-screen px-4 sm:px-6 py-10 font-sans text-[#234451] pt-24 sm:pt-32">
         <div className="max-w-6xl mx-auto">
         {/* Header Card */}
-        <div className="bg-white/30 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-sm mb-8">
-          <div className="flex justify-between items-start w-full">
-            <div className="flex items-center gap-6">
+        <div className="bg-white/30 backdrop-blur-lg border border-white/20 rounded-2xl p-4 sm:p-6 shadow-sm mb-8">
+          <div className="flex flex-col sm:flex-row justify-between items-start w-full gap-4">
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full">
               <div className="relative">
                 <img
                   src={userData.photo && userData.photo.trim() !== "" ? userData.photo : "https://i.pinimg.com/236x/40/41/6f/40416fe5cfc9de788b1fcd769c93013a.jpg"}
@@ -202,8 +202,8 @@ export default function UserProfile() {
                 />
               </div>
               <div>
-                <h1 className="text-2xl font-bold">Hi {userData.name}!</h1>
-                <div className="mt-2 flex gap-2">
+                <h1 className="text-base sm:text-2xl font-bold">Hi {userData.name}!</h1>
+                <div className="mt-2 flex gap-2 flex-wrap">
                   {isEditingJourney ? (
                     <>
                       <input
@@ -242,20 +242,22 @@ export default function UserProfile() {
                 </div>
               </div>
             </div>
-            <button
-              onClick={handleLogout}
-              className="bg-[#9771bc] text-white text-sm px-4 py-1 rounded-md hover:bg-[#745295]"
-            >
-              Logout
-            </button>
+            <div className="mt-4 sm:mt-0 flex-shrink-0">
+              <button
+                onClick={handleLogout}
+                className="bg-[#9771bc] text-white text-xs sm:text-sm px-4 py-1 rounded-md hover:bg-[#745295] w-full"
+              >
+                Logout
+              </button>
+            </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 gap-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 gap-y-8">
           {/* Personal Info */}
-          <div className="col-span-2 bg-white/30 backdrop-blur-lg border border-white/20 rounded-2xl shadow p-6">
+          <div className="col-span-2 bg-white/30 backdrop-blur-lg border border-white/20 rounded-2xl shadow p-4 sm:p-6">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="font-semibold text-lg text-left">Personal Information</h2>
+              <h2 className="font-semibold text-base sm:text-lg text-left">Personal Information</h2>
               {!isEditingPersonal ? (
                 <img
                   src={editIcon}
@@ -289,9 +291,9 @@ export default function UserProfile() {
                 </button>
               )}
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-4">
               <div className="flex flex-col">
-                <label className="text-sm font-medium mb-1 text-left">Full Name</label>
+                <label className="text-xs sm:text-sm font-medium mb-1 text-left">Full Name</label>
                 <input
                   type="text"
                   className="bg-white/60 border border-gray-300 text-[#234451] py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a48bc3]"
@@ -303,7 +305,7 @@ export default function UserProfile() {
                 />
               </div>
               <div className="flex flex-col">
-                <label className="text-sm font-medium mb-1 text-left">Email</label>
+                <label className="text-xs sm:text-sm font-medium mb-1 text-left">Email</label>
                 <input
                   type="email"
                   className="bg-white/60 border border-gray-300 text-[#234451] py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a48bc3]"
@@ -315,7 +317,7 @@ export default function UserProfile() {
                 />
               </div>
               <div className="flex flex-col">
-                <label className="text-sm font-medium mb-1 text-left">Phone Number</label>
+                <label className="text-xs sm:text-sm font-medium mb-1 text-left">Phone Number</label>
                 <input
                   type="tel"
                   className="bg-white/60 border border-gray-300 text-[#234451] py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a48bc3]"
@@ -327,7 +329,7 @@ export default function UserProfile() {
                 />
               </div>
               <div className="flex flex-col">
-                <label className="text-sm font-medium mb-1 text-left">Date of Birth</label>
+                <label className="text-xs sm:text-sm font-medium mb-1 text-left">Date of Birth</label>
                 <input
                   type="date"
                   className="bg-white/60 border border-gray-300 text-[#234451] py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a48bc3]"
@@ -344,9 +346,9 @@ export default function UserProfile() {
 
 
           {/* Maternal Journey */}
-          <div className="col-span-2 bg-white/30 backdrop-blur-lg border border-white/20 rounded-2xl shadow p-6">
+          <div className="col-span-2 bg-white/30 backdrop-blur-lg border border-white/20 rounded-2xl shadow p-4 sm:p-6">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="font-semibold text-lg text-left">Maternal Journey</h2>
+              <h2 className="font-semibold text-base sm:text-lg text-left">Maternal Journey</h2>
               {!isEditingJourney ? (
                 <img
                   src={editIcon}
@@ -371,9 +373,9 @@ export default function UserProfile() {
                 </button>
               )}
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-4">
               <div className="flex flex-col">
-                <label className="text-sm font-medium mb-1 text-left">Status</label>
+                <label className="text-xs sm:text-sm font-medium mb-1 text-left">Status</label>
                 <select
                   className="bg-white/60 border border-gray-300 text-[#234451] py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a48bc3]"
                   value={userData.status || ""}
@@ -388,7 +390,7 @@ export default function UserProfile() {
                 </select>
               </div>
               <div className="flex flex-col">
-                <label className="text-sm font-medium mb-1 text-left">Due Date</label>
+                <label className="text-xs sm:text-sm font-medium mb-1 text-left">Due Date</label>
                 <input
                   type="date"
                   className="bg-white/60 border border-gray-300 text-[#234451] py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a48bc3]"
@@ -400,7 +402,7 @@ export default function UserProfile() {
                 />
               </div>
               <div className="flex flex-col">
-                <label className="text-sm font-medium mb-1 text-left">Healthcare Provider</label>
+                <label className="text-xs sm:text-sm font-medium mb-1 text-left">Healthcare Provider</label>
                 <input
                   type="text"
                   className="bg-white/60 border border-gray-300 text-[#234451] py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a48bc3]"
@@ -412,7 +414,7 @@ export default function UserProfile() {
                 />
               </div>
               <div className="flex flex-col">
-                <label className="text-sm font-medium mb-1 text-left">Emergency Contact</label>
+                <label className="text-xs sm:text-sm font-medium mb-1 text-left">Emergency Contact</label>
                 <input
                   type="text"
                   className="bg-white/60 border border-gray-300 text-[#234451] py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a48bc3]"
@@ -425,7 +427,7 @@ export default function UserProfile() {
               </div>
               {/* Partner Access Section */}
               <div className="flex flex-col">
-                <label className="text-sm font-medium mb-1 text-left">Partner Email</label>
+                <label className="text-xs sm:text-sm font-medium mb-1 text-left">Partner Email</label>
                 <input
                   type="email"
                   className="bg-white/60 border border-gray-300 text-[#234451] py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a48bc3]"
@@ -443,8 +445,8 @@ export default function UserProfile() {
           </div>
 
           {/* Preferences */}
-          <div className="bg-white/30 backdrop-blur-lg border border-white/20 rounded-2xl shadow p-6">
-            <h2 className="font-semibold text-lg mb-4">Preferences</h2>
+          <div className="bg-white/30 backdrop-blur-lg border border-white/20 rounded-2xl shadow p-4 sm:p-6">
+            <h2 className="font-semibold text-base sm:text-lg mb-4">Preferences</h2>
             <div className="space-y-3 text-sm">
               <div className="flex items-center justify-between">
                 <span>Daily Reminders</span>
@@ -460,7 +462,7 @@ export default function UserProfile() {
               </div>
               {/* Language Dropdown */}
               <div className="flex flex-col mt-4">
-                <label htmlFor="language" className="text-sm font-medium mb-1 text-left">Language</label>
+                <label htmlFor="language" className="text-xs sm:text-sm font-medium mb-1 text-left">Language</label>
                 <select
                   id="language"
                   className="bg-white/60 border border-gray-300 text-[#234451] py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a48bc3]"
@@ -480,9 +482,9 @@ export default function UserProfile() {
           </div>
 
           {/* Upcoming Appointments with card layout, modal, and split view */}
-          <div className="bg-white/30 backdrop-blur-lg border border-white/20 rounded-2xl shadow p-6 md:col-start-3 md:row-start-1">
+          <div className="bg-white/30 backdrop-blur-lg border border-white/20 rounded-2xl shadow p-4 sm:p-6 md:col-start-2 lg:col-start-3 md:row-start-1">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="font-semibold text-lg">{viewPast ? "Past Appointments" : "Upcoming Appointments"}</h2>
+              <h2 className="font-semibold text-base sm:text-lg">{viewPast ? "Past Appointments" : "Upcoming Appointments"}</h2>
               <div className="flex items-center gap-2">
                 <button
                   className="text-xs underline text-[#234451]"
@@ -524,8 +526,8 @@ export default function UserProfile() {
 
             {showModal && (
               <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-                <div className="bg-white p-6 rounded-lg w-[95%] sm:max-w-md shadow-xl">
-                  <h3 className="text-lg font-semibold mb-4 text-[#234451]">Add Appointment</h3>
+                <div className="bg-white p-4 sm:p-6 rounded-lg w-[95%] sm:max-w-md shadow-xl">
+                  <h3 className="text-base sm:text-lg font-semibold mb-4 text-[#234451]">Add Appointment</h3>
                   <div className="space-y-3">
                     <input type="date" className="w-full p-2 border border-gray-300 rounded" value={newAppt.date} onChange={(e) => setNewAppt({ ...newAppt, date: e.target.value })} />
                     <input type="time" className="w-full p-2 border border-gray-300 rounded" value={newAppt.time} onChange={(e) => setNewAppt({ ...newAppt, time: e.target.value })} />
@@ -540,9 +542,9 @@ export default function UserProfile() {
             )}
           </div>
           {/* Growth Tracker */}
-          <div className="col-span-3 bg-white/30 backdrop-blur-lg border border-white/20 rounded-3xl p-6 shadow-lg text-[#234451]">
-            <h2 className="text-xl font-bold text-[#6f4fa1] mb-4">Growth tracker</h2>
-            <div className="flex justify-start gap-6 mb-4">
+          <div className="col-span-1 md:col-span-2 lg:col-span-3 bg-white/30 backdrop-blur-lg border border-white/20 rounded-2xl p-4 sm:p-6 shadow-lg text-[#234451]">
+            <h2 className="text-base sm:text-xl font-bold text-[#6f4fa1] mb-4">Growth tracker</h2>
+            <div className="flex flex-wrap justify-start gap-3 sm:gap-6 mb-4">
               {["today", "weekly", "trimester"].map((view) => (
                 <button
                   key={view}
@@ -561,26 +563,26 @@ export default function UserProfile() {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-center">
               {/* Illustration */}
               <div className="col-span-1 flex justify-center">
-                <div className="w-40 h-40 rounded-full bg-[#e8d8f8] flex items-center justify-center relative max-w-full">
+                <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-[#e8d8f8] flex items-center justify-center relative max-w-full">
                   <img
                     src={babyIcon}
                     alt="Fetus"
-                    className="w-28 h-28 object-contain"
+                    className="w-20 h-20 sm:w-28 sm:h-28 object-contain"
                   />
                 </div>
               </div>
 
               {/* Metrics */}
-              <div className="col-span-2 grid grid-cols-2 gap-4">
+              <div className="col-span-2 grid grid-cols-1 xs:grid-cols-2 gap-4">
                 {/* Weight */}
                 <div className="bg-white/30 backdrop-blur-sm rounded-xl p-4 shadow-sm border border-white/20 flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
                     <div className="bg-white/50 p-2 rounded-xl">
-                      <img src={weight} alt="Weight" className="w-7 h-7" />
+                      <img src={weight} alt="Weight" className="w-6 h-6 sm:w-7 sm:h-7" />
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-[#444]">Weight</p>
-                      <p className="text-xl font-bold text-[#234451]">{growthData.weight.toFixed(2)} kg</p>
+                      <p className="text-xs sm:text-sm font-medium text-[#444]">Weight</p>
+                      <p className="text-lg sm:text-xl font-bold text-[#234451]">{growthData.weight.toFixed(2)} kg</p>
                     </div>
                   </div>
                   <p className="text-xs text-[#f87171] font-semibold">
@@ -593,11 +595,11 @@ export default function UserProfile() {
                 <div className="bg-white/30 backdrop-blur-sm rounded-xl p-4 shadow-sm border border-white/20 flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
                     <div className="bg-white/50 p-2 rounded-xl">
-                      <img src={size} alt="Size" className="w-7 h-7" />
+                      <img src={size} alt="Size" className="w-6 h-6 sm:w-7 sm:h-7" />
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-[#444]">Size</p>
-                      <p className="text-xl font-bold text-[#234451]">{growthData.size.toFixed(1)} cm</p>
+                      <p className="text-xs sm:text-sm font-medium text-[#444]">Size</p>
+                      <p className="text-lg sm:text-xl font-bold text-[#234451]">{growthData.size.toFixed(1)} cm</p>
                     </div>
                   </div>
                   <p className="text-xs text-[#f87171] font-semibold">
@@ -610,7 +612,7 @@ export default function UserProfile() {
 
             {/* Charts for weekly and trimester views */}
             {growthView === "weekly" && (
-              <div className="mt-6">
+              <div className="mt-6 overflow-x-auto">
                 <Line
                   data={{
                     labels: growthData.weeklyChart.map((d) => `Week ${d.week}`),
@@ -631,7 +633,7 @@ export default function UserProfile() {
             )}
 
             {growthView === "trimester" && (
-              <div className="mt-6">
+              <div className="mt-6 overflow-x-auto">
                 <Bar
                   data={{
                     labels: growthData.trimesterChart.map((d) => d.label),
