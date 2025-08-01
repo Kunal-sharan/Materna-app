@@ -1,13 +1,15 @@
 
 
 import React from "react";
+import useUserProfile from "../hooks/useUserProfileData";
 import { CalendarCheck, Heart, Users } from "lucide-react";
 
 const MobileProfile = () => {
+  const { userData } = useUserProfile();
   return (
     <main className="p-4 space-y-6 bg-[#fffaf9] min-h-screen text-[#234451]">
       <header className="text-center space-y-1">
-        <h1 className="text-2xl font-semibold">Welcome back, Mama 💕</h1>
+        <h1 className="text-2xl font-semibold">Welcome back, {userData.name || "Mama"} 💕</h1>
         <p className="text-sm text-[#6b7280]">Here’s your journey at a glance</p>
       </header>
 
