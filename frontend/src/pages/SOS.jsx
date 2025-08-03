@@ -111,14 +111,14 @@ const Normal = () => {
         {/* Middle Section - Symptom Checker and AI Results */}
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-10">
           {/* Check Your Symptoms Card */}
-          <div className="bg-white/20 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-8 shadow-xl">
-            <h2 className="text-[#234451] text-2xl font-semibold mb-6">Check Your Symptoms</h2>
+          <div className="bg-white/20 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-8 shadow-xl font-inter">
+            <h2 className="text-[#234451] text-3xl font-bold mb-4 text-center drop-shadow-sm">Check Your Symptoms</h2>
 
             {currentStep === 0 && (
               <>
-                <h3 className="text-[#234451] font-semibold mb-4">Number of Previous Pregnancies</h3>
+                <h3 className="text-[#234451] font-semibold text-lg mb-2">Number of Previous Pregnancies</h3>
                 <div className="mb-4">
-                  <p className="text-[#234451] text-sm mb-2">Selected: {formData.parity}</p>
+                  <p className="text-[#234451] text-sm mb-4">Selected: {formData.parity}</p>
                   <input
                     type="range"
                     min={0}
@@ -135,13 +135,13 @@ const Normal = () => {
 
             {currentStep === 1 && (
               <>
-                <h3 className="text-[#234451] font-semibold mb-4">Substance Use</h3>
+                <h3 className="text-[#234451] font-semibold text-lg mb-2">Substance Use</h3>
                 <div className="flex flex-wrap justify-center gap-3">
                   {['None', 'Smoking', 'Alcohol', 'Recreational drugs'].map((option) => (
                     <button
                       key={option}
                       onClick={() => updateField('substanceUse', option.toLowerCase())}
-                      className={`px-4 py-2 rounded-lg text-sm font-medium border ${
+                      className={`px-4 py-2 rounded-lg font-medium text-sm border ${
                         formData.substanceUse === option.toLowerCase()
                           ? 'bg-[#DFA69F] text-[#234451]'
                           : 'bg-white/30 text-[#234451] hover:bg-[#DFA69F]/20'
@@ -157,13 +157,13 @@ const Normal = () => {
 
             {currentStep === 2 && (
               <>
-                <h3 className="text-[#234451] font-semibold mb-4">Type of Pregnancy</h3>
+                <h3 className="text-[#234451] font-semibold text-lg mb-2">Type of Pregnancy</h3>
                 <div className="flex flex-wrap justify-center gap-3">
                   {['Single', 'Twins', 'Triplets or more'].map((option) => (
                     <button
                       key={option}
                       onClick={() => updateField('pregnancyType', option.toLowerCase())}
-                      className={`px-4 py-2 rounded-lg text-sm font-medium border ${
+                      className={`px-4 py-2 rounded-lg font-medium text-sm border ${
                         formData.pregnancyType === option.toLowerCase()
                           ? 'bg-[#DFA69F] text-[#234451]'
                           : 'bg-white/30 text-[#234451] hover:bg-[#DFA69F]/20'
@@ -179,7 +179,7 @@ const Normal = () => {
 
             {currentStep === 3 && (
               <>
-                <h3 className="text-[#234451] font-semibold mb-4">Previous Pregnancy Complications</h3>
+                <h3 className="text-[#234451] font-semibold text-lg mb-2">Previous Pregnancy Complications</h3>
                 <div className="mb-3 flex flex-wrap gap-2">
                   {formData.prevComplications.map((item, idx) => (
                     <span
@@ -255,7 +255,7 @@ const Normal = () => {
 
             {currentStep === 4 && (
               <>
-                <h3 className="text-[#234451] font-semibold mb-4">Symptom Type</h3>
+                <h3 className="text-[#234451] font-semibold text-lg mb-2">Symptom Type</h3>
                 <div className="mb-3 flex flex-wrap gap-2">
                   {formData.symptomType.map((item, idx) => (
                     <span
@@ -331,7 +331,7 @@ const Normal = () => {
 
             {currentStep === 5 && (
               <>
-                <h3 className="text-[#234451] font-semibold mb-4">Severity</h3>
+                <h3 className="text-[#234451] font-semibold text-lg mb-2">Severity</h3>
                 <div className="relative">
                   <button
                     type="button"
@@ -363,7 +363,7 @@ const Normal = () => {
 
             {currentStep === 6 && (
               <>
-                <h3 className="text-[#234451] font-semibold mb-4">Duration</h3>
+                <h3 className="text-[#234451] font-semibold text-lg mb-2">Duration</h3>
                 <div className="flex gap-3">
                   <input
                     type="number"
@@ -390,7 +390,7 @@ const Normal = () => {
 
             {currentStep === 7 && (
               <>
-                <h3 className="text-[#234451] font-semibold mb-4">Frequency</h3>
+                <h3 className="text-[#234451] font-semibold text-lg mb-2">Frequency</h3>
                 <div className="relative">
                   <button
                     type="button"
@@ -424,12 +424,12 @@ const Normal = () => {
 
             {currentStep === 8 && (
               <>
-                <h3 className="text-[#234451] font-semibold mb-4">Associated Symptoms</h3>
+                <h3 className="text-[#234451] font-semibold text-lg mb-2">Associated Symptoms</h3>
                 <input
                   type="text"
                   value={formData.associatedFactors}
                   onChange={(e) => updateField('associatedFactors', e.target.value)}
-                  className="w-full px-4 py-3 border border-[#bcb2da]/50 rounded-lg text-sm bg-white/30 placeholder-[#a48bc3] focus:ring-2 focus:ring-[#DFA69F]/50 transition-all"
+                  className="w-full px-4 py-3 border border-[#bcb2da]/50 rounded-lg text-sm bg-white/30 placeholder-[#a48bc3] text-[#234451] focus:ring-2 focus:ring-[#DFA69F]/50 transition-all"
                   placeholder="e.g. fever, urination, trauma"
                 />
                 {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
@@ -438,13 +438,13 @@ const Normal = () => {
 
             {currentStep === 9 && (
               <>
-                <h3 className="text-[#234451] font-semibold mb-4">Fetal Movement</h3>
+                <h3 className="text-[#234451] font-semibold text-lg mb-2">Fetal Movement</h3>
                 <div className="flex flex-wrap gap-3 justify-center">
                   {['Normal', 'Reduced', 'No movement'].map((option) => (
                     <button
                       key={option}
                       onClick={() => updateField('fetalMovement', option.toLowerCase())}
-                      className={`px-4 py-2 rounded-lg text-sm font-medium border ${
+                      className={`px-4 py-2 rounded-lg font-medium text-sm border ${
                         formData.fetalMovement === option.toLowerCase()
                           ? 'bg-[#DFA69F] text-[#234451]'
                           : 'bg-white/30 text-[#234451] hover:bg-[#DFA69F]/20'
@@ -460,13 +460,13 @@ const Normal = () => {
 
             {currentStep === 10 && (
               <>
-                <h3 className="text-[#234451] font-semibold mb-4">How do you feel?</h3>
+                <h3 className="text-[#234451] font-semibold text-lg mb-2">How do you feel?</h3>
                 <div className="flex flex-wrap gap-3 justify-center">
                   {['Stable', 'Anxious', 'Sad', 'Overwhelmed', 'Depressed'].map((option) => (
                     <button
                       key={option}
                       onClick={() => updateField('mentalHealth', option.toLowerCase())}
-                      className={`px-4 py-2 rounded-lg text-sm font-medium border ${
+                      className={`px-4 py-2 rounded-lg font-medium text-sm border ${
                         formData.mentalHealth === option.toLowerCase()
                           ? 'bg-[#DFA69F] text-[#234451]'
                           : 'bg-white/30 text-[#234451] hover:bg-[#DFA69F]/20'
@@ -484,14 +484,14 @@ const Normal = () => {
               <button
                 onClick={prevStep}
                 disabled={currentStep === 0}
-                className="text-sm px-6 py-3 bg-[#234451] text-[#fabdb5] rounded-lg font-medium disabled:opacity-50"
+                className="font-medium text-sm px-6 py-3 bg-[#234451] text-[#fabdb5] rounded-lg disabled:opacity-50"
               >
                 Back
               </button>
               {currentStep < 10 ? (
                 <button
                   onClick={nextStep}
-                  className="text-sm px-6 py-3 bg-[#DFA69F] text-[#234451] rounded-lg font-medium"
+                  className="font-medium text-sm px-6 py-3 bg-[#DFA69F] text-[#234451] rounded-lg"
                 >
                   Next
                 </button>
@@ -503,7 +503,7 @@ const Normal = () => {
                     // You may want to use duration in your submission logic here
                     alert("Form submitted successfully!");
                   }}
-                  className="text-sm px-6 py-3 bg-[#DFA69F] text-[#234451] rounded-lg font-medium"
+                  className="font-medium text-sm px-6 py-3 bg-[#DFA69F] text-[#234451] rounded-lg"
                 >
                   Submit
                 </button>
@@ -512,13 +512,11 @@ const Normal = () => {
           </div>
 
           {/* AI Assessment Results Card*/}
-          <div className="relative bg-gradient-to-br from-[#fceef1] via-[#f3f0ff] to-[#e7f2ff] border border-[#bcb2da]/30 rounded-3xl p-10 shadow-2xl overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-full bg-stars opacity-10 pointer-events-none z-0"></div>
-            <h2 className="text-[#234451] text-3xl font-bold mb-4 text-center z-10 relative drop-shadow-sm">Assessment Results</h2>
-            <p className="text-[#234451] text-md mb-8 text-center z-10 relative max-w-md mx-auto">Based on your answers, Materna's AI suggests:</p>
-            
-            <div className="space-y-6 relative z-10">
-              <div className="bg-white/70 backdrop-blur-md border border-[#e5d9fa] rounded-2xl p-6 shadow-md transition-transform hover:scale-[1.01] duration-200">
+          <div className="bg-white/20 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-8 shadow-xl">
+            <h2 className="text-[#234451] text-3xl font-bold mb-4 text-center drop-shadow-sm">Assessment Results</h2>
+            <p className="text-[#234451] text-md mb-8 text-center max-w-md mx-auto">Based on your answers, Materna's AI suggests:</p>
+            <div className="space-y-6">
+              <div className="bg-white/20 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-6 shadow-md transition-transform hover:scale-[1.01] duration-200">
                 <div className="flex gap-4 items-start">
                   <div className="w-6 h-6 bg-[#fabdb5]/80 rounded-full shadow-lg border border-white"></div>
                   <div>
@@ -527,8 +525,7 @@ const Normal = () => {
                   </div>
                 </div>
               </div>
-
-              <div className="bg-white/70 backdrop-blur-md border border-[#e5d9fa] rounded-2xl p-6 shadow-md transition-transform hover:scale-[1.01] duration-200">
+              <div className="bg-white/20 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-6 shadow-md transition-transform hover:scale-[1.01] duration-200">
                 <div className="flex gap-4 items-start">
                   <div className="w-6 h-6 bg-[#fabdb5]/80 rounded-full shadow-lg border border-white"></div>
                   <div>
@@ -542,26 +539,26 @@ const Normal = () => {
         </div>
 
         {/* Top Section - Emergency Actions */}
-        <section className="mt-12 text-center">
-          <h2 className="text-[#234451] text-2xl font-semibold mb-6 relative z-20 px-4 py-2 rounded-xl inline-block bg-white/20 backdrop-blur-md border border-[#bcb2da]/50">
+        <section className="mt-12 text-center font-inter">
+          <h2 className="text-[#234451] text-3xl font-bold mb-4 text-center drop-shadow-sm">
             Need to talk to someone? Quick Contacts
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
             {/* Emergency Services */}
             <div className="bg-white/20 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-6 shadow-xl">
-              <h2 className="text-[#234451] text-xl font-semibold mb-2">Emergency</h2>
+              <h2 className="text-[#234451] text-xl font-semibold mb-4">Emergency</h2>
               <p className="text-[#234451] text-sm mb-4">Call immediately</p>
               {!confirmCall911 ? (
                 <button
                   onClick={() => setConfirmCall911(true)}
-                  className="bg-red-600 text-white px-6 py-4 rounded-lg font-medium hover:bg-red-700 transition-all w-full border border-[#a48bc3]/50 flex items-center justify-center gap-2"
+                  className="font-medium text-sm bg-red-600 text-white px-6 py-4 rounded-lg hover:bg-red-700 transition-all w-full border border-[#a48bc3]/50 flex items-center justify-center gap-2"
                 >
                   Call 911
                 </button>
               ) : (
                 <button
                   onClick={() => window.location.href = 'tel:911'}
-                  className="bg-red-700 text-white px-6 py-4 rounded-lg font-medium hover:bg-red-800 transition-all w-full border border-[#a48bc3]/50 flex items-center justify-center gap-2"
+                  className="font-medium text-sm bg-red-700 text-white px-6 py-4 rounded-lg hover:bg-red-800 transition-all w-full border border-[#a48bc3]/50 flex items-center justify-center gap-2"
                 >
                   Confirm Call to 911
                 </button>
@@ -570,9 +567,9 @@ const Normal = () => {
 
             {/* OB/GYN Contact */}
             <div className="bg-white/20 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-6 shadow-xl">
-              <h2 className="text-[#234451] text-xl font-semibold mb-2">Your OB/GYN</h2>
+              <h2 className="text-[#234451] text-xl font-semibold mb-4">Your OB/GYN</h2>
               <p className="text-[#234451] text-sm mb-4">Contact your doctor</p>
-              <button className="bg-[#234451] text-white px-6 py-4 rounded-lg font-medium hover:bg-[#1b343f] transition-all w-full border border-[#a48bc3]/50 flex items-center justify-center gap-2">
+              <button className="font-medium text-sm bg-[#234451] text-white px-6 py-4 rounded-lg hover:bg-[#1b343f] transition-all w-full border border-[#a48bc3]/50 flex items-center justify-center gap-2">
                 Call Doctor
               </button>
             </div>
