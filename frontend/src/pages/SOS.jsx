@@ -98,7 +98,7 @@ const Normal = () => {
       <StarStill />
       <div className="fixed top-0 left-0 w-full h-screen bg-white/20 backdrop-blur-md -z-10"></div>
       
-      <main className="min-h-screen p-6 pt-24 max-w-7xl mx-auto">
+      <main className="min-h-screen p-6 pt-32 max-w-7xl mx-auto">
         
 
         {/* Middle Section - Symptom Checker and AI Results */}
