@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { X, Send, MoreHorizontal, Globe, Calendar, Smile, Info } from 'lucide-react';
+import { getAuth } from "firebase/auth";
 import botIcon from "@/assets/botIcon.png";
 
 const FloatingChatbot = () => {
@@ -22,6 +23,21 @@ const FloatingChatbot = () => {
     { id: 5, title: 'summary of chat topic...', date: 'date/time' }
   ]);
   
+  const [userName, setUserName] = useState("Mama");
+  const [userPhoto, setUserPhoto] = useState("");
+
+  useEffect(() => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (user && user.displayName) {
+      const firstName = user.displayName.split(" ")[0];
+      setUserName(firstName);
+    }
+    if (user && user.photoURL) {
+      setUserPhoto(user.photoURL);
+    }
+  }, []);
+
   const messagesEndRef = useRef(null);
   const textareaRef = useRef(null);
 
@@ -41,7 +57,8 @@ const FloatingChatbot = () => {
         text: message,
         timestamp: new Date()
       };
-      setMessages([...messages, newMessage]);
+      setMessages(prev => [...prev, newMessage]);
+      console.log("Current Messages:", newMessage);
       setMessage('');
       
       // Refocus the textarea after sending
@@ -53,13 +70,15 @@ const FloatingChatbot = () => {
       
       // Simulate bot response
       setTimeout(() => {
-        const botResponse = {
-          id: messages.length + 2,
-          sender: 'bot',
-          text: 'Thank you for your message. How can I assist you further?',
-          timestamp: new Date()
-        };
-        setMessages(prev => [...prev, botResponse]);
+        setMessages(prev => [
+          ...prev,
+          {
+            id: prev.length + 1,
+            sender: 'bot',
+            text: 'Thank you for your message. How can I assist you further?',
+            timestamp: new Date()
+          }
+        ]);
       }, 1000);
     }
   };
@@ -139,206 +158,168 @@ const FloatingChatbot = () => {
     </div>
   );
 
-  // Full Page Chat Component
+  // Redesigned Full Page Chat Component moved inside FloatingChatbot
   const FullPageChat = () => (
-    <div className="fixed inset-0 bg-gradient-to-br from-pink-100 to-blue-100 z-50 flex">
-      {/* Chat History Sidebar */}
-      {showHistory && (
-        <div className="w-80 bg-gradient-to-br from-green-100 to-blue-100 flex flex-col border-r border-gray-200">
-          {/* History Header */}
-          <div className="flex items-center justify-between p-4 border-b border-gray-200">
-            <h2 className="text-2xl font-bold text-gray-800">Chat History</h2>
-            <button
-              onClick={() => setShowHistory(false)}
-              className="p-2 hover:bg-white/50 rounded-lg transition-colors"
-            >
-              <svg 
-                className="w-6 h-6 text-gray-600 transition-transform duration-200"
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-          </div>
-          
-          {/* History Content */}
-          <div className="flex-1 p-4 overflow-y-auto">
-            <p className="text-gray-600 text-sm mb-6">
-              Select a chat to continue conversation where you left off
-            </p>
-            
-            <div className="space-y-3 mb-6">
-              {chatHistory.map((chat) => (
-                <button
-                  key={chat.id}
-                  onClick={() => selectChat(chat.id)}
-                  className="w-full p-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow text-left hover:bg-gray-50"
-                >
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-800 text-sm">{chat.title}</span>
-                    <span className="text-gray-400 text-xs">{chat.date}</span>
-                  </div>
-                </button>
-              ))}
-            </div>
-            
+    <div className="fixed inset-0 bg-gray-50 z-50 flex flex-row">
+      {/* Sidebar */}
+      <aside className="flex flex-col justify-between w-64 bg-white border-r border-gray-200 h-full py-8 px-6 shadow-lg">
+        <div>
+          {/* New Chat Button */}
+          <div className="mb-6">
             <button
               onClick={startNewChat}
-              className="w-full p-3 bg-teal-100 hover:bg-teal-200 rounded-lg transition-colors text-left text-gray-700"
+              className="w-full bg-gradient-to-r from-[#fabdb5] to-[#bcb2da] text-white font-semibold px-4 py-2 rounded-xl shadow-lg hover:from-[#f9b9b0] hover:to-[#a994c2] transition-colors"
             >
-              OR Begin a new chat... →
+              + New Chat
             </button>
           </div>
+          {/* Search Bar */}
+          <div className="mb-8">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search"
+                className="w-full pl-10 pr-4 py-2 rounded-xl bg-[#f9f5f7] border border-[#d8d3e3] focus:outline-none focus:ring-2 focus:ring-[#234451] text-[#6a6a6a]"
+              />
+              <span className="absolute left-3 top-2.5 text-[#a8a8a8]">
+                <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="M21 21l-4.35-4.35" />
+                </svg>
+              </span>
+            </div>
+          </div>
+          {/* Nav Sections */}
+          <nav className="flex flex-col gap-2">
+            {chatHistory.map(chat => (
+              <button
+                key={chat.id}
+                onClick={() => selectChat(chat.id)}
+                className="flex flex-col items-start px-3 py-2 rounded-lg text-[#4a4a4a] hover:bg-[#f5f0f9] text-left"
+              >
+                <span className="font-medium">{chat.title}</span>
+                <span className="text-xs text-[#b0a8c3]">{chat.date}</span>
+              </button>
+            ))}
+          </nav>
         </div>
-      )}
+        {/* User Profile */}
+        <div className="flex items-center gap-3 mt-10">
+          <img
+            src={userPhoto || "https://ui-avatars.com/api/?name=Mama&background=FABDB5&color=234451"}
+            alt="Profile"
+            className="w-10 h-10 rounded-full object-cover border-2 border-[#234451]"
+          />
+          <div>
+            <div className="font-semibold text-[#234451]">{userName}</div>
+            <div className="text-xs text-[#a8a8a8]">Active</div>
+          </div>
+        </div>
+      </aside>
 
       {/* Main Chat Area */}
-      <div className="flex-1 flex flex-col">
-        {/* Top Navigation */}
-        <div className="flex items-center justify-between p-4 bg-white/30 backdrop-blur-sm border-b border-white/50">
-          {!showHistory && (
-            <button
-              onClick={() => setShowHistory(true)}
-              className="p-2 hover:bg-white/50 rounded-lg transition-colors"
-            >
-              <svg 
-                className="w-6 h-6 text-gray-600 transition-transform duration-200"
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          )}
-          
-          {showHistory && <div></div>}
-          
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-600">english</span>
-              <Globe className="w-4 h-4 text-gray-600" />
-            </div>
-            
-            <button
-              onClick={() => setIsFullPage(false)}
-              className="p-2 hover:bg-white/50 rounded-lg transition-colors"
-            >
-              <X className="w-5 h-5 text-gray-600" />
-            </button>
-          </div>
+      <main className="flex-1 flex flex-col h-full relative">
+        {/* Header */}
+        <div className="flex items-center justify-between px-10 pt-10 pb-3">
+          <div></div>
         </div>
-
-        {/* Scrollable Content Area - Contains both header and messages */}
-        <div className="flex-1 overflow-y-auto">
-          <div className="px-8">
-            {/* Chat Header - Only show if no user messages */}
-            {!messages.some(msg => msg.sender === 'user') && (
-              <div className="text-center py-8">
-                <div className="w-45 h-45 rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <img 
-                        src={botIcon} type="png"
-                        alt="Chat Bot" 
-                        className="w-45 h-45"
-                    />
-                </div>
-                <h1 className="text-3xl font-bold text-gray-800 mb-2">Hey, User!</h1>
-                <p className="text-gray-600">How can I help you?</p>
-              </div>
-            )}
-
-            {/* Messages Area */}
-            <div className="max-w-4xl mx-auto space-y-6 pb-4">
-              {messages.map((msg) => (
-                <div key={msg.id} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-md px-6 py-4 rounded-2xl ${
-                    msg.sender === 'user' 
-                      ? 'bg-slate-600 text-white ml-auto' 
-                      : 'bg-white text-gray-800 shadow-sm border'
-                  }`}>
-                    {msg.sender === 'bot' && (
-                      <div className="flex items-center gap-3 mb-2">
-                        <div className="w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center">
-                          <Calendar className="w-4 h-4 text-teal-600" />
-                        </div>
-                        <span className="text-sm font-medium text-teal-600">Materna Bot</span>
-                      </div>
-                    )}
-                    {msg.sender === 'user' && (
-                      <div className="flex items-center justify-end gap-3 mb-2">
-                        <span className="text-sm font-medium text-white/80">User</span>
-                      </div>
-                    )}
-                    <p className="text-base leading-relaxed">{msg.text}</p>
-                  </div>
-                </div>
-              ))}
-              <div ref={messagesEndRef} />
+        {/* Floating Glowing Icon */}
+        <div className="flex flex-col items-center mt-8 mb-4 relative">
+          <div className="relative mb-4">
+            <span className="absolute inset-0 rounded-full blur-2xl opacity-60 bg-gradient-to-br from-[#fabdb5] via-[#a48bc3] to-[#bcb2da] w-20 h-20 animate-pulse"></span>
+            <div className="relative flex items-center justify-center w-20 h-20 rounded-full bg-white shadow-lg z-10">
+              <img src={botIcon} alt="AI" className="w-12 h-12 object-contain" />
             </div>
           </div>
+          {/* Greeting */}
+          <div className="text-center">
+            <h1 className="text-3xl font-bold text-[#234451] mb-2">Hi <span className="text-[#234451]">{userName}!</span></h1>
+            <p className="text-lg text-[#6a6a6a]">
+              How Can I{' '}
+              <span
+                className="bg-gradient-to-r from-[#fabdb5] to-[#bcb2da] bg-clip-text text-transparent font-semibold cursor-pointer hover:underline"
+                tabIndex={0}
+              >
+                Help?
+              </span>
+            </p>
+          </div>
         </div>
-
-        {/* Input Area */}
-        <div className="p-6 bg-white/30 backdrop-blur-sm border-t border-white/50 flex-shrink-0">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex items-center gap-3">
-              <button 
-                onClick={handleInfoClick}
-                className="p-3 hover:bg-white/50 rounded-full transition-colors flex-shrink-0"
-              >
-                <Info className="w-5 h-5 text-gray-600" />
-              </button>
-              
-              <button 
-                onClick={handleEmojiClick}
-                className="p-3 hover:bg-white/50 rounded-full transition-colors flex-shrink-0"
-              >
-                <Smile className="w-5 h-5 text-gray-600" />
-              </button>
-              
-              <div className="flex-1 relative">
-                <textarea
+        {/* Chat Messages */}
+        <div className="flex-1 w-full max-w-2xl mx-auto px-4 overflow-y-auto mb-6">
+          {messages.map((msg) => (
+            <div
+              key={msg.id}
+              className={`my-2 p-3 rounded-lg max-w-[75%] ${
+                msg.sender === 'user'
+                  ? 'ml-auto bg-[#fabdb5] text-[#234451]'
+                  : 'mr-auto bg-[#f9f5f7] text-[#234451]'
+              }`}
+            >
+              {msg.text}
+            </div>
+          ))}
+          <div ref={messagesEndRef} />
+        </div>
+        {/* Chat Input Box */}
+        <div className="flex flex-col items-center pb-16">
+          <div className="w-full max-w-xl mx-auto">
+            <div className="bg-white rounded-2xl shadow-lg border border-[#d8d3e3] px-5 py-4 flex flex-col gap-3">
+              <div className="relative flex items-center">
+                <input
                   ref={textareaRef}
+                  type="text"
                   value={message}
                   onChange={handleInputChange}
                   onKeyDown={handleKeyDown}
-                  placeholder="I need..."
-                  className="w-full p-4 pr-16 border border-gray-300 rounded-3xl resize-none focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent bg-white/80 backdrop-blur-sm text-base"
-                  rows="1"
-                  style={{ minHeight: '56px' }}
+                  placeholder="Type in your question..."
+                  className="w-full pl-4 pr-4 py-3 rounded-xl bg-[#f9f5f7] border border-[#d8d3e3] focus:outline-none focus:ring-2 focus:ring-[#234451] text-base placeholder:text-left"
                   autoFocus
                 />
                 <button
                   onClick={handleSendMessage}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 p-3 bg-slate-600 text-white rounded-full hover:bg-slate-700 transition-colors"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-[#fabdb5] to-[#bcb2da] text-[#234451] rounded-full p-2 shadow-md hover:scale-105 transition-transform"
+                  aria-label="Send"
                 >
-                  <Send className="w-5 h-5" />
+                  <Send size={20} />
                 </button>
               </div>
-              
-              <button 
-                onClick={handleSearchClick}
-                className="p-3 hover:bg-white/50 rounded-full transition-colors flex-shrink-0"
-              >
-                <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </button>
-              
-              <button 
-                onClick={handleMenuClick}
-                className="p-3 hover:bg-white/50 rounded-full transition-colors flex-shrink-0"
-              >
-                <MoreHorizontal className="w-5 h-5 text-gray-600" />
-              </button>
             </div>
           </div>
         </div>
-      </div>
+      </main>
+      {/* Close Button */}
+      <button
+        onClick={() => setIsFullPage(false)}
+        className="absolute top-6 right-8 bg-[#f9f5f7] hover:bg-[#f0e9f8] rounded-full p-2 shadow-md"
+        aria-label="Close"
+      >
+        <X size={22} className="text-[#234451]" />
+      </button>
     </div>
   );
+
+  // History Icon SVG
+  function HistoryIcon() {
+    return (
+      <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" className="text-[#a8a8a8]">
+        <path d="M3 3v5h5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M3.05 13a9 9 0 102.13-9.36" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M12 7v5l3 3" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    );
+  }
+
+  useEffect(() => {
+    if (isFullPage) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isFullPage]);
 
   return (
     <>
