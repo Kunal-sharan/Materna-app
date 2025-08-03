@@ -222,7 +222,7 @@ useEffect(() => {
                                            selectedDate.getFullYear() === currentYear;
                         daysArray.push(
                           <div key={i} className="relative" onClick={() => handleDayClick(dayNum)}>
-                            <div className={`inline-block w-8 h-8 leading-8 rounded-full hover:bg-[#234451] cursor-pointer ${isSelected ? 'bg-[#DFA69F] text-white' : ''}`}>
+                            <div className={`inline-block w-8 h-8 leading-8 rounded-full cursor-pointer transition-colors duration-200 ${isSelected ? 'bg-[#DFA69F] text-white' : 'hover:bg-[#234451]/20 text-[#234451]'}`}>
                               {dayNum}
                             </div>
                             {(() => {

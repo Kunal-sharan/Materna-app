@@ -13,6 +13,7 @@ import UserProfile from "./pages/UserProfile";
 import Milestones from "./pages/Milestones";
 import Vaccines from "./pages/Vaccines"
 import Essentials from "./pages/Essentials"
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/milestones" element={<Milestones />} />
           <Route path="/vaccination" element={<Vaccines />} />
           <Route path="/essentials" element={<Essentials />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
