@@ -103,7 +103,7 @@ const Normal = () => {
         Your browser does not support the video tag.
       </video>
       <StarStill />
-      <div className="fixed top-0 left-0 w-full h-screen bg-white/20 backdrop-blur-md -z-10"></div>
+      <div className="fixed top-0 left-0 w-full h-screen bg-white/40 backdrop-blur-md -z-10"></div>
       
       <main className="min-h-screen p-6 pt-32 max-w-7xl mx-auto">
         
@@ -111,7 +111,7 @@ const Normal = () => {
         {/* Middle Section - Symptom Checker and AI Results */}
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-10">
           {/* Check Your Symptoms Card */}
-          <div className="bg-white/20 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-8 shadow-xl font-inter">
+          <div className="bg-white/40 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-8 shadow-xl font-inter">
             <h2 className="text-[#234451] text-3xl font-bold mb-4 text-center drop-shadow-sm">Check Your Symptoms</h2>
 
             {currentStep === 0 && (
@@ -512,11 +512,11 @@ const Normal = () => {
           </div>
 
           {/* AI Assessment Results Card*/}
-          <div className="bg-white/20 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-8 shadow-xl">
+          <div className="bg-white/40 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-8 shadow-xl">
             <h2 className="text-[#234451] text-3xl font-bold mb-4 text-center drop-shadow-sm">Assessment Results</h2>
             <p className="text-[#234451] text-md mb-8 text-center max-w-md mx-auto">Based on your answers, Materna's AI suggests:</p>
             <div className="space-y-6">
-              <div className="bg-white/20 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-6 shadow-md transition-transform hover:scale-[1.01] duration-200">
+              <div className="bg-white/40 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-6 shadow-md transition-transform hover:scale-[1.01] duration-200">
                 <div className="flex gap-4 items-start">
                   <div className="w-6 h-6 bg-[#fabdb5]/80 rounded-full shadow-lg border border-white"></div>
                   <div>
@@ -525,7 +525,7 @@ const Normal = () => {
                   </div>
                 </div>
               </div>
-              <div className="bg-white/20 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-6 shadow-md transition-transform hover:scale-[1.01] duration-200">
+              <div className="bg-white/40 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-6 shadow-md transition-transform hover:scale-[1.01] duration-200">
                 <div className="flex gap-4 items-start">
                   <div className="w-6 h-6 bg-[#fabdb5]/80 rounded-full shadow-lg border border-white"></div>
                   <div>
@@ -545,7 +545,7 @@ const Normal = () => {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
             {/* Emergency Services */}
-            <div className="bg-white/20 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-6 shadow-xl">
+            <div className="bg-white/40 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-6 shadow-xl">
               <h2 className="text-[#234451] text-xl font-semibold mb-4">Emergency</h2>
               <p className="text-[#234451] text-sm mb-4">Call immediately</p>
               {!confirmCall911 ? (
@@ -566,7 +566,7 @@ const Normal = () => {
             </div>
 
             {/* OB/GYN Contact */}
-            <div className="bg-white/20 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-6 shadow-xl">
+            <div className="bg-white/40 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-6 shadow-xl">
               <h2 className="text-[#234451] text-xl font-semibold mb-4">Your OB/GYN</h2>
               <p className="text-[#234451] text-sm mb-4">Contact your doctor</p>
               <button className="font-medium text-sm bg-[#234451] text-white px-6 py-4 rounded-lg hover:bg-[#1b343f] transition-all w-full border border-[#a48bc3]/50 flex items-center justify-center gap-2">
