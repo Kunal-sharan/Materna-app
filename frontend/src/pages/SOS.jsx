@@ -79,7 +79,13 @@ const Normal = () => {
     setError('');
     setCurrentStep((prev) => prev + 1);
   };
-  const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 0));
+  const prevStep = () => {
+    setCurrentStep((prev) => {
+      // If we're at step 4 (Symptom Type) and we skipped step 3 (Prev Complications) due to parity 0, go back to step 2
+      if (prev === 4 && formData.parity === 0) return 2;
+      return Math.max(prev - 1, 0);
+    });
+  };
 
   const updateField = (field, value) => {
     setFormData((prev) => ({
