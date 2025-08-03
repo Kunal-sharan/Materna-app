@@ -1,3 +1,4 @@
+import Chatbot from "../pages/Chatbot";
 import { Navbar } from "../components/Navbar";
 import { StarBackground } from "@/components/StarBackground";
 import { HeroSection } from "../components/HeroSection";
@@ -42,6 +43,10 @@ export const Home = () => {
 
       {/* Footer */}
       <Footer />
+
+      <div className="fixed bottom-6 right-6 z-50">
+        <Chatbot />
+      </div>
     </div>
   );
 };

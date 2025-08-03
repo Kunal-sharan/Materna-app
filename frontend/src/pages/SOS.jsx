@@ -16,6 +16,7 @@ const Normal = () => {
   const [error, setError] = useState('');
   const [showSeverityDropdown, setShowSeverityDropdown] = useState(false);
   const [showFrequencyDropdown, setShowFrequencyDropdown] = useState(false);
+  const [confirmCall911, setConfirmCall911] = useState(false);
   const [formData, setFormData] = useState({
     parity: 0,
     substanceUse: '',
@@ -549,10 +550,22 @@ const Normal = () => {
             {/* Emergency Services */}
             <div className="bg-white/20 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-6 shadow-xl">
               <h2 className="text-[#234451] text-xl font-semibold mb-2">Emergency</h2>
-              <p className="text-[#234451] text-sm mb-4">Call 911 immediately</p>
-              <button className="bg-red-600 text-white px-6 py-4 rounded-lg font-medium hover:bg-red-700 transition-all w-full border border-[#a48bc3]/50 flex items-center justify-center gap-2">
-                Call 911
-              </button>
+              <p className="text-[#234451] text-sm mb-4">Call immediately</p>
+              {!confirmCall911 ? (
+                <button
+                  onClick={() => setConfirmCall911(true)}
+                  className="bg-red-600 text-white px-6 py-4 rounded-lg font-medium hover:bg-red-700 transition-all w-full border border-[#a48bc3]/50 flex items-center justify-center gap-2"
+                >
+                  Call 911
+                </button>
+              ) : (
+                <button
+                  onClick={() => window.location.href = 'tel:911'}
+                  className="bg-red-700 text-white px-6 py-4 rounded-lg font-medium hover:bg-red-800 transition-all w-full border border-[#a48bc3]/50 flex items-center justify-center gap-2"
+                >
+                  Confirm Call to 911
+                </button>
+              )}
             </div>
 
             {/* OB/GYN Contact */}

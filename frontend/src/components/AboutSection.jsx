@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Apple, MessageCircle, CalendarCheck } from "lucide-react";
+import Chatbot from "../pages/Chatbot";
 
 export const AboutSection = () => {
   const navigate = useNavigate();
