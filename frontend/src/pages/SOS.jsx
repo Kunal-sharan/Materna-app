@@ -60,7 +60,6 @@ const Normal = () => {
       'associatedFactors', 'fetalMovement', 'mentalHealth'
     ];
     const currentField = fields[currentStep];
-    // Updated validation logic for clarity and duration handling
     if (
       currentField === 'duration' &&
       (!formData.durationAmount || !formData.durationUnit)
@@ -506,26 +505,27 @@ const Normal = () => {
           </div>
 
           {/* AI Assessment Results Card*/}
-          <div className="bg-white/20 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-8 shadow-xl">
-            <h2 className="text-[#234451] text-2xl font-semibold mb-4">Assessment Results</h2>
-            <p className="text-[#234451] text-sm mb-8">Based on your answers, Materna's AI suggests the following actions:</p>
+          <div className="relative bg-gradient-to-br from-[#fceef1] via-[#f3f0ff] to-[#e7f2ff] border border-[#bcb2da]/30 rounded-3xl p-10 shadow-2xl overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-full bg-stars opacity-10 pointer-events-none z-0"></div>
+            <h2 className="text-[#234451] text-3xl font-bold mb-4 text-center z-10 relative drop-shadow-sm">Assessment Results</h2>
+            <p className="text-[#234451] text-md mb-8 text-center z-10 relative max-w-md mx-auto">Based on your answers, Materna's AI suggests:</p>
             
-            <div className="space-y-6">
-              <div className="bg-[#bcb2da]/40 backdrop-blur-md border border-[#a48bc3]/50 rounded-xl p-6 shadow-md">
-                <div className="flex gap-4">
-                  <div className="w-5 h-5 bg-[#fabdb5]/80 backdrop-blur-md rounded-sm mt-1 flex-shrink-0 shadow-sm"></div>
+            <div className="space-y-6 relative z-10">
+              <div className="bg-white/70 backdrop-blur-md border border-[#e5d9fa] rounded-2xl p-6 shadow-md transition-transform hover:scale-[1.01] duration-200">
+                <div className="flex gap-4 items-start">
+                  <div className="w-6 h-6 bg-[#fabdb5]/80 rounded-full shadow-lg border border-white"></div>
                   <div>
-                    <h3 className="font-semibold text-[#234451] mb-2">Recommendation</h3>
+                    <h3 className="font-semibold text-[#234451] mb-1 text-lg">Recommendation</h3>
                     <p className="text-[#234451] text-sm leading-relaxed">Seek immediate care for severe symptoms.</p>
                   </div>
                 </div>
               </div>
-              
-              <div className="bg-[#bcb2da]/40 backdrop-blur-md border border-[#a48bc3]/50 rounded-xl p-6 shadow-md">
-                <div className="flex gap-4">
-                  <div className="w-5 h-5 bg-[#fabdb5]/80 backdrop-blur-md rounded-sm mt-1 flex-shrink-0 shadow-sm"></div>
+
+              <div className="bg-white/70 backdrop-blur-md border border-[#e5d9fa] rounded-2xl p-6 shadow-md transition-transform hover:scale-[1.01] duration-200">
+                <div className="flex gap-4 items-start">
+                  <div className="w-6 h-6 bg-[#fabdb5]/80 rounded-full shadow-lg border border-white"></div>
                   <div>
-                    <h3 className="font-semibold text-[#234451] mb-2">Recommendation</h3>
+                    <h3 className="font-semibold text-[#234451] mb-1 text-lg">Recommendation</h3>
                     <p className="text-[#234451] text-sm leading-relaxed">Monitor symptoms and contact your healthcare provider.</p>
                   </div>
                 </div>
