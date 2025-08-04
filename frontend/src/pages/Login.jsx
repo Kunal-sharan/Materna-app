@@ -14,6 +14,8 @@ export default function Login() {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const token = await userCredential.user.getIdToken();
       localStorage.setItem("maternaUserToken", token);
+      localStorage.setItem("maternaUserPhoto", userCredential.user.photoURL || "");
+      localStorage.setItem("maternaUserName", userCredential.user.displayName || "");
       console.log("Firebase ID token:", token);
       // You can now send this token to the Django backend for verification
       navigate("/profile");
@@ -28,8 +30,11 @@ export default function Login() {
       const result = await signInWithPopup(auth, provider);
       const token = await result.user.getIdToken();
       localStorage.setItem("maternaUserToken", token);
-      console.log("Google login token:", token);
+      localStorage.setItem("maternaUserPhoto", result.user.photoURL || "");
+      localStorage.setItem("maternaUserName", result.user.displayName || "");
+      console.log("photoURL:", result.user.photoURL);
       navigate("/profile");
+      window.location.reload();
     } catch (error) {
       console.error("Google login error:", error.message);
     }
