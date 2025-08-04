@@ -81,14 +81,14 @@ const FloatingChatbot = () => {
         } else if (lower.includes("symptom")) {
           response = "You can log or track symptoms directly from your dashboard.";
         } else if (lower.includes("emotional") || lower.includes("feeling")) {
-          response = "You're not alone. I'm here to listen — want to talk more about it?";
+          response = "You're not alone. I'm here to listen. Want to talk more about it?";
         } else if (lower.includes("support")) {
           response = "For support, you can always message us or book a session with a Materna specialist.";
         } else {
           const fallbackResponses = [
-            "That's a great question — let me look into it!",
+            "That's a great question, let me look into it!",
             "Thanks for reaching out! I'm here to support you.",
-            "You're not alone — let's figure this out together.",
+            "You're not alone! Let's figure this out together.",
             "Hang tight! I'll try to help with that.",
             "Okay! Let's dive into this."
           ];
