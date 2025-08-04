@@ -187,10 +187,10 @@ const FloatingChatbot = () => {
 
   // Redesigned Full Page Chat Component moved inside FloatingChatbot
   const FullPageChat = () => (
-    <div className="fixed inset-0 bg-gray-50 z-50 flex flex-row">
+    <div className="fixed inset-0 bg-gray-50 z-50 flex flex-col md:flex-row">
       {/* Sidebar */}
       {isSidebarOpen && (
-      <aside className="flex flex-col justify-between w-64 bg-white border-r border-gray-200 h-full py-8 px-6 shadow-lg">
+      <aside className="flex flex-col justify-between w-64 bg-white border-r border-gray-200 h-full py-8 px-6 shadow-lg fixed inset-y-0 left-0 z-50 md:relative md:z-0 md:block">
         <div className="flex justify-end">
           <button
             onClick={() => setIsSidebarOpen(false)}
@@ -200,7 +200,7 @@ const FloatingChatbot = () => {
             <X size={20} />
           </button>
         </div>
-        <div>
+        <div className="mt-2">
           {/* New Chat Button */}
           <div className="mb-6">
             <button
@@ -266,7 +266,7 @@ const FloatingChatbot = () => {
       )}
 
       {/* Main Chat Area */}
-      <main className="flex-1 flex flex-col h-full relative">
+      <main className={`flex-1 flex flex-col h-full relative ${isSidebarOpen ? 'hidden md:flex' : 'flex'}`}>
         {/* Header */}
         <div className="flex items-center justify-between px-10 pt-10 pb-3">
         </div>
