@@ -298,7 +298,7 @@ const FloatingChatbot = () => {
           {messages.map((msg) => (
             <div
               key={msg.id}
-              className={`flex w-full max-w-3xl mx-auto gap-2 my-2 ${
+              className={`flex items-end w-full max-w-3xl mx-auto gap-3 my-3 ${
                 msg.sender === 'user' ? 'justify-end' : 'justify-start'
               }`}
             >
@@ -306,14 +306,14 @@ const FloatingChatbot = () => {
                 <img
                   src={botIcon}
                   alt="Bot"
-                  className="w-6 h-6 mt-1 rounded-full"
+                  className="w-8 h-8 rounded-full border border-[#fabdb5] shadow"
                 />
               )}
               <div
-                className={`p-3 rounded-lg max-w-[75%] ${
+                className={`relative px-4 py-3 rounded-2xl text-sm max-w-[70%] whitespace-pre-line leading-relaxed shadow-md ${
                   msg.sender === 'user'
-                    ? 'bg-[#fabdb5] text-[#234451]'
-                    : 'bg-[#f9f5f7] text-[#234451]'
+                    ? 'bg-gradient-to-br from-[#fabdb5] to-[#dfa69f] text-white rounded-br-none'
+                    : 'bg-[#f9f5f7] text-[#234451] rounded-bl-none'
                 }`}
               >
                 {msg.text}
@@ -322,7 +322,7 @@ const FloatingChatbot = () => {
                 <img
                   src={userPhoto || "https://ui-avatars.com/api/?name=You&background=FABDB5&color=234451"}
                   alt="User"
-                  className="w-6 h-6 mt-1 rounded-full"
+                  className="w-8 h-8 rounded-full border border-[#fabdb5] shadow"
                 />
               )}
             </div>
