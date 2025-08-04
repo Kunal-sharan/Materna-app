@@ -242,7 +242,7 @@ export default function UserProfile() {
                 </div>
               </div>
             </div>
-            <div className="mt-4 sm:mt-0 flex-shrink-0">
+            <div className="mt-4 sm:mt-0 flex-shrink-0 self-center">
               <button
                 onClick={handleLogout}
                 className="bg-[#9771bc] text-white text-xs sm:text-sm px-4 py-1 rounded-md hover:bg-[#745295] w-full"
@@ -517,7 +517,7 @@ export default function UserProfile() {
                       {!appt.done && (
                         <button onClick={() => markAsDone(idx)} className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Done</button>
                       )}
-                      <button onClick={() => deleteAppointment(idx)} className="text-xs bg-red-100 text-red-700 px-2 py-1 rounded">Delete</button>
+                      <button onClick={() => deleteAppointment(idx)} className="text-xs bg-[#fabdb5] text-[#234451] px-2 py-1 rounded hover:bg-[#dfa69f]">Delete</button>
                     </div>
                   </div>
                 </div>
@@ -660,6 +660,25 @@ export default function UserProfile() {
         {/* Removed Edit/Save/Cancel buttons at the bottom */}
         </div>
       </main>
+      <div className="text-center mt-10 mb-6">
+        <button
+          onClick={async () => {
+            if (window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+              try {
+                await auth.currentUser.delete();
+                toast.success("Account deleted successfully.");
+                navigate("/");
+              } catch (error) {
+                console.error("Error deleting account:", error);
+                toast.error("Error deleting account. Please re-authenticate and try again.");
+              }
+            }
+          }}
+          className="text-xs text-[#234451] px-4 py-1 rounded hover:underline bg-[#fabdb5]/30"
+        >
+          Delete Account
+        </button>
+      </div>
       <Footer />
     </>
   );

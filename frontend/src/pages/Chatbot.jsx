@@ -25,6 +25,7 @@ const FloatingChatbot = () => {
   
   const [userName, setUserName] = useState("Mama");
   const [userPhoto, setUserPhoto] = useState("");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   useEffect(() => {
     const auth = getAuth();
@@ -162,7 +163,17 @@ const FloatingChatbot = () => {
   const FullPageChat = () => (
     <div className="fixed inset-0 bg-gray-50 z-50 flex flex-row">
       {/* Sidebar */}
+      {isSidebarOpen && (
       <aside className="flex flex-col justify-between w-64 bg-white border-r border-gray-200 h-full py-8 px-6 shadow-lg">
+        <div className="flex justify-end">
+          <button
+            onClick={() => setIsSidebarOpen(false)}
+            className="text-[#234451] p-2 rounded-md hover:bg-[#f9f5f7] transition"
+            aria-label="Hide Sidebar"
+          >
+            <X size={20} />
+          </button>
+        </div>
         <div>
           {/* New Chat Button */}
           <div className="mb-6">
@@ -216,12 +227,22 @@ const FloatingChatbot = () => {
           </div>
         </div>
       </aside>
+      )}
+
+      {!isSidebarOpen && (
+        <button
+          onClick={() => setIsSidebarOpen(true)}
+          className="absolute top-6 left-6 z-10 text-[#234451] p-2 rounded-md hover:bg-[#f9f5f7] transition"
+          aria-label="Show Sidebar"
+        >
+          <MoreHorizontal size={20} />
+        </button>
+      )}
 
       {/* Main Chat Area */}
       <main className="flex-1 flex flex-col h-full relative">
         {/* Header */}
         <div className="flex items-center justify-between px-10 pt-10 pb-3">
-          <div></div>
         </div>
         {/* Floating Glowing Icon */}
         <div className="flex flex-col items-center mt-8 mb-4 relative">
