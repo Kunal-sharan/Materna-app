@@ -16,6 +16,7 @@ export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const [photo, setPhoto] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,6 +31,8 @@ export const Navbar = () => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
+      const storedPhoto = localStorage.getItem("maternaUserPhoto");
+      if (storedPhoto) setPhoto(storedPhoto);
     });
     return () => unsubscribe();
   }, []);
@@ -84,7 +87,7 @@ export const Navbar = () => {
         {user ? (
           <Link to="/profile">
             <img
-              src={user.photoURL || "https://i.pinimg.com/236x/40/41/6f/40416fe5cfc9de788b1fcd769c93013a.jpg"}
+              src={photo || "https://i.pinimg.com/236x/40/41/6f/40416fe5cfc9de788b1fcd769c93013a.jpg"}
               onError={(e) => {
                 e.target.onerror = null;
                 e.target.src = "https://i.pinimg.com/236x/40/41/6f/40416fe5cfc9de788b1fcd769c93013a.jpg";
