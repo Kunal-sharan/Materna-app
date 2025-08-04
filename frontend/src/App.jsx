@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { NotFound } from "./pages/NotFound";
 import { Toaster } from "@/components/ui/toaster";
@@ -15,31 +15,42 @@ import Vaccines from "./pages/Vaccines"
 import Essentials from "./pages/Essentials"
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TOS from "./pages/TOS";
+import ResetPassword from "./pages/ResetPassword";
 
-function App() {
+function AppContent() {
+  const location = useLocation();
+  const showChatbot = !["/signup", "/login"].includes(location.pathname);
+
   return (
     <>
       <Toaster />
-      <Chatbot />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/journal" element={<Journal />} />
-          <Route path="/normal" element={<Normal />} />
-          <Route path="/wellness" element={<Wellness />} />
-          <Route path="/community" element={<Community />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/profile" element={<UserProfile />} />
-          <Route path="/milestones" element={<Milestones />} />
-          <Route path="/vaccination" element={<Vaccines />} />
-          <Route path="/essentials" element={<Essentials />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/termsofservice" element={<TOS />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      {showChatbot && <Chatbot />}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/journal" element={<Journal />} />
+        <Route path="/normal" element={<Normal />} />
+        <Route path="/wellness" element={<Wellness />} />
+        <Route path="/community" element={<Community />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/profile" element={<UserProfile />} />
+        <Route path="/milestones" element={<Milestones />} />
+        <Route path="/vaccination" element={<Vaccines />} />
+        <Route path="/essentials" element={<Essentials />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/termsofservice" element={<TOS />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 }
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import base from "../assets/base.svg"
+import loginBg from "../assets/loginbg.svg";
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../firebase";
 
@@ -36,66 +36,91 @@ export default function Login() {
   };
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-r from-[#f5f7fa] to-[#e3ebf4] font-sans">
-      {/* Left: Login Form */}
-      <div className="relative w-full max-w-md bg-white shadow-xl rounded-3xl p-8 m-6 flex flex-col justify-center">
+    <div
+      style={{
+        backgroundImage: `url(${loginBg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+      className="flex items-center justify-center min-h-screen"
+    >
+      <div className="bg-white/80 backdrop-blur-md rounded-3xl shadow-lg p-10 max-w-md w-full relative">
         <Link
           to="/"
-          className="absolute top-4 left-4 text-sm text-[#a48bc3] font-semibold hover:text-[#9771bc]"
+          className="absolute top-4 left-4 text-sm text-[#bcb2da] font-semibold hover:text-[#a48bc3]"
         >
           ← Back to Home
         </Link>
-        <h2 className="text-2xl font-bold text-[#234451]">Welcome back!</h2>
-        <p className="text-sm text-[#234451] mt-2">Log in to continue your journey.</p>
 
-        <button
-          onClick={handleGoogleLogin}
-          className="mt-6 border border-gray-300 rounded-lg py-2 flex items-center justify-center"
-        >
-          <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5 mr-2" />
-          <span className="text-sm">Log in with Google</span>
-        </button>
+        <div className="mb-8 flex justify-center">
+          <img
+            src="/Logo.png"
+            alt="Materna Logo"
+            className="w-20 h-20 rounded-full object-cover"
+          />
+        </div>
 
-        <div className="text-xs text-center text-gray-500 mt-4">or log in with your email</div>
+        <h2 className="text-3xl font-bold text-[#234451] mb-2 text-center">Welcome back</h2>
+        <p className="text-center text-[#234451]/80 mb-8 text-sm">
+          We’ve missed you. Pick up where you left off.
+        </p>
 
         <input
-          className="mt-4 px-4 py-3 w-full border border-gray-200 rounded-xl placeholder-gray-400"
+          type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className="w-full px-4 py-3 rounded-xl border border-gray-300 mb-4 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a48bc3]"
         />
+
         <input
           type="password"
-          className="mt-3 px-4 py-3 w-full border border-gray-200 rounded-xl placeholder-gray-400"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          className="w-full px-4 py-3 rounded-xl border border-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a48bc3] mb-6"
         />
+        <Link
+          to="/reset-password"
+          className="mt-2 text-right text-sm text-[#a48bc3] hover:underline block mb-4"
+        >
+          Forgot your password?
+        </Link>
 
         <button
           onClick={handleLogin}
-          className="mt-6 bg-[#a48bc3] text-white py-3 rounded-xl font-semibold hover:bg-[#9771bc]"
+          className="w-full bg-gradient-to-r from-[#dfa69f] to-[#bcb2da] text-white py-3 rounded-xl font-semibold hover:from-[#fabdb5] hover:to-[#a48bc3] transition-colors mb-6"
         >
           Log in
         </button>
 
-        <p className="mt-4 text-sm text-center text-[#234451]">
-          Don’t have an account? <a href="/signup" className="text-[#a48bc3] font-semibold">Sign up</a>
+        <p className="text-sm text-center text-[#234451] mb-6">
+          Don’t have an account?{" "}
+          <Link to="/signup" className="text-[#bcb2da] font-semibold hover:text-[#a48bc3]">
+            Sign up
+          </Link>
         </p>
-      </div>
 
-      {/* Right: Static Welcome Section */}
-      <div
-        className="flex-1 bg-cover bg-center bg-no-repeat px-10 py-8 hidden md:flex flex-col items-center justify-center text-center"
-        style={{
-          backgroundImage: `url(${base})`,
-        }}
-      >
-        <div className="bg-white/70 p-6 rounded-2xl shadow-lg">
-          <h2 className="text-2xl font-bold text-[#234451]">Welcome back, mama!</h2>
-          <p className="text-sm text-[#234451] mt-2 max-w-md">
-            We’ve missed you. Pick up where you left off.
-          </p>
+        <div className="flex items-center mb-6">
+          <hr className="flex-grow border-gray-300" />
+          <span className="mx-4 text-gray-500 text-sm">or log in with</span>
+          <hr className="flex-grow border-gray-300" />
+        </div>
+
+        <div className="flex justify-center">
+          <button
+            onClick={handleGoogleLogin}
+            className="flex items-center border border-gray-300 rounded-lg px-4 py-2 hover:bg-gray-100 transition"
+            aria-label="Log in with Google"
+          >
+            <img
+              src="https://www.svgrepo.com/show/475656/google-color.svg"
+              alt="Google"
+              className="w-5 h-5 mr-2"
+            />
+            <span className="text-sm text-gray-700 font-medium">Log in with Google</span>
+          </button>
         </div>
       </div>
     </div>
