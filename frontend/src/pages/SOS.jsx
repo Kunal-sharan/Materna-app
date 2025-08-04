@@ -12,6 +12,100 @@ const suggestedComplications = [
   "Placenta previa"
 ];
 const Normal = () => {
+  // Helper to get the local emergency number and country name using IP-based location
+  const getEmergencyNumber = () => {
+    const [emergencyInfo, setEmergencyInfo] = useState({ number: "112", country: "Unknown" });
+
+    useEffect(() => {
+      const fetchLocation = async () => {
+        try {
+          const response = await fetch("https://ipapi.co/json/");
+          const data = await response.json();
+          const countryCode = data.country_code.toUpperCase();
+
+          switch (countryCode) {
+            case "US":
+              setEmergencyInfo({ number: "911", country: "United States" });
+              break;
+            case "GB":
+              setEmergencyInfo({ number: "999", country: "United Kingdom" });
+              break;
+            case "AU":
+              setEmergencyInfo({ number: "000", country: "Australia" });
+              break;
+            case "IN":
+              setEmergencyInfo({ number: "112", country: "India" });
+              break;
+            case "CA":
+              setEmergencyInfo({ number: "911", country: "Canada" });
+              break;
+            case "NZ":
+              setEmergencyInfo({ number: "111", country: "New Zealand" });
+              break;
+            case "ZA":
+              setEmergencyInfo({ number: "10111", country: "South Africa" });
+              break;
+            case "FR":
+              setEmergencyInfo({ number: "112", country: "France" });
+              break;
+            case "DE":
+              setEmergencyInfo({ number: "112", country: "Germany" });
+              break;
+            case "MY":
+              setEmergencyInfo({ number: "999", country: "Malaysia" });
+              break;
+            case "PH":
+              setEmergencyInfo({ number: "911", country: "Philippines" });
+              break;
+            case "SG":
+              setEmergencyInfo({ number: "995", country: "Singapore" });
+              break;
+            case "JP":
+              setEmergencyInfo({ number: "119", country: "Japan" });
+              break;
+            case "CN":
+              setEmergencyInfo({ number: "120", country: "China" });
+              break;
+            case "BR":
+              setEmergencyInfo({ number: "190", country: "Brazil" });
+              break;
+            case "MX":
+              setEmergencyInfo({ number: "911", country: "Mexico" });
+              break;
+            case "TH":
+              setEmergencyInfo({ number: "191", country: "Thailand" });
+              break;
+            case "ID":
+              setEmergencyInfo({ number: "112", country: "Indonesia" });
+              break;
+            case "NG":
+              setEmergencyInfo({ number: "112", country: "Nigeria" });
+              break;
+            case "KE":
+              setEmergencyInfo({ number: "999", country: "Kenya" });
+              break;
+            case "AE":
+              setEmergencyInfo({ number: "999", country: "United Arab Emirates" });
+              break;
+            case "SA":
+              setEmergencyInfo({ number: "997", country: "Saudi Arabia" });
+              break;
+            default:
+              setEmergencyInfo({ number: "112", country: data.country_name || "Unknown" });
+          }
+        } catch (error) {
+          console.error("Failed to fetch location:", error);
+          setEmergencyInfo({ number: "112", country: "Unknown" });
+        }
+      };
+
+      fetchLocation();
+    }, []);
+
+    return [emergencyInfo, setEmergencyInfo];
+  };
+  // Initialize and retrieve the emergency info (number and country)
+  const [emergencyInfo, setEmergencyInfo] = getEmergencyNumber();
   const [currentStep, setCurrentStep] = useState(0);
   const [error, setError] = useState('');
   const [showSeverityDropdown, setShowSeverityDropdown] = useState(false);
@@ -543,30 +637,30 @@ const Normal = () => {
           <h2 className="text-[#234451] text-3xl font-bold mb-4 text-center drop-shadow-sm">
             Need to talk to someone? Quick Contacts
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto items-stretch">
             {/* Emergency Services */}
-            <div className="bg-white/40 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-6 shadow-xl">
+            <div className="bg-white/40 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-6 shadow-xl h-full flex flex-col justify-between">
               <h2 className="text-[#234451] text-xl font-semibold mb-4">Emergency</h2>
-              <p className="text-[#234451] text-sm mb-4">Call immediately</p>
+              <p className="text-[#234451] text-sm mb-4">Emergency Number for {emergencyInfo.country}</p>
               {!confirmCall911 ? (
                 <button
                   onClick={() => setConfirmCall911(true)}
                   className="font-medium text-sm bg-red-600 text-white px-6 py-4 rounded-lg hover:bg-red-700 transition-all w-full border border-[#a48bc3]/50 flex items-center justify-center gap-2"
                 >
-                  Call 911
+                  Call {emergencyInfo.number}
                 </button>
               ) : (
                 <button
-                  onClick={() => window.location.href = 'tel:911'}
+                  onClick={() => window.location.href = `tel:${emergencyInfo.number}`}
                   className="font-medium text-sm bg-red-700 text-white px-6 py-4 rounded-lg hover:bg-red-800 transition-all w-full border border-[#a48bc3]/50 flex items-center justify-center gap-2"
                 >
-                  Confirm Call to 911
+                  Confirm Call to {emergencyInfo.number}
                 </button>
               )}
             </div>
 
             {/* OB/GYN Contact */}
-            <div className="bg-white/40 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-6 shadow-xl">
+            <div className="bg-white/40 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-6 shadow-xl h-full flex flex-col justify-between">
               <h2 className="text-[#234451] text-xl font-semibold mb-4">Your OB/GYN</h2>
               <p className="text-[#234451] text-sm mb-4">Contact your doctor</p>
               <button className="font-medium text-sm bg-[#234451] text-white px-6 py-4 rounded-lg hover:bg-[#1b343f] transition-all w-full border border-[#a48bc3]/50 flex items-center justify-center gap-2">
