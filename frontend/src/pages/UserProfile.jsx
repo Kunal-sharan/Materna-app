@@ -919,7 +919,7 @@ export default function UserProfile() {
               }
             }
           }}
-          className="text-xs sm:text-sm text-[#234451] px-5 py-2 rounded-full bg-[#fabdb5]/60 hover:brightness-110 transition-all font-semibold"
+          className="text-xs sm:text-sm text-[#234451] px-5 py-2 rounded-full bg-[#fabdb5]/90 hover:brightness-110 transition-all font-semibold"
         >
           Delete Account
         </button>
