@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
-import { X, Send, MoreHorizontal, Globe, Calendar, Smile, Info } from 'lucide-react';
+import { X, MoreHorizontal, Globe, Calendar, Smile, Info } from 'lucide-react';
+import upArrow from "@/assets/up-arrow.png";
 import { getAuth } from "firebase/auth";
 import botIcon from "@/assets/botIcon.png";
 
@@ -26,6 +27,7 @@ const FloatingChatbot = () => {
   const [userName, setUserName] = useState("Mama");
   const [userPhoto, setUserPhoto] = useState("");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isTyping, setIsTyping] = useState(false);
 
   useEffect(() => {
     const auth = getAuth();
@@ -69,17 +71,41 @@ const FloatingChatbot = () => {
         }
       }, 0);
       
-      // Simulate bot response
+      setIsTyping(true);
       setTimeout(() => {
+        const lower = message.toLowerCase();
+        let response;
+
+        if (lower.includes("appointment")) {
+          response = "You can manage appointments in the Schedule tab. Need help finding it?";
+        } else if (lower.includes("symptom")) {
+          response = "You can log or track symptoms directly from your dashboard.";
+        } else if (lower.includes("emotional") || lower.includes("feeling")) {
+          response = "You're not alone. I'm here to listen — want to talk more about it?";
+        } else if (lower.includes("support")) {
+          response = "For support, you can always message us or book a session with a Materna specialist.";
+        } else {
+          const fallbackResponses = [
+            "That's a great question — let me look into it!",
+            "Thanks for reaching out! I'm here to support you.",
+            "You're not alone — let's figure this out together.",
+            "Hang tight! I'll try to help with that.",
+            "Okay! Let's dive into this."
+          ];
+          const randomIndex = Math.floor(Math.random() * fallbackResponses.length);
+          response = fallbackResponses[randomIndex];
+        }
+
         setMessages(prev => [
           ...prev,
           {
             id: prev.length + 1,
             sender: 'bot',
-            text: 'Thank you for your message. How can I assist you further?',
+            text: response,
             timestamp: new Date()
           }
         ]);
+        setIsTyping(false);
       }, 1000);
     }
   };
@@ -244,48 +270,78 @@ const FloatingChatbot = () => {
         {/* Header */}
         <div className="flex items-center justify-between px-10 pt-10 pb-3">
         </div>
-        {/* Floating Glowing Icon */}
-        <div className="flex flex-col items-center mt-8 mb-4 relative">
-          <div className="relative mb-4">
-            <span className="absolute inset-0 rounded-full blur-2xl opacity-60 bg-gradient-to-br from-[#fabdb5] via-[#a48bc3] to-[#bcb2da] w-20 h-20 animate-pulse"></span>
-            <div className="relative flex items-center justify-center w-20 h-20 rounded-full bg-white shadow-lg z-10">
-              <img src={botIcon} alt="AI" className="w-12 h-12 object-contain" />
+        {/* Floating Glowing Icon and Greeting (only on new chat) */}
+        {messages.length === 1 && messages[0].sender === 'bot' && (
+          <div className="flex flex-col items-center mt-8 mb-4 relative">
+            <div className="relative mb-4">
+              <span className="absolute inset-0 rounded-full blur-2xl opacity-60 bg-gradient-to-br from-[#fabdb5] via-[#a48bc3] to-[#bcb2da] w-20 h-20 animate-pulse"></span>
+              <div className="relative flex items-center justify-center w-20 h-20 rounded-full bg-white shadow-lg z-10">
+                <img src={botIcon} alt="AI" className="w-12 h-12 object-contain" />
+              </div>
+            </div>
+            <div className="text-center">
+              <h1 className="text-3xl font-bold text-[#234451] mb-2">Hi <span className="text-[#234451]">{userName}!</span></h1>
+              <p className="text-lg text-[#6a6a6a]">
+                How Can I{' '}
+                <span
+                  className="bg-gradient-to-r from-[#fabdb5] to-[#bcb2da] bg-clip-text text-transparent font-semibold cursor-pointer hover:underline"
+                  tabIndex={0}
+                >
+                  Help?
+                </span>
+              </p>
             </div>
           </div>
-          {/* Greeting */}
-          <div className="text-center">
-            <h1 className="text-3xl font-bold text-[#234451] mb-2">Hi <span className="text-[#234451]">{userName}!</span></h1>
-            <p className="text-lg text-[#6a6a6a]">
-              How Can I{' '}
-              <span
-                className="bg-gradient-to-r from-[#fabdb5] to-[#bcb2da] bg-clip-text text-transparent font-semibold cursor-pointer hover:underline"
-                tabIndex={0}
-              >
-                Help?
-              </span>
-            </p>
-          </div>
-        </div>
+        )}
         {/* Chat Messages */}
-        <div className="flex-1 w-full max-w-2xl mx-auto px-4 overflow-y-auto mb-6">
+        <div className="flex-1 w-full max-w-3xl mx-auto px-4 overflow-y-auto mb-6">
           {messages.map((msg) => (
             <div
               key={msg.id}
-              className={`my-2 p-3 rounded-lg max-w-[75%] ${
-                msg.sender === 'user'
-                  ? 'ml-auto bg-[#fabdb5] text-[#234451]'
-                  : 'mr-auto bg-[#f9f5f7] text-[#234451]'
+              className={`flex w-full max-w-3xl mx-auto gap-2 my-2 ${
+                msg.sender === 'user' ? 'justify-end' : 'justify-start'
               }`}
             >
-              {msg.text}
+              {msg.sender === 'bot' && (
+                <img
+                  src={botIcon}
+                  alt="Bot"
+                  className="w-6 h-6 mt-1 rounded-full"
+                />
+              )}
+              <div
+                className={`p-3 rounded-lg max-w-[75%] ${
+                  msg.sender === 'user'
+                    ? 'bg-[#fabdb5] text-[#234451]'
+                    : 'bg-[#f9f5f7] text-[#234451]'
+                }`}
+              >
+                {msg.text}
+              </div>
+              {msg.sender === 'user' && (
+                <img
+                  src={userPhoto || "https://ui-avatars.com/api/?name=You&background=FABDB5&color=234451"}
+                  alt="User"
+                  className="w-6 h-6 mt-1 rounded-full"
+                />
+              )}
             </div>
           ))}
+          {isTyping && (
+            <div className="mr-auto my-2 px-4 py-3 rounded-lg bg-[#f9f5f7] text-[#234451] max-w-[75%]">
+              <div className="flex space-x-1">
+                <span className="animate-bounce [animation-delay:-0.3s]">•</span>
+                <span className="animate-bounce [animation-delay:-0.15s]">•</span>
+                <span className="animate-bounce">•</span>
+              </div>
+            </div>
+          )}
           <div ref={messagesEndRef} />
         </div>
         {/* Chat Input Box */}
         <div className="flex flex-col items-center pb-16">
-          <div className="w-full max-w-xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-lg border border-[#d8d3e3] px-5 py-4 flex flex-col gap-3">
+          <div className="w-full max-w-3xl mx-auto">
+            <div className="bg-white rounded-2xl shadow-lg px-5 py-4 flex flex-col gap-3">
               <div className="relative flex items-center">
                 <input
                   ref={textareaRef}
@@ -293,8 +349,8 @@ const FloatingChatbot = () => {
                   value={message}
                   onChange={handleInputChange}
                   onKeyDown={handleKeyDown}
-                  placeholder="Type in your question..."
-                  className="w-full pl-4 pr-4 py-3 rounded-xl bg-[#f9f5f7] border border-[#d8d3e3] focus:outline-none focus:ring-2 focus:ring-[#234451] text-base placeholder:text-left"
+                  placeholder="Ask us anything"
+                  className="w-full pl-4 pr-4 py-3 rounded-xl bg-[#f9f5f7] focus:outline-none focus:ring-0 text-base placeholder:text-left"
                   autoFocus
                 />
                 <button
@@ -302,7 +358,7 @@ const FloatingChatbot = () => {
                   className="absolute right-2 top-1/2 -translate-y-1/2 bg-gradient-to-r from-[#fabdb5] to-[#bcb2da] text-[#234451] rounded-full p-2 shadow-md hover:scale-105 transition-transform"
                   aria-label="Send"
                 >
-                  <Send size={20} />
+                  <img src={upArrow} alt="Send" className="w-3 h-3" />
                 </button>
               </div>
             </div>
