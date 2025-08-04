@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'wellness_hub_app', # Wellness Hub app
     'ai_chatbot_app', # AI Chatbot app
     'symptom_checker_app', # Symptom Checker app
-    'users_app',  # User Profiles, as an app for centralized user management
+    'users_app',  # User Profiles, as an app for centralized user management,
+    'community_forum_app',
 ]
 
 MIDDLEWARE = [
