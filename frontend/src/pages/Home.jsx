@@ -1,6 +1,6 @@
 import Chatbot from "../pages/Chatbot";
 import { Navbar } from "../components/Navbar";
-import { StarBackground } from "@/components/StarBackground";
+import { StarStill } from "@/components/StarStill";
 import { HeroSection } from "../components/HeroSection";
 import { AboutSection } from "../components/AboutSection";
 import { SkillsSection } from "../components/Mission";
@@ -32,7 +32,7 @@ export const Home = () => {
 
       {/* Background Effects + Main Content */}
       <div className="relative z-0">
-        <StarBackground />
+        <StarStill />
         <main>
           <HeroSection />
           <AboutSection />
