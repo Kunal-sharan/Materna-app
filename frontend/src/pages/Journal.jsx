@@ -476,6 +476,15 @@ useEffect(() => {
               </div>
             </div>
           </div>
+          <div className="mt-16 text-center text-xs text-[hsl(var(--foreground))] px-4 max-w-2xl mx-auto">
+            <p className="italic leading-relaxed">
+              <strong className="block mb-1 text-red-500">DISCLAIMER</strong>
+              Materna is currently in early-stage development and is not intended for clinical use. <br />
+              We do not collect, store, or process any Protected Health Information (PHI). <br />
+              This platform is for educational and demonstration purposes only and is not HIPAA-compliant at this time. <br />
+              Please do not submit any personal or health-related data.
+            </p>
+          </div>
         </main>
       </div>
       {/* Login modal */}

@@ -37,6 +37,15 @@ export const HeroSection = () => {
         <span className="text-sm text-muted-foreground mb-2"> Scroll </span>
         <ArrowDown className="h-5 w-5 text-[#234451]" />
       </div>
+
+      <div className="mt-12 max-w-xl text-center text-xs text-[hsl(var(--foreground))] px-4">
+        <p className="italic leading-relaxed">
+          <strong className="block mb-1 text-red-500">DISCLAIMER</strong>
+          Materna is currently in early-stage development and is not intended for clinical use. <br />
+          We do not collect, store, or process any Protected Health Information (PHI). <br />
+          This platform is for educational and demonstration purposes only and is not HIPAA-compliant at this time. Please do not submit any personal or health-related data. <br />
+        </p>
+      </div>
     </section>
   );
 };
