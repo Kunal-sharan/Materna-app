@@ -44,6 +44,10 @@ const Journal = () => {
     const saved = localStorage.getItem("maternaWeeks");
     return saved ? parseInt(saved, 10) : 18; // default if not set
   });
+  const [tempWeeks, setTempWeeks] = useState(() => {
+    const saved = localStorage.getItem("maternaWeeks");
+    return saved ? parseInt(saved, 10) : 18;
+  });
   const [predictionFeedback, setPredictionFeedback] = useState({});
   const [lookingAheadOpen, setLookingAheadOpen] = useState(false);
 
@@ -412,6 +416,14 @@ const Journal = () => {
       ...prev,
       [label]: happened ? "yes" : "no",
     }));
+  };
+
+  const handleSliderChange = (e) => {
+    setTempWeeks(parseInt(e.target.value, 10));
+  };
+
+  const commitSliderChange = () => {
+    setWeeksPregnant(tempWeeks);
   };
 
   const trimester = getTrimester(weeksPregnant);
@@ -865,7 +877,7 @@ const Journal = () => {
                         {/* Filled bar */}
                         <div
                           className="absolute top-0 left-0 h-full bg-[#DFA69F]"
-                          style={{ width: `${(weeksPregnant / 40) * 100}%` }}
+                          style={{ width: `${(tempWeeks / 40) * 100}%` }}
                         ></div>
 
                         {/* Invisible slider input */}
@@ -873,10 +885,10 @@ const Journal = () => {
                           type="range"
                           min="4"
                           max="40"
-                          value={weeksPregnant}
-                          onChange={(e) =>
-                            setWeeksPregnant(parseInt(e.target.value, 10))
-                          }
+                          value={tempWeeks}
+                          onChange={handleSliderChange}
+                          onMouseUp={commitSliderChange}
+                          onTouchEnd={commitSliderChange}
                           className="w-full h-full opacity-0 cursor-pointer"
                         />
 
@@ -884,7 +896,7 @@ const Journal = () => {
                         <div
                           className="absolute top-1/2 h-6 w-6 rounded-full shadow-md transform -translate-y-1/2"
                           style={{
-                            left: `calc(${(weeksPregnant / 40) * 100}% - 12px)`,
+                            left: `calc(${(tempWeeks / 40) * 100}% - 12px)`,
                             backgroundColor: "#B87872",
                           }}
                         ></div>
