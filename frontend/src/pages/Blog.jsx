@@ -3,22 +3,6 @@ import bgVideo from "@/assets/sky1.mp4";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { StarStill } from "@/components/StarStill.jsx";
-
-/* 
-  Materna Blogs Page — Premium UX
-  - Smooth hero with soft gradient + subtle parallax
-  - Featured carousel (auto + arrows + hover pause)
-  - Blog grid cards (hover lift, gentle shadow)
-  - Sidebar: categories, recent posts, newsletter
-  - Like/Unlike (instant, localStorage)
-  - Comments (instant, per-post, localStorage)
-  - Create Post (title, body, image upload, category) — prepends to feed
-  - Search + category filter
-  - Small, tasteful micro-animations and section fades
-  - Uses Materna palette:
-      teal-ish #99C8C1, rose #DFA69F, navy #234451, sand #EAE3CA
-*/
-
 const MAT_COLORS = {
   teal: "#99C8C1",
   rose: "#DFA69F",
@@ -26,7 +10,7 @@ const MAT_COLORS = {
   sand: "#EAE3CA",
 };
 
-// Demo seed content (can be replaced by API data)
+// 
 const seedPosts = [
   {
     id: "p1",
@@ -118,7 +102,7 @@ const seedPosts = [
   },
 ];
 
-// Utilities — localStorage helpers
+// Utilities
 const LS_KEYS = {
   POSTS: "materna_blogs_posts",
   LIKES: "materna_blogs_likes",
@@ -139,8 +123,6 @@ const writeLS = (k, v) => {
   } catch {}
 };
 
-// Accent font class: swap to your configured Tailwind font if available
-// Example: add in tailwind.config `fontFamily: { display: ['"Playfair Display"', 'serif'] }`
 const displayFont = "font-serif"; // change to 'font-display' if you have one
 
 const Blog = () => {
@@ -149,7 +131,6 @@ const Blog = () => {
   const [likes, setLikes] = useState(() => readLS(LS_KEYS.LIKES, {}));
   const [comments, setComments] = useState(() =>
     readLS(LS_KEYS.COMMENTS, {
-      // structure: { [postId]: [{ id, text, createdAt }] }
     })
   );
 
@@ -198,7 +179,7 @@ const Blog = () => {
     return () => clearInterval(t);
   }, [featured.length, carouselPaused]);
 
-  // Parallax hero (small, subtle)
+  // Parallax hero
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY * 0.15; // subtle
@@ -248,7 +229,7 @@ const Blog = () => {
       createdAt: Date.now(),
     };
     setPosts((prev) => [newPost, ...prev]);
-    // optional: set featured carousel to first slide when adding featured
+    // 
     if (newPost.featured) setSlide(0);
   };
 
@@ -282,7 +263,7 @@ const Blog = () => {
       <Navbar />
 
       <main className="relative min-h-screen overflow-hidden">
-        {/* Background video + star layer + white glass veil */}
+        
         <video
           autoPlay
           loop
@@ -318,7 +299,7 @@ const Blog = () => {
                   Reassuring fact-based reads on exercise, nutrition, mindfulness, and
                   more. Curated with care by fellow moms and Materna.
                 </p>
-                {/* Search + Category Chips */}
+                
                 <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center">
                   <div className="flex-1 glass rounded-xl px-4 py-3 hover-lift">
                     <input
@@ -360,7 +341,7 @@ const Blog = () => {
                 </div>
               </div>
 
-              {/* Featured Carousel */}
+              
               <div className="lg:col-span-5">
                 <div
                   className="relative glass rounded-2xl p-3 md:p-4 hover-lift"
@@ -402,7 +383,7 @@ const Blog = () => {
                     </div>
                   </div>
 
-                  {/* Carousel controls */}
+                  
                   <button
                     aria-label="Previous featured"
                     className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full glass p-2 hover-lift"
@@ -420,7 +401,7 @@ const Blog = () => {
                     ›
                   </button>
 
-                  {/* Dots */}
+                  
                   <div className="mt-3 flex items-center justify-center gap-2">
                     {featured.map((_, i) => (
                       <button
@@ -440,10 +421,10 @@ const Blog = () => {
           </div>
         </section>
 
-        {/* CONTENT AREA */}
+        
         <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 md:pb-24">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-            {/* Blog Grid */}
+            
             <div className="lg:col-span-8 space-y-6">
               {filteredPosts.length === 0 && (
                 <div className="glass rounded-2xl p-8 text-center animate-soft-in">
@@ -466,9 +447,9 @@ const Blog = () => {
               </div>
             </div>
 
-            {/* Sidebar */}
+            
             <aside className="lg:col-span-4 space-y-6">
-              {/* About / CTA */}
+              
               <div className="glass rounded-2xl p-6 animate-soft-in hover-lift">
                 <h3
                   className={`text-xl ${displayFont}`}
@@ -497,7 +478,7 @@ const Blog = () => {
                 </div>
               </div>
 
-              {/* Liked Blogs */}
+              
               <div className="glass rounded-2xl p-6 animate-soft-in hover-lift">
                 <h3 className={`text-xl ${displayFont}`} style={{ color: MAT_COLORS.navy }}>
                   Liked Blogs
@@ -537,10 +518,10 @@ const Blog = () => {
                 </ul>
               </div>
 
-              {/* Newsletter */}
+              
               <Newsletter colors={MAT_COLORS} />
 
-              {/* Go to Community Posts Button */}
+              
               <div className="animate-soft-in hover-lift">
                 <button
                   onClick={() => window.location.href = "/community"}
@@ -557,7 +538,7 @@ const Blog = () => {
           </div>
         </section>
 
-        {/* CREATE POST DIALOG */}
+        
         {showCreate && (
           <CreatePostDialog
             onClose={() => setShowCreate(false)}
@@ -572,7 +553,7 @@ const Blog = () => {
   );
 };
 
-/* ---------- Subcomponents ---------- */
+// 
 
 function BlogCard({ post, liked, onToggleLike, comments, onAddComment, colors }) {
   const [openComments, setOpenComments] = useState(false);
@@ -642,7 +623,7 @@ function BlogCard({ post, liked, onToggleLike, comments, onAddComment, colors })
           </div>
         </div>
 
-        {/* Comments */}
+        
         {openComments && (
           <div id={`comments-${post.id}`} className="mt-4 space-y-3" onClick={e => e.stopPropagation()}>
             <ul className="space-y-2">
