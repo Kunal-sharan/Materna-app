@@ -4,7 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { StarStill } from "@/components/StarStill.jsx";
 const MAT_COLORS = {
-  teal: "#99C8C1",
+  teal: "#bcb2da",
   rose: "#DFA69F",
   navy: "#234451",
   sand: "#EAE3CA",
@@ -325,7 +325,7 @@ const Blog = () => {
                     <input
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
-                      placeholder="Search articles, e.g. “sleep”, “iron”, “breathwork”…"
+                      placeholder="pregnancy water intake…"
                       className="w-full bg-transparent placeholder:text-slate-500/70 focus:outline-none text-slate-800"
                       aria-label="Search blogs"
                     />
