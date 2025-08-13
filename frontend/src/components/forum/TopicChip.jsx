@@ -15,7 +15,7 @@ export const TopicChip = ({ topic, onSelect }) => {
   // When clicking on it, send a signal to the parent to tell it is has been selected
   return (
     <button
-      className="h-8 w-24 content-center rounded-3xl border text-center"
+      className="h-6 px-3 text-xs content-center rounded-2xl border text-center"
       style={{ backgroundColor: backgroundColor }}
       onClick={handleClick}
     >

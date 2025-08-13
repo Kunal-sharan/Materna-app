@@ -102,7 +102,7 @@ const Community = () => {
   return (
     <>
       <Navbar />
-      <main className="relative min-h-screen overflow-hidden p-8 pt-32">
+      <main className="relative min-h-screen overflow-hidden p-8 pt-32 font-inter">
         <video
           autoPlay
           loop
@@ -114,8 +114,8 @@ const Community = () => {
           Your browser does not support the video tag.
         </video>
         <StarStill />
-        <div className="fixed top-0 left-0 -z-10 h-screen w-full bg-white/25 backdrop-blur-xs"></div>
-        <div className="relative z-10">
+        <div className="fixed top-0 left-0 -z-10 h-screen w-full bg-white/40 backdrop-blur-xs"></div>
+        <div className="relative z-10 font-inter">
           <div className="flex flex-col">
             <div className="flex flex-row justify-between">
               <Label className="ml-4 text-4xl">Community</Label>

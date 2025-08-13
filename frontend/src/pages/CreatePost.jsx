@@ -66,7 +66,7 @@ const CreatePost = ({}) => {
       </video>
       <div className="fixed top-0 left-0 -z-10 h-screen w-full bg-white/25 backdrop-blur-xs"></div>
 
-      <main className="min-h-screen p-8 pt-32">
+      <main className="min-h-screen p-8 pt-32 font-inter">
         <div className="flex flex-row text-left">
           <div className="flex flex-col justify-between">
             <div className="flex w-72 flex-col items-center gap-y-4 rounded-[25px] border border-white/50 bg-[#DFA69F]/25 p-4 backdrop-blur-xs">
@@ -128,6 +128,7 @@ const CreatePost = ({}) => {
                       key={topic}
                       topic={topic}
                       onSelect={handleTopicSelection}
+                      className="text-xs px-2 py-1"
                     />
                   ))}
                 </div>
