@@ -59,7 +59,7 @@ export const ContactSection = () => {
   return (
     <section id="contact" className="py-24 px-4 relative bg-secondary/30">
       <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
+        <h2 className="text-3xl md:text-4xl font-serif mb-4 text-center">
           Get In <span className="text-[#234451]"> Touch</span>
         </h2>
 
@@ -70,7 +70,7 @@ export const ContactSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="space-y-8">
-            <h3 className="text-2xl font-semibold mb-6 text-left">
+            <h3 className="text-2xl font-serif mb-6 text-left">
               {" "}
               Contact Information
             </h3>
@@ -115,7 +115,7 @@ export const ContactSection = () => {
             </div>
 
             <div className="pt-8">
-              <h4 className="font-medium mb-4 text-left"> Connect With Us</h4>
+              <h4 className="font-serif mb-4 text-left"> Connect With Us</h4>
               <div className="flex space-x-4 justify-left">
                 <a
                   href="https://www.linkedin.com/company/materna-women"
@@ -143,7 +143,7 @@ export const ContactSection = () => {
             className="bg-card p-8 rounded-lg shadow-xs"
             onSubmit={handleSubmit}
           >
-            <h3 className="text-2xl font-semibold mb-6 text-[hsl(var(--primary))]">
+            <h3 className="text-2xl font-serif mb-6 text-[hsl(var(--primary))]">
               {" "}
               Send a Message
             </h3>

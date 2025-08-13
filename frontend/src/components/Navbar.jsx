@@ -55,7 +55,7 @@ export const Navbar = () => {
             alt="Materna Logo"
             className="h-10 w-10.5 mr-1.5"
           />
-          <span className="relative z-10 text-[#234451] font-bold">
+          <span className="relative z-10 text-[#234451] font-bold font-sans">
             <span className="text-glow text-foreground"></span> Materna
           </span>
         </Link>
@@ -79,19 +79,19 @@ export const Navbar = () => {
             <div className="absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto hover:opacity-100 hover:pointer-events-auto transition-opacity duration-200 z-50">
               <Link
                 to="/essentials"
-                className="block px-4 py-2 hover:bg-gray-100"
+                className="block px-4 py-2 hover:bg-gray-100 font-sans"
               >
                 Newborn Essentials
               </Link>
               <Link
                 to="/vaccination"
-                className="block px-4 py-2 hover:bg-gray-100"
+                className="block px-4 py-2 hover:bg-gray-100 font-sans"
               >
                 Vaccination Reminder
               </Link>
               <Link
                 to="/milestones"
-                className="block px-4 py-2 hover:bg-gray-100"
+                className="block px-4 py-2 hover:bg-gray-100 font-sans"
               >
                 My Baby Milestones
               </Link>
@@ -143,7 +143,7 @@ export const Navbar = () => {
               : "opacity-0 pointer-events-none",
           )}
         >
-          <div className="flex flex-col space-y-8 text-xl">
+          <div className="flex flex-col space-y-8 text-xl font-sans">
             {navItems.map((item, key) => (
               <Link
                 key={key}
@@ -155,22 +155,22 @@ export const Navbar = () => {
               </Link>
             ))}
             <div className="flex flex-col space-y-2 text-lg">
-              <span className="text-[#234451] font-semibold">Postpartum</span>
+              <span className="text-[#234451] font-semibold font-sans">Postpartum</span>
               <Link
                 to="/essentials"
-                className="text-[#234451] hover:text-primary transition"
+                className="text-[#234451] hover:text-primary transition font-sans"
               >
                 Newborn Essentials
               </Link>
               <Link
                 to="/vaccination"
-                className="text-[#234451] hover:text-primary transition"
+                className="text-[#234451] hover:text-primary transition font-sans"
               >
                 Vaccination Reminder
               </Link>
               <Link
                 to="/milestones"
-                className="text-[#234451] hover:text-primary transition"
+                className="text-[#234451] hover:text-primary transition font-sans"
               >
                 My Baby Milestones
               </Link>
@@ -178,7 +178,7 @@ export const Navbar = () => {
             {user ? (
               <Link
                 to="/profile"
-                className="text-[#a48bc3] hover:text-[#9771bc] transition text-lg font-semibold"
+                className="text-[#a48bc3] hover:text-[#9771bc] transition text-lg font-semibold font-sans"
                 onClick={() => setIsMenuOpen(false)}
               >
                 View Profile
@@ -186,7 +186,7 @@ export const Navbar = () => {
             ) : (
               <Link
                 to="/signup"
-                className="text-[#a48bc3] hover:text-[#9771bc] transition text-lg font-semibold"
+                className="text-[#a48bc3] hover:text-[#9771bc] transition text-lg font-semibold font-sans"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Login / Sign Up

@@ -30,7 +30,7 @@ export const SkillsSection = () => {
   return (
     <section id="mission" className="py-24 px-4 relative bg-secondary/30">
       <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+        <h2 className="text-3xl md:text-4xl font-serif mb-12 text-center">
           Our <span className="text-[#234451]">Mission</span>
         </h2>
 
@@ -53,7 +53,7 @@ export const SkillsSection = () => {
               key={index}
               className="rounded-xl bg-[rgba(247,241,235,0.6)] backdrop-blur-lg shadow-lg border border-white/30 p-6 transition hover:shadow-2xl hover:bg-[rgba(247,241,235,0.8)]"
             >
-              <h3 className="font-semibold text-xl mb-2 text-[#234451]">
+              <h3 className="font-serif text-xl mb-2 text-[#234451]">
                 {item.title}
               </h3>
               <p className="text-[#234451]">{item.text}</p>
