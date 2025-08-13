@@ -8,8 +8,7 @@ const navItems = [
   { name: "Home", href: "/" },
   { name: "Symptom Journal", href: "/journal" },
   { name: "Emergency Help", href: "/normal" },
-  { name: "Wellness Hub", href: "/wellness" },
-  { name: "Community", href: "/community" },
+  { name: "Community", href: "/blog" },
 ];
 
 export const Navbar = () => {

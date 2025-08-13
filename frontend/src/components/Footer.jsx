@@ -46,10 +46,7 @@ export const Footer = () => {
                 <Link to="/normal">Emergency Symptom Help</Link>
               </li>
               <li>
-                <Link to="/wellness">Wellness Hub</Link>
-              </li>
-              <li>
-                <Link to="/community">Community Forum</Link>
+                <Link to="/community">Community</Link>
               </li>
             </ul>
           </div>

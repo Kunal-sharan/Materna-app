@@ -35,7 +35,7 @@ const seedPosts = [
       "Simple prenatal-friendly sequences to ease back tension and prep your body for deep, restorative rest.",
     image:
       "https://images.unsplash.com/photo-1552196563-55cd4e45efb3?q=80&w=1200&auto=format&fit=crop",
-    category: "Movement",
+    category: "Exercise",
     featured: true,
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 3,
   },
@@ -46,7 +46,7 @@ const seedPosts = [
       "From lentil bowls to cocoa overnight oats—balanced, delicious, and bump-approved.",
     image:
       "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=1200&auto=format&fit=crop",
-    category: "Nutrition",
+    category: "Food",
     featured: true,
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 6,
   },
@@ -57,7 +57,7 @@ const seedPosts = [
       "A tiny ritual for focus, calm, and energy. Designed for trimester-safe breathing.",
     image:
       "https://images.unsplash.com/photo-1527236438218-d82077ae1f85?q=80&w=1200&auto=format&fit=crop",
-    category: "Mindfulness",
+    category: "Lifestyle",
     featured: true,
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 9,
   },
@@ -68,7 +68,7 @@ const seedPosts = [
       "From round ligament pains to baby flutters—when to breathe and when to call your provider.",
     image:
       "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop",
-    category: "Clinical",
+    category: "Tips & Hacks",
     featured: false,
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 1,
   },
@@ -79,7 +79,7 @@ const seedPosts = [
       "Elevate snack time with protein + fiber combos you can prep in 5 minutes.",
     image:
       "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1200&auto=format&fit=crop",
-    category: "Nutrition",
+    category: "Food",
     featured: false,
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 2,
   },
@@ -90,9 +90,31 @@ const seedPosts = [
       "Safe full-body moves to support posture and reduce aches as your bump grows.",
     image:
       "https://images.unsplash.com/photo-1599058917212-d750089bc07d?q=80&w=1200&auto=format&fit=crop",
-    category: "Movement",
+    category: "Exercise",
     featured: false,
     createdAt: Date.now() - 1000 * 60 * 60 * 24 * 5,
+  },
+  {
+    id: "p7",
+    title: "Why My Pregnancy Rant is Actually Self-Care",
+    body:
+      "Sometimes you just need to let it out. Why a good rant can be a healthy part of your journey.",
+    image:
+      "https://images.unsplash.com/photo-1464983953574-0892a716854b?q=80&w=1200&auto=format&fit=crop",
+    category: "Self-Care",
+    featured: false,
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 4,
+  },
+  {
+    id: "p8",
+    title: "5 Tips & Hacks for Morning Sickness Relief",
+    body:
+      "Quick, practical tricks to ease your queasiness and get on with your day.",
+    image:
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
+    category: "Tips & Hacks",
+    featured: false,
+    createdAt: Date.now() - 1000 * 60 * 60 * 24 * 7,
   },
 ];
 
@@ -293,8 +315,8 @@ const Blog = () => {
                   Materna <span className="opacity-80">Blog</span>
                 </h1>
                 <p className="mt-4 text-base md:text-lg text-slate-700/90 max-w-2xl">
-                  Smooth, modern, and reassuring reads on movement, nutrition, mindfulness, and
-                  clinical guidance. Curated with care for every trimester.
+                  Reassuring fact-based reads on exercise, nutrition, mindfulness, and
+                  more. Curated with care by fellow moms and Materna.
                 </p>
                 {/* Search + Category Chips */}
                 <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -312,7 +334,7 @@ const Blog = () => {
                     className="rounded-xl px-5 py-3 text-sm font-medium hover-lift"
                     style={{
                       background: MAT_COLORS.navy,
-                      color: MAT_COLORS.sand,
+                      color: "#ffffff",
                     }}
                     aria-haspopup="dialog"
                   >
@@ -475,23 +497,31 @@ const Blog = () => {
                 </div>
               </div>
 
-              {/* Recent Posts */}
+              {/* Liked Blogs */}
               <div className="glass rounded-2xl p-6 animate-soft-in hover-lift">
                 <h3 className={`text-xl ${displayFont}`} style={{ color: MAT_COLORS.navy }}>
-                  Recent Posts
+                  Liked Blogs
                 </h3>
                 <ul className="mt-4 space-y-4">
                   {posts
-                    .slice()
+                    .filter((p) => likes[p.id])
                     .sort((a, b) => b.createdAt - a.createdAt)
                     .slice(0, 5)
                     .map((p) => (
                       <li key={p.id} className="flex gap-3">
                         <img
-                          src={p.image}
+                          src={
+                            p.image ||
+                            "https://cafesommerhaven.dk/wp-content/uploads/2024/03/desktop-wallpaper-cute-aesthetic-flowers-aesthetic-spring.jpg"
+                          }
                           alt=""
                           className="h-14 w-14 rounded-lg object-cover flex-none"
                           loading="lazy"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src =
+                              "https://cafesommerhaven.dk/wp-content/uploads/2024/03/desktop-wallpaper-cute-aesthetic-flowers-aesthetic-spring.jpg";
+                          }}
                         />
                         <div className="min-w-0">
                           <p className="truncate text-sm font-medium text-slate-800">
@@ -501,11 +531,28 @@ const Blog = () => {
                         </div>
                       </li>
                     ))}
+                  {posts.filter((p) => likes[p.id]).length === 0 && (
+                    <li className="text-sm text-slate-600">No liked posts yet.</li>
+                  )}
                 </ul>
               </div>
 
               {/* Newsletter */}
               <Newsletter colors={MAT_COLORS} />
+
+              {/* Go to Community Posts Button */}
+              <div className="animate-soft-in hover-lift">
+                <button
+                  onClick={() => window.location.href = "/community"}
+                  className="w-full rounded-xl px-5 py-3 text-sm font-medium hover-lift"
+                  style={{
+                    background: MAT_COLORS.navy,
+                    color: "#ffffff",
+                  }}
+                >
+                  Go to Community Posts
+                </button>
+              </div>
             </aside>
           </div>
         </section>
@@ -531,8 +578,25 @@ function BlogCard({ post, liked, onToggleLike, comments, onAddComment, colors })
   const [openComments, setOpenComments] = useState(false);
   const [text, setText] = useState("");
 
+  // Handler to open full post
+  const handleOpenPost = () => {
+    alert("Open full post page / route — wire to router");
+  };
+
+  // Stop propagation for like/comment buttons
+  const stopPropagation = (fn) => (e) => {
+    e.stopPropagation();
+    fn && fn(e);
+  };
+
   return (
-    <article className="glass rounded-2xl overflow-hidden hover-lift animate-soft-in">
+    <article
+      className="glass rounded-2xl overflow-hidden hover-lift animate-soft-in cursor-pointer"
+      onClick={handleOpenPost}
+      tabIndex={0}
+      role="button"
+      aria-label={`Open blog post: ${post.title}`}
+    >
       <div className="relative">
         <img
           src={post.image || "https://cafesommerhaven.dk/wp-content/uploads/2024/03/desktop-wallpaper-cute-aesthetic-flowers-aesthetic-spring.jpg"}
@@ -543,7 +607,7 @@ function BlogCard({ post, liked, onToggleLike, comments, onAddComment, colors })
         />
         <span
           className="absolute left-4 top-4 rounded-full px-3 py-1 text-xs font-medium"
-          style={{ background: colors.sand, color: colors.navy }}
+          style={{ background: "#ffffff", color: colors.navy }}
         >
           {post.category}
         </span>
@@ -553,31 +617,25 @@ function BlogCard({ post, liked, onToggleLike, comments, onAddComment, colors })
         <h3 className="text-lg font-semibold text-slate-900">{post.title}</h3>
         <p className="mt-2 text-sm text-slate-700/90 line-clamp-3">{post.body}</p>
 
-        <div className="mt-4 flex items-center justify-between">
-          <button
-            className="rounded-full px-4 py-2 text-sm hover-lift"
-            style={{ background: colors.navy, color: colors.sand }}
-            onClick={() => alert("Open full post page / route — wire to router")}
-          >
-            Read more
-          </button>
-
+        <div className="mt-4 flex items-center justify-end">
           <div className="flex items-center gap-2">
             <button
-              onClick={onToggleLike}
+              onClick={stopPropagation(onToggleLike)}
               className="rounded-full px-3 py-2 text-sm glass hover-lift"
               aria-pressed={liked}
               aria-label={liked ? "Unlike" : "Like"}
               title={liked ? "Unlike" : "Like"}
+              tabIndex={0}
             >
               {liked ? "♥︎ Liked" : "♡ Like"}
             </button>
             <button
-              onClick={() => setOpenComments((v) => !v)}
+              onClick={stopPropagation(() => setOpenComments((v) => !v))}
               className="rounded-full px-3 py-2 text-sm glass hover-lift"
               aria-expanded={openComments}
               aria-controls={`comments-${post.id}`}
               title="Comments"
+              tabIndex={0}
             >
               💬 {comments.length}
             </button>
@@ -586,7 +644,7 @@ function BlogCard({ post, liked, onToggleLike, comments, onAddComment, colors })
 
         {/* Comments */}
         {openComments && (
-          <div id={`comments-${post.id}`} className="mt-4 space-y-3">
+          <div id={`comments-${post.id}`} className="mt-4 space-y-3" onClick={e => e.stopPropagation()}>
             <ul className="space-y-2">
               {comments.map((c) => (
                 <li key={c.id} className="rounded-lg bg-white/70 p-3">
@@ -647,7 +705,7 @@ function Newsletter({ colors }) {
         Newsletter
       </h3>
       <p className="mt-2 text-sm text-slate-700/90">
-        Calm, evidence-based reads—delivered occasionally.
+        Exciting new reads delivered occasionally.
       </p>
       {saved ? (
         <p className="mt-4 rounded-lg bg-white/80 p-3 text-sm" style={{ color: colors.navy }}>
@@ -734,7 +792,7 @@ function CreatePostDialog({ onClose, onCreate, colors }) {
                 onChange={(e) => setCategory(e.target.value)}
                 className="mt-1 w-full rounded-lg bg-white/80 px-3 py-2 text-sm focus:outline-none focus-ring"
               >
-                {["General", "Movement", "Nutrition", "Mindfulness", "Clinical"].map((c) => (
+                {["General", "Exercise", "Food", "Lifestyle", "Self-Care", "Tips & Hacks"].map((c) => (
                   <option key={c}>{c}</option>
                 ))}
               </select>
@@ -799,7 +857,7 @@ function CreatePostDialog({ onClose, onCreate, colors }) {
             </button>
             <button
               className="rounded-lg px-4 py-2 hover-lift"
-              style={{ background: colors.navy, color: colors.sand }}
+              style={{ background: colors.navy, color: "#ffffff" }}
             >
               Publish
             </button>
