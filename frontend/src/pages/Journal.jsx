@@ -44,10 +44,6 @@ const Journal = () => {
     const saved = localStorage.getItem("maternaWeeks");
     return saved ? parseInt(saved, 10) : 18; // default if not set
   });
-  const [tempWeeks, setTempWeeks] = useState(() => {
-    const saved = localStorage.getItem("maternaWeeks");
-    return saved ? parseInt(saved, 10) : 18;
-  });
   const [predictionFeedback, setPredictionFeedback] = useState({});
   const [lookingAheadOpen, setLookingAheadOpen] = useState(false);
 
@@ -272,7 +268,7 @@ const Journal = () => {
       base.push(
         {
           label: "Morning sickness",
-          icon: stomachIcon,
+          icon: puke,
           prob: 65,
           tip: "Small, frequent meals and ginger tea can help.",
         },
@@ -418,13 +414,6 @@ const Journal = () => {
     }));
   };
 
-  const handleSliderChange = (e) => {
-    setTempWeeks(parseInt(e.target.value, 10));
-  };
-
-  const commitSliderChange = () => {
-    setWeeksPregnant(tempWeeks);
-  };
 
   const trimester = getTrimester(weeksPregnant);
   const predictions = computePredictions(weeksPregnant, symptomCounts);
@@ -872,38 +861,28 @@ const Journal = () => {
                       .
                     </p>
 
-                    <div className="mt-3 flex items-center gap-3">
-                      <div className="relative w-full h-6 rounded-full bg-[#fff] shadow-inner overflow-hidden">
-                        {/* Filled bar */}
-                        <div
-                          className="absolute top-0 left-0 h-full bg-[#DFA69F]"
-                          style={{ width: `${(tempWeeks / 40) * 100}%` }}
-                        ></div>
-
-                        {/* Invisible slider input */}
-                        <input
-                          type="range"
-                          min="4"
-                          max="40"
-                          value={tempWeeks}
-                          onChange={handleSliderChange}
-                          onMouseUp={commitSliderChange}
-                          onTouchEnd={commitSliderChange}
-                          className="w-full h-full opacity-0 cursor-pointer"
-                        />
-
-                        {/* Knob */}
-                        <div
-                          className="absolute top-1/2 h-6 w-6 rounded-full shadow-md transform -translate-y-1/2"
-                          style={{
-                            left: `calc(${(tempWeeks / 40) * 100}% - 12px)`,
-                            backgroundColor: "#B87872",
-                          }}
-                        ></div>
-                      </div>
-                      <span className="text-xs text-[#234451] w-24 text-right">
-                        Adjust week
-                      </span>
+                    <div className="mt-4 flex items-center gap-2 overflow-x-auto pb-2">
+                      {Array.from({ length: 37 }, (_, idx) => {
+                        const weekNumber = idx + 4;
+                        return (
+                          <div
+                            key={weekNumber}
+                            onClick={() => setWeeksPregnant(weekNumber)}
+                            className={`flex flex-col items-center cursor-pointer ${
+                              weeksPregnant === weekNumber ? "text-[#234451] font-semibold" : "text-[#234451]/60"
+                            }`}
+                          >
+                            <div
+                              className={`w-6 h-6 rounded-full flex items-center justify-center mb-1 ${
+                                weeksPregnant === weekNumber ? "bg-[#DFA69F] text-white" : "bg-white border border-[#234451]/20"
+                              }`}
+                            >
+                              {weekNumber}
+                            </div>
+                            <span className="text-[10px] whitespace-nowrap">Week {weekNumber}</span>
+                          </div>
+                        );
+                      })}
                     </div>
 
                     <div className="mt-4 overflow-x-auto snap-x snap-mandatory flex gap-3 pb-2">
