@@ -4,7 +4,6 @@ import { StarStill } from "@/components/StarStill";
 import { HeroSection } from "../components/HeroSection";
 import { AboutSection } from "../components/AboutSection";
 import { SkillsSection } from "../components/Mission";
-import { ProjectsSection } from "../components/Waitlist";
 import { ContactSection } from "../components/ContactSection";
 import { Footer } from "../components/Footer";
 import bgVideo from "@/assets/sky1.mp4";
