@@ -73,11 +73,11 @@ export const Navbar = () => {
               {item.name}
             </Link>
           ))}
-          <div className="relative group">
-            <button className="text-[#234451] hover:text-primary transition-colors duration-300 font-sans">
+          <div className="relative">
+            <button className="peer text-[#234451] hover:text-primary transition-colors duration-300 font-sans">
               Postpartum
             </button>
-            <div className="absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50">
+            <div className="absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto hover:opacity-100 hover:pointer-events-auto transition-opacity duration-200 z-50">
               <Link
                 to="/essentials"
                 className="block px-4 py-2 hover:bg-gray-100"
