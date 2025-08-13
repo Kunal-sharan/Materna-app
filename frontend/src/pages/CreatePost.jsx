@@ -64,12 +64,12 @@ const CreatePost = ({}) => {
         <source src={bgVideo} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
+      <div className="fixed top-0 left-0 -z-10 h-screen w-full bg-white/25 backdrop-blur-xs"></div>
 
       <main className="min-h-screen p-8 pt-32">
-        <div className="fixed top-0 left-0 -z-10 h-screen w-full bg-white/25 backdrop-blur-xs"></div>
         <div className="flex flex-row text-left">
           <div className="flex flex-col justify-between">
-            <div className="flex flex-col items-center w-72 gap-y-4 rounded-[25px] border border-white/50 bg-[#DFA69F]/25 p-4 backdrop-blur-xs">
+            <div className="flex w-72 flex-col items-center gap-y-4 rounded-[25px] border border-white/50 bg-[#DFA69F]/25 p-4 backdrop-blur-xs">
               <label
                 htmlFor="post-title"
                 className="text-lg font-semibold text-gray-800"
@@ -77,7 +77,7 @@ const CreatePost = ({}) => {
                 Rules
               </label>
               {/* Formatting for displaying rules may be incorrect */}
-              <p className="bg-white w-full h-auto rounded-md p-4">
+              <p className="h-auto w-full rounded-md bg-white p-4">
                 Follow these rules or you will be banned.
               </p>
             </div>
@@ -166,7 +166,7 @@ const CreatePost = ({}) => {
 
                 <div className="flex flex-row justify-end gap-x-4">
                   <Link to="/community">
-                    <Button className="mt-4 w-fit self-end px-6 py-2">
+                    <Button className="mt-4 w-fit cursor-pointer self-end px-6 py-2">
                       Cancel
                     </Button>
                   </Link>
@@ -174,9 +174,9 @@ const CreatePost = ({}) => {
                     <Button
                       onClick={handleSaveClick}
                       disabled={!title || !description}
-                      className="mt-4 w-fit cursor-pointer self-end bg-blue-700 px-6 py-2"
+                      className="mt-4 w-fit cursor-pointer self-end bg-blue-500 px-6 py-2 text-sm text-white transition hover:bg-blue-600"
                     >
-                      Save Post
+                      Post
                     </Button>
                   </Link>
                 </div>

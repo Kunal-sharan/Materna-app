@@ -60,7 +60,7 @@ const Community = () => {
   const [selectedTopics, setSelectedTopics] = useState([]);
   const [selectedSort, setSelectedSort] = useState(["Hot"]);
 
-  const [posts, setPosts] = useState(examplePosts);
+  const [posts, setPosts] = useState(examplePosts);   // ! Make sure to change this to another set of initial posts
   const [selectedPost, setSelectedPost] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -114,7 +114,7 @@ const Community = () => {
           Your browser does not support the video tag.
         </video>
         <StarStill />
-        <div className="fixed top-0 left-0 -z-10 h-screen w-full bg-white/40 backdrop-blur-xs"></div>
+        <div className="fixed top-0 left-0 -z-10 h-screen w-full bg-white/25 backdrop-blur-xs"></div>
         <div className="relative z-10">
           <div className="flex flex-col">
             <div className="flex flex-row justify-between">
@@ -145,18 +145,14 @@ const Community = () => {
                   <ViewBlog />
                 </div>
                 <div className="rounded-[25px] border border-white/50 bg-[#DFA69F]/25 p-4 pt-12 backdrop-blur-xs">
-                  {/* ! Put in the user's profile information here */}
-                  <Profile name={"Main User"} />
+                    {/* ! Put in the user's profile information here */}
+                    <Profile name={"Main User"}/>
                 </div>
               </div>
 
               <div className="flex flex-1 flex-col gap-y-4">
                 {filteredPosts.map((post) => (
-                  <Post
-                    key={post.id}
-                    post={post}
-                    onPostClick={() => handlePostClick(post)}
-                  />
+                  <Post key={post.id} post={post} onPostClick={() => handlePostClick(post)} />
                 ))}
 
                 <PostDetail post={selectedPost} onClose={handleCloseModal} />

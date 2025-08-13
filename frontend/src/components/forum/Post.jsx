@@ -1,11 +1,8 @@
 import { formatDistanceToNow } from "date-fns";
-import { Likes } from "./Likes";
-import { Comments } from "./Comments";
-import { CommentIcon } from "./CommentIcon";
-import { Saves } from "./Saves";
 import { Profile } from "./Profile";
 import { TopicChip } from "./TopicChip";
 import { User } from "lucide-react";
+import { Interactions } from "./Interactions";
 
 export const Post = ({ post, onPostClick }) => {
   const {
@@ -46,12 +43,7 @@ export const Post = ({ post, onPostClick }) => {
       <h1 className="text-left text-[32px]">{title}</h1>
       <div className="my-4 text-left">{description}</div>
       <div className="flex justify-between">
-        <div className="flex justify-start">
-          <Likes currentLikes={likes} />
-          <CommentIcon comments={comments} />
-          <Saves />
-          {/* TODO: Make sure to add whether saved is true or false */}
-        </div>
+        <Interactions likes={likes} comments={comments} saved={saved} />
 
         {topics && topics.length > 0 && (
           <div className="flex justify-between gap-x-4">

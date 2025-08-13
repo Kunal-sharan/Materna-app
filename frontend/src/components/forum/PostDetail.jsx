@@ -1,19 +1,12 @@
 import { formatDistanceToNow } from "date-fns";
 import { User, X } from "lucide-react";
-import { Likes } from "./Likes";
 import { Comments } from "./Comments";
-import { CommentIcon } from "./CommentIcon";
-import { Saves } from "./Saves";
 import { Profile } from "./Profile";
 import { TopicChip } from "./TopicChip";
-import { useState } from "react";
-
-// TODO: Add in a response that is more consistent with comments
+import { Interactions } from "./Interactions";
 
 export const PostDetail = ({ post, onClose }) => {
   if (!post) return null;
-
-  const [query, setQuery] = useState("");
 
   const {
     title,
@@ -32,19 +25,6 @@ export const PostDetail = ({ post, onClose }) => {
     includeSeconds: false,
   });
   const formattedPostTime = postTime.replace("about ", "");
-
-  const handleSendMessage = () => {
-    if (query.trim() === "") {
-      return;
-    }
-
-    // Send data to API/database
-    console.log("Sending message:", query);
-
-    // Render it in comments
-
-    setQuery("");
-  };
 
   return (
     <div className="bg-opacity-50 fixed inset-0 flex items-center justify-center bg-black/50 p-4">
@@ -77,12 +57,7 @@ export const PostDetail = ({ post, onClose }) => {
         </div>
         <p className="text-left text-gray-700">{description}</p>
         <div className="flex justify-between">
-          <div className="flex justify-start">
-            <Likes currentLikes={likes} />
-            <CommentIcon comments={comments} />
-            <Saves />
-            {/* TODO: Make sure to add whether saved is true or false */}
-          </div>
+          <Interactions likes={likes} comments={comments} saved={saved} />
 
           {topics && topics.length > 0 && (
             <div className="flex justify-between gap-x-4">
@@ -93,22 +68,6 @@ export const PostDetail = ({ post, onClose }) => {
           )}
         </div>
 
-        {/* If the commentn is pressed, reveal a reply to that comment instead */}
-        {/* <div class="relative my-2 flex-1">
-          <textarea
-            placeholder="Join the conversation..."
-            class="h-10 w-full resize-none rounded-[5px] border border-gray-300 bg-white py-2 pr-10 pl-2 text-sm transition-all duration-300 ease-in-out focus:h-24 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-          />
-          <button
-            onClick={handleSendMessage}
-            className="text-white focus:ring-2 focus:outline-none"
-            aria-label="Send message"
-          >
-            <SendHorizontal class="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 transition-colors hover:text-black"></SendHorizontal>
-          </button>
-        </div> */}
         <Comments postComments={comments} />
       </div>
     </div>

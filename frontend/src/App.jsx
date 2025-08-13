@@ -16,6 +16,8 @@ import Essentials from "./pages/Essentials";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TOS from "./pages/TOS";
 import ResetPassword from "./pages/ResetPassword";
+import CreatePost from "./pages/CreatePost";
+import Blog from "./pages/Blog";
 
 function AppContent() {
   const location = useLocation();
@@ -40,6 +42,8 @@ function AppContent() {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/termsofservice" element={<TOS />} />
         <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/create-post" element={<CreatePost />} />
+        <Route path="/blog" element={<Blog />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

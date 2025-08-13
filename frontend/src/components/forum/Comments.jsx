@@ -2,7 +2,7 @@ import { Likes } from "./Likes";
 import { MessageCircle } from "lucide-react";
 import { useState } from "react";
 
-// ! In the parent, use the messsage circle to trigger the visibility of the comments component
+// ! Make sure to link up comments to the database
 // ? What do you want to do with the top level cancel button?
 export const Comments = ({ postComments }) => {
   const [comments, setComments] = useState(postComments);
