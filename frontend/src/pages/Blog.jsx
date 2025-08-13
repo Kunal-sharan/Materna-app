@@ -11,6 +11,26 @@ const MAT_COLORS = {
 };
 
 // 
+const IconHeart = ({ className = "" }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+       className={className} aria-hidden="true">
+    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/>
+  </svg>
+);
+
+const IconHeartFilled = ({ className = "" }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor"
+       className={className} aria-hidden="true">
+    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/>
+  </svg>
+);
+
+const IconComment = ({ className = "" }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+       className={className} aria-hidden="true">
+    <path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/>
+  </svg>
+);
 const seedPosts = [
   {
     id: "p1",
@@ -608,7 +628,7 @@ function BlogCard({ post, liked, onToggleLike, comments, onAddComment, colors })
               title={liked ? "Unlike" : "Like"}
               tabIndex={0}
             >
-              {liked ? "♥︎ Liked" : "♡ Like"}
+              {liked ? <IconHeartFilled className="w-4 h-4 inline" /> : <IconHeart className="w-4 h-4 inline" />}
             </button>
             <button
               onClick={stopPropagation(() => setOpenComments((v) => !v))}
@@ -618,7 +638,8 @@ function BlogCard({ post, liked, onToggleLike, comments, onAddComment, colors })
               title="Comments"
               tabIndex={0}
             >
-              💬 {comments.length}
+              <IconComment className="w-4 h-4 inline" />
+              <span className="ml-1">{comments.length}</span>
             </button>
           </div>
         </div>
