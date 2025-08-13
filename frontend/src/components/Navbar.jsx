@@ -41,7 +41,9 @@ export const Navbar = () => {
     <nav
       className={cn(
         "fixed w-full z-40 transition-all duration-300 font-sans",
-        isScrolled ? "py-3 bg-background/80 backdrop-blur-md shadow-xs" : "py-5"
+        isScrolled
+          ? "py-3 bg-background/80 backdrop-blur-md shadow-xs"
+          : "py-5",
       )}
     >
       <div className="container flex items-center justify-between">
@@ -55,8 +57,7 @@ export const Navbar = () => {
             className="h-10 w-10.5 mr-1.5"
           />
           <span className="relative z-10 text-[#234451] font-bold">
-            <span className="text-glow text-foreground"></span>{" "}
-            Materna
+            <span className="text-glow text-foreground"></span> Materna
           </span>
         </Link>
 
@@ -77,9 +78,24 @@ export const Navbar = () => {
               Postpartum
             </button>
             <div className="absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50">
-              <Link to="/essentials" className="block px-4 py-2 hover:bg-gray-100">Newborn Essentials</Link>
-              <Link to="/vaccination" className="block px-4 py-2 hover:bg-gray-100">Vaccination Reminder</Link>
-              <Link to="/milestones" className="block px-4 py-2 hover:bg-gray-100">My Baby Milestones</Link>
+              <Link
+                to="/essentials"
+                className="block px-4 py-2 hover:bg-gray-100"
+              >
+                Newborn Essentials
+              </Link>
+              <Link
+                to="/vaccination"
+                className="block px-4 py-2 hover:bg-gray-100"
+              >
+                Vaccination Reminder
+              </Link>
+              <Link
+                to="/milestones"
+                className="block px-4 py-2 hover:bg-gray-100"
+              >
+                My Baby Milestones
+              </Link>
             </div>
           </div>
         </div>
@@ -87,10 +103,14 @@ export const Navbar = () => {
         {user ? (
           <Link to="/profile">
             <img
-              src={photo || "https://i.pinimg.com/236x/40/41/6f/40416fe5cfc9de788b1fcd769c93013a.jpg"}
+              src={
+                photo ||
+                "https://i.pinimg.com/236x/40/41/6f/40416fe5cfc9de788b1fcd769c93013a.jpg"
+              }
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = "https://i.pinimg.com/236x/40/41/6f/40416fe5cfc9de788b1fcd769c93013a.jpg";
+                e.target.src =
+                  "https://i.pinimg.com/236x/40/41/6f/40416fe5cfc9de788b1fcd769c93013a.jpg";
               }}
               alt="profile"
               className="hidden md:inline-block h-10 w-10 rounded-full object-cover"
@@ -121,7 +141,7 @@ export const Navbar = () => {
             "transition-all duration-300 md:hidden",
             isMenuOpen
               ? "opacity-100 pointer-events-auto"
-              : "opacity-0 pointer-events-none"
+              : "opacity-0 pointer-events-none",
           )}
         >
           <div className="flex flex-col space-y-8 text-xl">
@@ -137,9 +157,24 @@ export const Navbar = () => {
             ))}
             <div className="flex flex-col space-y-2 text-lg">
               <span className="text-[#234451] font-semibold">Postpartum</span>
-              <Link to="/essentials" className="text-[#234451] hover:text-primary transition">Newborn Essentials</Link>
-              <Link to="/vaccination" className="text-[#234451] hover:text-primary transition">Vaccination Reminder</Link>
-              <Link to="/milestones" className="text-[#234451] hover:text-primary transition">My Baby Milestones</Link>
+              <Link
+                to="/essentials"
+                className="text-[#234451] hover:text-primary transition"
+              >
+                Newborn Essentials
+              </Link>
+              <Link
+                to="/vaccination"
+                className="text-[#234451] hover:text-primary transition"
+              >
+                Vaccination Reminder
+              </Link>
+              <Link
+                to="/milestones"
+                className="text-[#234451] hover:text-primary transition"
+              >
+                My Baby Milestones
+              </Link>
             </div>
             {user ? (
               <Link

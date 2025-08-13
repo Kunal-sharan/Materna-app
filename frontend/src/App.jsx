@@ -11,8 +11,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import UserProfile from "./pages/UserProfile";
 import Milestones from "./pages/Milestones";
-import Vaccines from "./pages/Vaccines"
-import Essentials from "./pages/Essentials"
+import Vaccines from "./pages/Vaccines";
+import Essentials from "./pages/Essentials";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TOS from "./pages/TOS";
 import ResetPassword from "./pages/ResetPassword";

@@ -7,7 +7,12 @@ import {
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
-export const Dropdown = ({ dropdownItems, selectedValues, onValueChange, selectMultiple }) => {
+export const Dropdown = ({
+  dropdownItems,
+  selectedValues,
+  onValueChange,
+  selectMultiple,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSelect = (item) => {
@@ -27,7 +32,8 @@ export const Dropdown = ({ dropdownItems, selectedValues, onValueChange, selectM
     onValueChange(newSelectedValues);
   };
 
-  const displayValue = selectedValues.length > 0 ? selectedValues.join(", ") : "All";
+  const displayValue =
+    selectedValues.length > 0 ? selectedValues.join(", ") : "All";
 
   return (
     <>

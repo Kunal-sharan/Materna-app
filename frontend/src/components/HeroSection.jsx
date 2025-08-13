@@ -43,7 +43,8 @@ export const HeroSection = () => {
       <div className="mt-12 max-w-xl text-center text-xs text-[hsl(var(--foreground))] px-4 mx-auto">
         <p className="italic leading-relaxed">
           <strong className="block mb-1 text-red-500">DISCLAIMER</strong>
-          Materna is currently in early-stage development.<br />
+          Materna is currently in early-stage development.
+          <br />
           Please do not submit any personal or health-related data. <br />
         </p>
       </div>

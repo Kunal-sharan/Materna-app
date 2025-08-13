@@ -145,14 +145,18 @@ const Community = () => {
                   <ViewBlog />
                 </div>
                 <div className="rounded-[25px] border border-white/50 bg-[#DFA69F]/25 p-4 pt-12 backdrop-blur-xs">
-                    {/* ! Put in the user's profile information here */}
-                    <Profile name={"Main User"}/>
+                  {/* ! Put in the user's profile information here */}
+                  <Profile name={"Main User"} />
                 </div>
               </div>
 
               <div className="flex flex-1 flex-col gap-y-4">
                 {filteredPosts.map((post) => (
-                  <Post key={post.id} post={post} onPostClick={() => handlePostClick(post)} />
+                  <Post
+                    key={post.id}
+                    post={post}
+                    onPostClick={() => handlePostClick(post)}
+                  />
                 ))}
 
                 <PostDetail post={selectedPost} onClose={handleCloseModal} />

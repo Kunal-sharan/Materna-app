@@ -53,7 +53,9 @@ export const SkillsSection = () => {
               key={index}
               className="rounded-xl bg-[rgba(247,241,235,0.6)] backdrop-blur-lg shadow-lg border border-white/30 p-6 transition hover:shadow-2xl hover:bg-[rgba(247,241,235,0.8)]"
             >
-              <h3 className="font-semibold text-xl mb-2 text-[#234451]">{item.title}</h3>
+              <h3 className="font-semibold text-xl mb-2 text-[#234451]">
+                {item.title}
+              </h3>
               <p className="text-[#234451]">{item.text}</p>
             </div>
           ))}

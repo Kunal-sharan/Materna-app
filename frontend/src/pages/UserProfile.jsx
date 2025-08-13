@@ -1,7 +1,24 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Line, Bar } from "react-chartjs-2";
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, PointElement, LineElement, Tooltip, Legend } from "chart.js";
-ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, Tooltip, Legend);
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  PointElement,
+  LineElement,
+  Tooltip,
+  Legend,
+} from "chart.js";
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  PointElement,
+  LineElement,
+  Tooltip,
+  Legend,
+);
 import { getAuth, signOut, updateProfile, updateEmail } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
@@ -28,7 +45,13 @@ export default function UserProfile() {
   const [growthView, setGrowthView] = useState("today");
 
   // Growth tracking state
-  const [growthData, setGrowthData] = useState({ weight: 0, size: 0, currentWeek: 0, weeklyChart: [], trimesterChart: [] });
+  const [growthData, setGrowthData] = useState({
+    weight: 0,
+    size: 0,
+    currentWeek: 0,
+    weeklyChart: [],
+    trimesterChart: [],
+  });
   // Growth estimation utility functions
   const estimateWeight = (week) => {
     if (week < 4) return 0.01;
@@ -60,7 +83,7 @@ export default function UserProfile() {
       const weeklyChart = Array.from({ length: week + 1 }, (_, w) => ({
         week: w,
         weight: estimateWeight(w),
-        size: estimateLength(w)
+        size: estimateLength(w),
       }));
 
       const trimesterChart = [
@@ -81,7 +104,13 @@ export default function UserProfile() {
         },
       ];
 
-      setGrowthData({ weight, size, currentWeek: week, weeklyChart, trimesterChart });
+      setGrowthData({
+        weight,
+        size,
+        currentWeek: week,
+        weeklyChart,
+        trimesterChart,
+      });
     }
   }, [userData.dueDate]);
 
@@ -125,7 +154,8 @@ export default function UserProfile() {
       setUserData({
         name: user.displayName || "Mama",
         email: user.email || "No email",
-        photo: user.photoURL && user.photoURL.trim() !== "" ? user.photoURL : ""
+        photo:
+          user.photoURL && user.photoURL.trim() !== "" ? user.photoURL : "",
       });
     }
   }, [auth]);
@@ -149,7 +179,7 @@ export default function UserProfile() {
         playsInline
         loop
         className="fixed top-0 left-0 w-full h-screen object-cover -z-20 transition-opacity duration-500 "
-      > 
+      >
         <source src={bgVideo} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
@@ -164,14 +194,21 @@ export default function UserProfile() {
               <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 w-full">
                 <div className="relative group transition-all duration-200">
                   <img
-                    src={userData.photo && userData.photo.trim() !== "" ? userData.photo : "https://i.pinimg.com/236x/40/41/6f/40416fe5cfc9de788b1fcd769c93013a.jpg"}
+                    src={
+                      userData.photo && userData.photo.trim() !== ""
+                        ? userData.photo
+                        : "https://i.pinimg.com/236x/40/41/6f/40416fe5cfc9de788b1fcd769c93013a.jpg"
+                    }
                     onError={(e) => {
                       e.target.onerror = null;
-                      e.target.src = "https://i.pinimg.com/236x/40/41/6f/40416fe5cfc9de788b1fcd769c93013a.jpg";
+                      e.target.src =
+                        "https://i.pinimg.com/236x/40/41/6f/40416fe5cfc9de788b1fcd769c93013a.jpg";
                     }}
                     alt="profile"
                     className="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover ring-4 ring-[#a48bc3] shadow-md transition-transform duration-300 cursor-pointer hover:scale-105"
-                    onClick={() => fileInputRef.current && fileInputRef.current.click()}
+                    onClick={() =>
+                      fileInputRef.current && fileInputRef.current.click()
+                    }
                   />
                   <input
                     type="file"
@@ -186,12 +223,12 @@ export default function UserProfile() {
                           const base64 = reader.result;
                           setUserData((prev) => ({
                             ...prev,
-                            photo: base64
+                            photo: base64,
                           }));
 
                           try {
                             await updateProfile(auth.currentUser, {
-                              photoURL: base64
+                              photoURL: base64,
                             });
                           } catch (err) {
                             console.error("Failed to update photo:", err);
@@ -203,7 +240,9 @@ export default function UserProfile() {
                   />
                 </div>
                 <div>
-                  <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-wide mb-1">Hi {userData.name}!</h1>
+                  <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-wide mb-1">
+                    Hi {userData.name}!
+                  </h1>
                   <div className="mt-2 flex gap-2 flex-wrap">
                     {isEditingJourney ? (
                       <>
@@ -213,7 +252,10 @@ export default function UserProfile() {
                           value={userData.tag1 || ""}
                           placeholder="Tag 1"
                           onChange={(e) =>
-                            setUserData((prev) => ({ ...prev, tag1: e.target.value }))
+                            setUserData((prev) => ({
+                              ...prev,
+                              tag1: e.target.value,
+                            }))
                           }
                         />
                         <input
@@ -222,7 +264,10 @@ export default function UserProfile() {
                           value={userData.tag2 || ""}
                           placeholder="Tag 2"
                           onChange={(e) =>
-                            setUserData((prev) => ({ ...prev, tag2: e.target.value }))
+                            setUserData((prev) => ({
+                              ...prev,
+                              tag2: e.target.value,
+                            }))
                           }
                         />
                       </>
@@ -259,7 +304,9 @@ export default function UserProfile() {
             {/* Personal Info */}
             <section className="col-span-1 md:col-span-2 lg:col-span-6 bg-white/70 backdrop-blur-md border border-white/30 rounded-3xl shadow-md shadow-purple-100 p-6 flex flex-col space-y-4">
               <div className="flex justify-between items-center mb-2">
-                <h2 className="text-base sm:text-lg md:text-2xl font-extrabold tracking-wide text-left">Personal Information</h2>
+                <h2 className="text-base sm:text-lg md:text-2xl font-extrabold tracking-wide text-left">
+                  Personal Information
+                </h2>
                 {!isEditingPersonal ? (
                   <img
                     src={editIcon}
@@ -285,7 +332,9 @@ export default function UserProfile() {
                         }
                       } catch (error) {
                         console.error("Error updating profile:", error);
-                        toast.error("Failed to save changes. Please try again.");
+                        toast.error(
+                          "Failed to save changes. Please try again.",
+                        );
                       }
                     }}
                   >
@@ -295,62 +344,94 @@ export default function UserProfile() {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5">
                 <div className="flex flex-col">
-                  <label className="text-xs sm:text-base font-semibold mb-1 tracking-wide text-left">Full Name</label>
+                  <label className="text-xs sm:text-base font-semibold mb-1 tracking-wide text-left">
+                    Full Name
+                  </label>
                   <input
                     type="text"
                     className="bg-white/80 border border-gray-200 text-[#234451] py-3 px-4 rounded-xl text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a48bc3] transition-all"
                     value={userData.name}
                     readOnly={!isEditingPersonal}
-                    onChange={isEditingPersonal ? (e) =>
-                      setUserData((prev) => ({ ...prev, name: e.target.value }))
-                    : undefined}
+                    onChange={
+                      isEditingPersonal
+                        ? (e) =>
+                            setUserData((prev) => ({
+                              ...prev,
+                              name: e.target.value,
+                            }))
+                        : undefined
+                    }
                   />
                 </div>
                 <div className="flex flex-col">
-                  <label className="text-xs sm:text-base font-semibold mb-1 tracking-wide text-left">Email</label>
+                  <label className="text-xs sm:text-base font-semibold mb-1 tracking-wide text-left">
+                    Email
+                  </label>
                   <input
                     type="email"
                     className="bg-white/80 border border-gray-200 text-[#234451] py-3 px-4 rounded-xl text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a48bc3] transition-all"
                     value={userData.email}
                     readOnly={!isEditingPersonal}
-                    onChange={isEditingPersonal ? (e) =>
-                      setUserData((prev) => ({ ...prev, email: e.target.value }))
-                    : undefined}
+                    onChange={
+                      isEditingPersonal
+                        ? (e) =>
+                            setUserData((prev) => ({
+                              ...prev,
+                              email: e.target.value,
+                            }))
+                        : undefined
+                    }
                   />
                 </div>
                 <div className="flex flex-col">
-                  <label className="text-xs sm:text-base font-semibold mb-1 tracking-wide text-left">Phone Number</label>
+                  <label className="text-xs sm:text-base font-semibold mb-1 tracking-wide text-left">
+                    Phone Number
+                  </label>
                   <input
                     type="tel"
                     className="bg-white/80 border border-gray-200 text-[#234451] py-3 px-4 rounded-xl text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a48bc3] transition-all"
                     value={userData.phone || ""}
                     readOnly={!isEditingPersonal}
-                    onChange={isEditingPersonal ? (e) =>
-                      setUserData((prev) => ({ ...prev, phone: e.target.value }))
-                    : undefined}
+                    onChange={
+                      isEditingPersonal
+                        ? (e) =>
+                            setUserData((prev) => ({
+                              ...prev,
+                              phone: e.target.value,
+                            }))
+                        : undefined
+                    }
                   />
                 </div>
                 <div className="flex flex-col">
-                  <label className="text-xs sm:text-base font-semibold mb-1 tracking-wide text-left">Date of Birth</label>
+                  <label className="text-xs sm:text-base font-semibold mb-1 tracking-wide text-left">
+                    Date of Birth
+                  </label>
                   <input
                     type="date"
                     className="bg-white/80 border border-gray-200 text-[#234451] py-3 px-4 rounded-xl text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a48bc3] transition-all"
                     value={userData.dob || ""}
                     readOnly={!isEditingPersonal}
-                    onChange={isEditingPersonal ? (e) =>
-                      setUserData((prev) => ({ ...prev, dob: e.target.value }))
-                    : undefined}
+                    onChange={
+                      isEditingPersonal
+                        ? (e) =>
+                            setUserData((prev) => ({
+                              ...prev,
+                              dob: e.target.value,
+                            }))
+                        : undefined
+                    }
                   />
                 </div>
               </div>
             </section>
 
-
-
             {/* Maternal Journey */}
             <section className="col-span-1 md:col-span-2 lg:col-span-6 bg-white/70 backdrop-blur-md border border-white/30 rounded-3xl shadow-md shadow-purple-100 p-6 flex flex-col space-y-4">
               <div className="flex justify-between items-center mb-2">
-                <h2 className="text-base sm:text-lg md:text-2xl font-extrabold tracking-wide text-left">Maternal Journey</h2>
+                <h2 className="text-base sm:text-lg md:text-2xl font-extrabold tracking-wide text-left">
+                  Maternal Journey
+                </h2>
                 {!isEditingJourney ? (
                   <img
                     src={editIcon}
@@ -367,7 +448,9 @@ export default function UserProfile() {
                         setIsEditingJourney(false);
                       } catch (error) {
                         console.error("Error saving changes:", error);
-                        toast.error("Failed to save changes. Please try again.");
+                        toast.error(
+                          "Failed to save changes. Please try again.",
+                        );
                       }
                     }}
                   >
@@ -377,14 +460,22 @@ export default function UserProfile() {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5">
                 <div className="flex flex-col">
-                  <label className="text-xs sm:text-base font-semibold mb-1 tracking-wide text-left">Status</label>
+                  <label className="text-xs sm:text-base font-semibold mb-1 tracking-wide text-left">
+                    Status
+                  </label>
                   <select
                     className="bg-white/80 border border-gray-200 text-[#234451] py-3 px-4 rounded-xl text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a48bc3] transition-all"
                     value={userData.status || ""}
                     disabled={!isEditingJourney}
-                    onChange={isEditingJourney ? (e) =>
-                      setUserData((prev) => ({ ...prev, status: e.target.value }))
-                    : undefined}
+                    onChange={
+                      isEditingJourney
+                        ? (e) =>
+                            setUserData((prev) => ({
+                              ...prev,
+                              status: e.target.value,
+                            }))
+                        : undefined
+                    }
                   >
                     <option>Pregnant</option>
                     <option>Postpartum</option>
@@ -392,55 +483,89 @@ export default function UserProfile() {
                   </select>
                 </div>
                 <div className="flex flex-col">
-                  <label className="text-xs sm:text-base font-semibold mb-1 tracking-wide text-left">Due Date</label>
+                  <label className="text-xs sm:text-base font-semibold mb-1 tracking-wide text-left">
+                    Due Date
+                  </label>
                   <input
                     type="date"
                     className="bg-white/80 border border-gray-200 text-[#234451] py-3 px-4 rounded-xl text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a48bc3] transition-all"
                     value={userData.dueDate || ""}
                     readOnly={!isEditingJourney}
-                    onChange={isEditingJourney ? (e) =>
-                      setUserData((prev) => ({ ...prev, dueDate: e.target.value }))
-                    : undefined}
+                    onChange={
+                      isEditingJourney
+                        ? (e) =>
+                            setUserData((prev) => ({
+                              ...prev,
+                              dueDate: e.target.value,
+                            }))
+                        : undefined
+                    }
                   />
                 </div>
                 <div className="flex flex-col">
-                  <label className="text-xs sm:text-base font-semibold mb-1 tracking-wide text-left">Healthcare Provider</label>
+                  <label className="text-xs sm:text-base font-semibold mb-1 tracking-wide text-left">
+                    Healthcare Provider
+                  </label>
                   <input
                     type="text"
                     className="bg-white/80 border border-gray-200 text-[#234451] py-3 px-4 rounded-xl text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a48bc3] transition-all"
                     value={userData.provider || ""}
                     readOnly={!isEditingJourney}
-                    onChange={isEditingJourney ? (e) =>
-                      setUserData((prev) => ({ ...prev, provider: e.target.value }))
-                    : undefined}
+                    onChange={
+                      isEditingJourney
+                        ? (e) =>
+                            setUserData((prev) => ({
+                              ...prev,
+                              provider: e.target.value,
+                            }))
+                        : undefined
+                    }
                   />
                 </div>
                 <div className="flex flex-col">
-                  <label className="text-xs sm:text-base font-semibold mb-1 tracking-wide text-left">Emergency Contact</label>
+                  <label className="text-xs sm:text-base font-semibold mb-1 tracking-wide text-left">
+                    Emergency Contact
+                  </label>
                   <input
                     type="text"
                     className="bg-white/80 border border-gray-200 text-[#234451] py-3 px-4 rounded-xl text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a48bc3] transition-all"
                     value={userData.emergency || ""}
                     readOnly={!isEditingJourney}
-                    onChange={isEditingJourney ? (e) =>
-                      setUserData((prev) => ({ ...prev, emergency: e.target.value }))
-                    : undefined}
+                    onChange={
+                      isEditingJourney
+                        ? (e) =>
+                            setUserData((prev) => ({
+                              ...prev,
+                              emergency: e.target.value,
+                            }))
+                        : undefined
+                    }
                   />
                 </div>
                 {/* Partner Access Section */}
                 <div className="flex flex-col">
-                  <label className="text-xs sm:text-base font-semibold mb-1 tracking-wide text-left">Partner Email</label>
+                  <label className="text-xs sm:text-base font-semibold mb-1 tracking-wide text-left">
+                    Partner Email
+                  </label>
                   <input
                     type="email"
                     className="bg-white/80 border border-gray-200 text-[#234451] py-3 px-4 rounded-xl text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a48bc3] transition-all"
                     value={userData.partnerEmail || ""}
                     readOnly={!isEditingJourney}
-                    onChange={isEditingJourney ? (e) =>
-                      setUserData((prev) => ({ ...prev, partnerEmail: e.target.value }))
-                    : undefined}
+                    onChange={
+                      isEditingJourney
+                        ? (e) =>
+                            setUserData((prev) => ({
+                              ...prev,
+                              partnerEmail: e.target.value,
+                            }))
+                        : undefined
+                    }
                   />
                   <p className="text-xs text-[#555] mt-1 text-left">
-                    Your partner can log in using this email to view shared data like symptom charts, vaccine reminders, appointments, and milestones.
+                    Your partner can log in using this email to view shared data
+                    like symptom charts, vaccine reminders, appointments, and
+                    milestones.
                   </p>
                 </div>
               </div>
@@ -452,23 +577,44 @@ export default function UserProfile() {
             <section className="block lg:hidden col-span-1 md:col-span-2 lg:col-span-6">
               {/* Preferences */}
               <section className="mb-6 bg-white/70 backdrop-blur-md border border-white/30 rounded-3xl shadow-md shadow-purple-100 p-6 flex flex-col space-y-4">
-                <h2 className="font-semibold text-base sm:text-lg md:text-2xl tracking-wide mb-3">Preferences</h2>
+                <h2 className="font-semibold text-base sm:text-lg md:text-2xl tracking-wide mb-3">
+                  Preferences
+                </h2>
                 <div className="space-y-3 text-sm sm:text-base">
                   <div className="flex items-center justify-between">
                     <span>Daily Reminders</span>
-                    <input type="checkbox" className="toggle accent-[#a48bc3]" checked readOnly />
+                    <input
+                      type="checkbox"
+                      className="toggle accent-[#a48bc3]"
+                      checked
+                      readOnly
+                    />
                   </div>
                   <div className="flex items-center justify-between">
                     <span>Email Updates</span>
-                    <input type="checkbox" className="toggle accent-[#a48bc3]" checked readOnly />
+                    <input
+                      type="checkbox"
+                      className="toggle accent-[#a48bc3]"
+                      checked
+                      readOnly
+                    />
                   </div>
                   <div className="flex items-center justify-between">
                     <span>Community Notifications</span>
-                    <input type="checkbox" className="toggle accent-[#a48bc3]" readOnly />
+                    <input
+                      type="checkbox"
+                      className="toggle accent-[#a48bc3]"
+                      readOnly
+                    />
                   </div>
                   {/* Language Dropdown */}
                   <div className="flex flex-col mt-4">
-                    <label htmlFor="language" className="text-xs sm:text-base font-semibold mb-1 tracking-wide text-left">Language</label>
+                    <label
+                      htmlFor="language"
+                      className="text-xs sm:text-base font-semibold mb-1 tracking-wide text-left"
+                    >
+                      Language
+                    </label>
                     <select
                       id="language"
                       className="bg-white/80 border border-gray-200 text-[#234451] py-3 px-4 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-[#a48bc3] transition-all"
@@ -489,7 +635,9 @@ export default function UserProfile() {
               {/* Upcoming Appointments */}
               <section className="mb-6 bg-white/70 backdrop-blur-md border border-white/30 rounded-3xl shadow-md shadow-purple-100 p-6 flex flex-col space-y-3">
                 <div className="flex justify-between items-center mb-2">
-                  <h2 className="font-semibold text-base sm:text-lg md:text-2xl tracking-wide">{viewPast ? "Past Appointments" : "Upcoming Appointments"}</h2>
+                  <h2 className="font-semibold text-base sm:text-lg md:text-2xl tracking-wide">
+                    {viewPast ? "Past Appointments" : "Upcoming Appointments"}
+                  </h2>
                   <div className="flex items-center gap-2">
                     <button
                       className="text-xs underline text-[#234451] hover:brightness-110"
@@ -506,22 +654,51 @@ export default function UserProfile() {
                     </button>
                   </div>
                 </div>
-                {(viewPast ? appointments.filter(a => a.done) : appointments.filter(a => !a.done)).length === 0 ? (
-                  <p className="text-sm text-[#666]">No {viewPast ? "past" : "upcoming"} appointments</p>
+                {(viewPast
+                  ? appointments.filter((a) => a.done)
+                  : appointments.filter((a) => !a.done)
+                ).length === 0 ? (
+                  <p className="text-sm text-[#666]">
+                    No {viewPast ? "past" : "upcoming"} appointments
+                  </p>
                 ) : (
-                  (viewPast ? appointments.filter(a => a.done) : appointments.filter(a => !a.done)).map((appt, idx) => (
-                    <div key={idx} className="bg-white/90 border border-gray-200 text-[#234451] rounded-2xl p-4 shadow-md mb-3 flex flex-col transition-transform hover:scale-105">
+                  (viewPast
+                    ? appointments.filter((a) => a.done)
+                    : appointments.filter((a) => !a.done)
+                  ).map((appt, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-white/90 border border-gray-200 text-[#234451] rounded-2xl p-4 shadow-md mb-3 flex flex-col transition-transform hover:scale-105"
+                    >
                       <div className="flex justify-between items-start">
                         <div>
-                          <p className="text-base font-semibold tracking-wide">{appt.doctor}</p>
-                          <p className="text-sm">{appt.date} at {appt.time}</p>
-                          {appt.notes && <p className="text-xs mt-1 text-[#555] italic">{appt.notes}</p>}
+                          <p className="text-base font-semibold tracking-wide">
+                            {appt.doctor}
+                          </p>
+                          <p className="text-sm">
+                            {appt.date} at {appt.time}
+                          </p>
+                          {appt.notes && (
+                            <p className="text-xs mt-1 text-[#555] italic">
+                              {appt.notes}
+                            </p>
+                          )}
                         </div>
                         <div className="flex flex-col gap-2">
                           {!appt.done && (
-                            <button onClick={() => markAsDone(idx)} className="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold transition-all hover:brightness-110">Done</button>
+                            <button
+                              onClick={() => markAsDone(idx)}
+                              className="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold transition-all hover:brightness-110"
+                            >
+                              Done
+                            </button>
                           )}
-                          <button onClick={() => deleteAppointment(idx)} className="text-xs bg-[#fabdb5] text-[#234451] px-3 py-1 rounded-full font-semibold hover:bg-[#dfa69f] transition-all">Delete</button>
+                          <button
+                            onClick={() => deleteAppointment(idx)}
+                            className="text-xs bg-[#fabdb5] text-[#234451] px-3 py-1 rounded-full font-semibold hover:bg-[#dfa69f] transition-all"
+                          >
+                            Delete
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -530,32 +707,48 @@ export default function UserProfile() {
                 {showModal && (
                   <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
                     <div className="bg-white/90 p-6 rounded-3xl w-[95%] sm:max-w-md shadow-xl transition-transform transform scale-100">
-                      <h3 className="text-lg sm:text-xl font-extrabold mb-4 text-[#234451] tracking-wide">Add Appointment</h3>
+                      <h3 className="text-lg sm:text-xl font-extrabold mb-4 text-[#234451] tracking-wide">
+                        Add Appointment
+                      </h3>
                       <div className="space-y-3">
                         <input
                           type="date"
                           className="w-full py-3 px-4 border border-gray-300 rounded-xl text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a48bc3] transition-all"
                           value={newAppt.date}
-                          onChange={(e) => setNewAppt({ ...newAppt, date: e.target.value })}
+                          onChange={(e) =>
+                            setNewAppt({ ...newAppt, date: e.target.value })
+                          }
                         />
                         <input
                           type="time"
                           className="w-full py-3 px-4 border border-gray-300 rounded-xl text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a48bc3] transition-all"
                           value={newAppt.time}
-                          onChange={(e) => setNewAppt({ ...newAppt, time: e.target.value })}
+                          onChange={(e) =>
+                            setNewAppt({ ...newAppt, time: e.target.value })
+                          }
                         />
                         <input
                           type="text"
                           placeholder="Doctor's Name"
                           className="w-full py-3 px-4 border border-gray-300 rounded-xl text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a48bc3] transition-all"
                           value={newAppt.doctor}
-                          onChange={(e) => setNewAppt({ ...newAppt, doctor: e.target.value })}
+                          onChange={(e) =>
+                            setNewAppt({ ...newAppt, doctor: e.target.value })
+                          }
                         />
                       </div>
                       <div className="flex justify-end gap-3 mt-6">
-                        <button onClick={() => setShowModal(false)} className="text-base text-[#666] hover:underline">Cancel</button>
                         <button
-                          onClick={() => { handleAddAppointment(); setShowModal(false); }}
+                          onClick={() => setShowModal(false)}
+                          className="text-base text-[#666] hover:underline"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          onClick={() => {
+                            handleAddAppointment();
+                            setShowModal(false);
+                          }}
                           className="bg-[#a48bc3] text-white px-6 py-2 rounded-full text-base font-semibold hover:brightness-110 transition-all"
                         >
                           Add
@@ -567,7 +760,9 @@ export default function UserProfile() {
               </section>
               {/* Growth Tracker */}
               <section className="bg-white/70 backdrop-blur-md border border-white/30 rounded-3xl p-6 shadow-lg shadow-purple-100 text-[#234451] flex flex-col">
-                <h2 className="text-xl sm:text-2xl font-extrabold tracking-wide text-[#6f4fa1] mb-4">Growth Tracker</h2>
+                <h2 className="text-xl sm:text-2xl font-extrabold tracking-wide text-[#6f4fa1] mb-4">
+                  Growth Tracker
+                </h2>
                 <div className="flex flex-wrap justify-start gap-3 sm:gap-6 mb-4">
                   {["today", "weekly", "trimester"].map((view) => (
                     <button
@@ -600,15 +795,27 @@ export default function UserProfile() {
                     <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-5 shadow border border-white/30 flex items-center justify-between gap-4">
                       <div className="flex items-center gap-4">
                         <div className="bg-white/80 p-3 rounded-2xl shadow">
-                          <img src={weight} alt="Weight" className="w-7 h-7 sm:w-8 sm:h-8" />
+                          <img
+                            src={weight}
+                            alt="Weight"
+                            className="w-7 h-7 sm:w-8 sm:h-8"
+                          />
                         </div>
                         <div>
-                          <p className="text-sm sm:text-base font-semibold text-[#444] tracking-wide">Weight</p>
-                          <p className="text-xl sm:text-2xl font-extrabold text-[#234451] tracking-wide">{growthData.weight.toFixed(2)} kg</p>
+                          <p className="text-sm sm:text-base font-semibold text-[#444] tracking-wide">
+                            Weight
+                          </p>
+                          <p className="text-xl sm:text-2xl font-extrabold text-[#234451] tracking-wide">
+                            {growthData.weight.toFixed(2)} kg
+                          </p>
                         </div>
                       </div>
                       <p className="text-xs text-[#f87171] font-semibold flex items-center">
-                        <img src={increaseIcon} alt="Increase" className="w-3 h-3 inline mr-1" />
+                        <img
+                          src={increaseIcon}
+                          alt="Increase"
+                          className="w-3 h-3 inline mr-1"
+                        />
                         3.6%
                       </p>
                     </div>
@@ -616,15 +823,27 @@ export default function UserProfile() {
                     <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-5 shadow border border-white/30 flex items-center justify-between gap-4">
                       <div className="flex items-center gap-4">
                         <div className="bg-white/80 p-3 rounded-2xl shadow">
-                          <img src={size} alt="Size" className="w-7 h-7 sm:w-8 sm:h-8" />
+                          <img
+                            src={size}
+                            alt="Size"
+                            className="w-7 h-7 sm:w-8 sm:h-8"
+                          />
                         </div>
                         <div>
-                          <p className="text-sm sm:text-base font-semibold text-[#444] tracking-wide">Size</p>
-                          <p className="text-xl sm:text-2xl font-extrabold text-[#234451] tracking-wide">{growthData.size.toFixed(1)} cm</p>
+                          <p className="text-sm sm:text-base font-semibold text-[#444] tracking-wide">
+                            Size
+                          </p>
+                          <p className="text-xl sm:text-2xl font-extrabold text-[#234451] tracking-wide">
+                            {growthData.size.toFixed(1)} cm
+                          </p>
                         </div>
                       </div>
                       <p className="text-xs text-[#f87171] font-semibold flex items-center">
-                        <img src={increaseIcon} alt="Increase" className="w-3 h-3 inline mr-1" />
+                        <img
+                          src={increaseIcon}
+                          alt="Increase"
+                          className="w-3 h-3 inline mr-1"
+                        />
                         3.6%
                       </p>
                     </div>
@@ -635,7 +854,9 @@ export default function UserProfile() {
                   <div className="mt-8 overflow-x-auto border border-white/30 rounded-2xl shadow-md bg-white/80 p-4">
                     <Line
                       data={{
-                        labels: growthData.weeklyChart.map((d) => `Week ${d.week}`),
+                        labels: growthData.weeklyChart.map(
+                          (d) => `Week ${d.week}`,
+                        ),
                         datasets: [
                           {
                             label: "Weight (kg)",
@@ -643,11 +864,14 @@ export default function UserProfile() {
                             borderColor: "#a48bc3",
                             backgroundColor: "rgba(164,139,195,0.2)",
                             tension: 0.4,
-                            fill: true
+                            fill: true,
                           },
                         ],
                       }}
-                      options={{ responsive: true, plugins: { legend: { display: true } } }}
+                      options={{
+                        responsive: true,
+                        plugins: { legend: { display: true } },
+                      }}
                     />
                   </div>
                 )}
@@ -659,17 +883,24 @@ export default function UserProfile() {
                         datasets: [
                           {
                             label: "Avg Weight (kg)",
-                            data: growthData.trimesterChart.map((d) => d.avgWeight),
+                            data: growthData.trimesterChart.map(
+                              (d) => d.avgWeight,
+                            ),
                             backgroundColor: "#a48bc3",
                           },
                           {
                             label: "Avg Size (cm)",
-                            data: growthData.trimesterChart.map((d) => d.avgSize),
+                            data: growthData.trimesterChart.map(
+                              (d) => d.avgSize,
+                            ),
                             backgroundColor: "#6f4fa1",
                           },
                         ],
                       }}
-                      options={{ responsive: true, plugins: { legend: { display: true } } }}
+                      options={{
+                        responsive: true,
+                        plugins: { legend: { display: true } },
+                      }}
                     />
                   </div>
                 )}
@@ -679,23 +910,44 @@ export default function UserProfile() {
             <div className="hidden lg:flex w-full gap-6 col-span-6">
               {/* Preferences */}
               <section className="w-[25%] bg-white/70 backdrop-blur-md border border-white/30 rounded-3xl shadow-md shadow-purple-100 p-6 flex flex-col space-y-4">
-                <h2 className="font-semibold text-base sm:text-lg md:text-2xl tracking-wide mb-3">Preferences</h2>
+                <h2 className="font-semibold text-base sm:text-lg md:text-2xl tracking-wide mb-3">
+                  Preferences
+                </h2>
                 <div className="space-y-3 text-sm sm:text-base">
                   <div className="flex items-center justify-between">
                     <span>Daily Reminders</span>
-                    <input type="checkbox" className="toggle accent-[#a48bc3]" checked readOnly />
+                    <input
+                      type="checkbox"
+                      className="toggle accent-[#a48bc3]"
+                      checked
+                      readOnly
+                    />
                   </div>
                   <div className="flex items-center justify-between">
                     <span>Email Updates</span>
-                    <input type="checkbox" className="toggle accent-[#a48bc3]" checked readOnly />
+                    <input
+                      type="checkbox"
+                      className="toggle accent-[#a48bc3]"
+                      checked
+                      readOnly
+                    />
                   </div>
                   <div className="flex items-center justify-between">
                     <span>Community Notifications</span>
-                    <input type="checkbox" className="toggle accent-[#a48bc3]" readOnly />
+                    <input
+                      type="checkbox"
+                      className="toggle accent-[#a48bc3]"
+                      readOnly
+                    />
                   </div>
                   {/* Language Dropdown */}
                   <div className="flex flex-col mt-4">
-                    <label htmlFor="language" className="text-xs sm:text-base font-semibold mb-1 tracking-wide text-left">Language</label>
+                    <label
+                      htmlFor="language"
+                      className="text-xs sm:text-base font-semibold mb-1 tracking-wide text-left"
+                    >
+                      Language
+                    </label>
                     <select
                       id="language"
                       className="bg-white/80 border border-gray-200 text-[#234451] py-3 px-4 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-[#a48bc3] transition-all"
@@ -716,7 +968,9 @@ export default function UserProfile() {
               {/* Upcoming Appointments */}
               <section className="w-[25%] bg-white/70 backdrop-blur-md border border-white/30 rounded-3xl shadow-md shadow-purple-100 p-6 flex flex-col space-y-3">
                 <div className="flex justify-between items-center mb-2">
-                  <h2 className="font-semibold text-base sm:text-lg md:text-2xl tracking-wide">{viewPast ? "Past Appointments" : "Upcoming Appointments"}</h2>
+                  <h2 className="font-semibold text-base sm:text-lg md:text-2xl tracking-wide">
+                    {viewPast ? "Past Appointments" : "Upcoming Appointments"}
+                  </h2>
                   <div className="flex items-center gap-2">
                     <button
                       className="text-xs underline text-[#234451] hover:brightness-110"
@@ -733,22 +987,51 @@ export default function UserProfile() {
                     </button>
                   </div>
                 </div>
-                {(viewPast ? appointments.filter(a => a.done) : appointments.filter(a => !a.done)).length === 0 ? (
-                  <p className="text-sm text-[#666]">No {viewPast ? "past" : "upcoming"} appointments</p>
+                {(viewPast
+                  ? appointments.filter((a) => a.done)
+                  : appointments.filter((a) => !a.done)
+                ).length === 0 ? (
+                  <p className="text-sm text-[#666]">
+                    No {viewPast ? "past" : "upcoming"} appointments
+                  </p>
                 ) : (
-                  (viewPast ? appointments.filter(a => a.done) : appointments.filter(a => !a.done)).map((appt, idx) => (
-                    <div key={idx} className="bg-white/90 border border-gray-200 text-[#234451] rounded-2xl p-4 shadow-md mb-3 flex flex-col transition-transform hover:scale-105">
+                  (viewPast
+                    ? appointments.filter((a) => a.done)
+                    : appointments.filter((a) => !a.done)
+                  ).map((appt, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-white/90 border border-gray-200 text-[#234451] rounded-2xl p-4 shadow-md mb-3 flex flex-col transition-transform hover:scale-105"
+                    >
                       <div className="flex justify-between items-start">
                         <div>
-                          <p className="text-base font-semibold tracking-wide">{appt.doctor}</p>
-                          <p className="text-sm">{appt.date} at {appt.time}</p>
-                          {appt.notes && <p className="text-xs mt-1 text-[#555] italic">{appt.notes}</p>}
+                          <p className="text-base font-semibold tracking-wide">
+                            {appt.doctor}
+                          </p>
+                          <p className="text-sm">
+                            {appt.date} at {appt.time}
+                          </p>
+                          {appt.notes && (
+                            <p className="text-xs mt-1 text-[#555] italic">
+                              {appt.notes}
+                            </p>
+                          )}
                         </div>
                         <div className="flex flex-col gap-2">
                           {!appt.done && (
-                            <button onClick={() => markAsDone(idx)} className="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold transition-all hover:brightness-110">Done</button>
+                            <button
+                              onClick={() => markAsDone(idx)}
+                              className="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold transition-all hover:brightness-110"
+                            >
+                              Done
+                            </button>
                           )}
-                          <button onClick={() => deleteAppointment(idx)} className="text-xs bg-[#fabdb5] text-[#234451] px-3 py-1 rounded-full font-semibold hover:bg-[#dfa69f] transition-all">Delete</button>
+                          <button
+                            onClick={() => deleteAppointment(idx)}
+                            className="text-xs bg-[#fabdb5] text-[#234451] px-3 py-1 rounded-full font-semibold hover:bg-[#dfa69f] transition-all"
+                          >
+                            Delete
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -757,32 +1040,48 @@ export default function UserProfile() {
                 {showModal && (
                   <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
                     <div className="bg-white/90 p-6 rounded-3xl w-[95%] sm:max-w-md shadow-xl transition-transform transform scale-100">
-                      <h3 className="text-lg sm:text-xl font-extrabold mb-4 text-[#234451] tracking-wide">Add Appointment</h3>
+                      <h3 className="text-lg sm:text-xl font-extrabold mb-4 text-[#234451] tracking-wide">
+                        Add Appointment
+                      </h3>
                       <div className="space-y-3">
                         <input
                           type="date"
                           className="w-full py-3 px-4 border border-gray-300 rounded-xl text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a48bc3] transition-all"
                           value={newAppt.date}
-                          onChange={(e) => setNewAppt({ ...newAppt, date: e.target.value })}
+                          onChange={(e) =>
+                            setNewAppt({ ...newAppt, date: e.target.value })
+                          }
                         />
                         <input
                           type="time"
                           className="w-full py-3 px-4 border border-gray-300 rounded-xl text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a48bc3] transition-all"
                           value={newAppt.time}
-                          onChange={(e) => setNewAppt({ ...newAppt, time: e.target.value })}
+                          onChange={(e) =>
+                            setNewAppt({ ...newAppt, time: e.target.value })
+                          }
                         />
                         <input
                           type="text"
                           placeholder="Doctor's Name"
                           className="w-full py-3 px-4 border border-gray-300 rounded-xl text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#a48bc3] transition-all"
                           value={newAppt.doctor}
-                          onChange={(e) => setNewAppt({ ...newAppt, doctor: e.target.value })}
+                          onChange={(e) =>
+                            setNewAppt({ ...newAppt, doctor: e.target.value })
+                          }
                         />
                       </div>
                       <div className="flex justify-end gap-3 mt-6">
-                        <button onClick={() => setShowModal(false)} className="text-base text-[#666] hover:underline">Cancel</button>
                         <button
-                          onClick={() => { handleAddAppointment(); setShowModal(false); }}
+                          onClick={() => setShowModal(false)}
+                          className="text-base text-[#666] hover:underline"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          onClick={() => {
+                            handleAddAppointment();
+                            setShowModal(false);
+                          }}
                           className="bg-[#a48bc3] text-white px-6 py-2 rounded-full text-base font-semibold hover:brightness-110 transition-all"
                         >
                           Add
@@ -794,7 +1093,9 @@ export default function UserProfile() {
               </section>
               {/* Growth Tracker */}
               <section className="w-[50%] bg-white/70 backdrop-blur-md border border-white/30 rounded-3xl p-6 shadow-lg shadow-purple-100 text-[#234451] flex flex-col">
-                <h2 className="text-xl sm:text-2xl font-extrabold tracking-wide text-[#6f4fa1] mb-4">Growth Tracker</h2>
+                <h2 className="text-xl sm:text-2xl font-extrabold tracking-wide text-[#6f4fa1] mb-4">
+                  Growth Tracker
+                </h2>
                 <div className="flex flex-wrap justify-start gap-3 sm:gap-6 mb-4">
                   {["today", "weekly", "trimester"].map((view) => (
                     <button
@@ -827,15 +1128,27 @@ export default function UserProfile() {
                     <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-5 shadow border border-white/30 flex items-center justify-between gap-4">
                       <div className="flex items-center gap-4">
                         <div className="bg-white/80 p-3 rounded-2xl shadow">
-                          <img src={weight} alt="Weight" className="w-7 h-7 sm:w-8 sm:h-8" />
+                          <img
+                            src={weight}
+                            alt="Weight"
+                            className="w-7 h-7 sm:w-8 sm:h-8"
+                          />
                         </div>
                         <div>
-                          <p className="text-sm sm:text-base font-semibold text-[#444] tracking-wide">Weight</p>
-                          <p className="text-xl sm:text-2xl font-extrabold text-[#234451] tracking-wide">{growthData.weight.toFixed(2)} kg</p>
+                          <p className="text-sm sm:text-base font-semibold text-[#444] tracking-wide">
+                            Weight
+                          </p>
+                          <p className="text-xl sm:text-2xl font-extrabold text-[#234451] tracking-wide">
+                            {growthData.weight.toFixed(2)} kg
+                          </p>
                         </div>
                       </div>
                       <p className="text-xs text-[#f87171] font-semibold flex items-center">
-                        <img src={increaseIcon} alt="Increase" className="w-3 h-3 inline mr-1" />
+                        <img
+                          src={increaseIcon}
+                          alt="Increase"
+                          className="w-3 h-3 inline mr-1"
+                        />
                         3.6%
                       </p>
                     </div>
@@ -843,15 +1156,27 @@ export default function UserProfile() {
                     <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-5 shadow border border-white/30 flex items-center justify-between gap-4">
                       <div className="flex items-center gap-4">
                         <div className="bg-white/80 p-3 rounded-2xl shadow">
-                          <img src={size} alt="Size" className="w-7 h-7 sm:w-8 sm:h-8" />
+                          <img
+                            src={size}
+                            alt="Size"
+                            className="w-7 h-7 sm:w-8 sm:h-8"
+                          />
                         </div>
                         <div>
-                          <p className="text-sm sm:text-base font-semibold text-[#444] tracking-wide">Size</p>
-                          <p className="text-xl sm:text-2xl font-extrabold text-[#234451] tracking-wide">{growthData.size.toFixed(1)} cm</p>
+                          <p className="text-sm sm:text-base font-semibold text-[#444] tracking-wide">
+                            Size
+                          </p>
+                          <p className="text-xl sm:text-2xl font-extrabold text-[#234451] tracking-wide">
+                            {growthData.size.toFixed(1)} cm
+                          </p>
                         </div>
                       </div>
                       <p className="text-xs text-[#f87171] font-semibold flex items-center">
-                        <img src={increaseIcon} alt="Increase" className="w-3 h-3 inline mr-1" />
+                        <img
+                          src={increaseIcon}
+                          alt="Increase"
+                          className="w-3 h-3 inline mr-1"
+                        />
                         3.6%
                       </p>
                     </div>
@@ -862,7 +1187,9 @@ export default function UserProfile() {
                   <div className="mt-8 overflow-x-auto border border-white/30 rounded-2xl shadow-md bg-white/80 p-4">
                     <Line
                       data={{
-                        labels: growthData.weeklyChart.map((d) => `Week ${d.week}`),
+                        labels: growthData.weeklyChart.map(
+                          (d) => `Week ${d.week}`,
+                        ),
                         datasets: [
                           {
                             label: "Weight (kg)",
@@ -870,11 +1197,14 @@ export default function UserProfile() {
                             borderColor: "#a48bc3",
                             backgroundColor: "rgba(164,139,195,0.2)",
                             tension: 0.4,
-                            fill: true
+                            fill: true,
                           },
                         ],
                       }}
-                      options={{ responsive: true, plugins: { legend: { display: true } } }}
+                      options={{
+                        responsive: true,
+                        plugins: { legend: { display: true } },
+                      }}
                     />
                   </div>
                 )}
@@ -886,17 +1216,24 @@ export default function UserProfile() {
                         datasets: [
                           {
                             label: "Avg Weight (kg)",
-                            data: growthData.trimesterChart.map((d) => d.avgWeight),
+                            data: growthData.trimesterChart.map(
+                              (d) => d.avgWeight,
+                            ),
                             backgroundColor: "#a48bc3",
                           },
                           {
                             label: "Avg Size (cm)",
-                            data: growthData.trimesterChart.map((d) => d.avgSize),
+                            data: growthData.trimesterChart.map(
+                              (d) => d.avgSize,
+                            ),
                             backgroundColor: "#6f4fa1",
                           },
                         ],
                       }}
-                      options={{ responsive: true, plugins: { legend: { display: true } } }}
+                      options={{
+                        responsive: true,
+                        plugins: { legend: { display: true } },
+                      }}
                     />
                   </div>
                 )}
@@ -906,25 +1243,34 @@ export default function UserProfile() {
         </div>
       </main>
       <div className="mt-16 text-center text-xs text-[hsl(var(--foreground))] px-4 max-w-2xl mx-auto">
-            <p className="italic leading-relaxed">
-              <strong className="block mb-1 text-red-500">DISCLAIMER</strong>
-              Materna is currently in early-stage development and is not intended for clinical use. <br />
-              We do not collect, store, or process any Protected Health Information (PHI). <br />
-              This platform is for educational and demonstration purposes only and is not HIPAA-compliant at this time. <br />
-              Please do not submit any personal or health-related data.
-            </p>
+        <p className="italic leading-relaxed">
+          <strong className="block mb-1 text-red-500">DISCLAIMER</strong>
+          Materna is currently in early-stage development and is not intended
+          for clinical use. <br />
+          We do not collect, store, or process any Protected Health Information
+          (PHI). <br />
+          This platform is for educational and demonstration purposes only and
+          is not HIPAA-compliant at this time. <br />
+          Please do not submit any personal or health-related data.
+        </p>
       </div>
       <div className="text-center mt-10 mb-6">
         <button
           onClick={async () => {
-            if (window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+            if (
+              window.confirm(
+                "Are you sure you want to delete your account? This action cannot be undone.",
+              )
+            ) {
               try {
                 await auth.currentUser.delete();
                 toast.success("Account deleted successfully.");
                 navigate("/");
               } catch (error) {
                 console.error("Error deleting account:", error);
-                toast.error("Error deleting account. Please re-authenticate and try again.");
+                toast.error(
+                  "Error deleting account. Please re-authenticate and try again.",
+                );
               }
             }
           }}

@@ -8,7 +8,11 @@ import { StarStill } from "@/components/StarStill.jsx";
 const MILESTONES_BY_MONTH = [
   {
     month: 1,
-    milestones: ["Responds to sounds", "Begins to smile", "Moves arms and legs"],
+    milestones: [
+      "Responds to sounds",
+      "Begins to smile",
+      "Moves arms and legs",
+    ],
   },
   {
     month: 2,
@@ -16,7 +20,11 @@ const MILESTONES_BY_MONTH = [
   },
   {
     month: 3,
-    milestones: ["Follows moving objects", "Begins to babble", "Recognizes faces"],
+    milestones: [
+      "Follows moving objects",
+      "Begins to babble",
+      "Recognizes faces",
+    ],
   },
   {
     month: 4,
@@ -48,11 +56,17 @@ const MILESTONES_BY_MONTH = [
   },
   {
     month: 11,
-    milestones: ["Cruises along furniture", "Shows preferences for people/toys"],
+    milestones: [
+      "Cruises along furniture",
+      "Shows preferences for people/toys",
+    ],
   },
   {
     month: 12,
-    milestones: ["May take first steps", "Says simple words like 'mama' or 'dada'"],
+    milestones: [
+      "May take first steps",
+      "Says simple words like 'mama' or 'dada'",
+    ],
   },
 ];
 
@@ -86,9 +100,7 @@ export default function Milestones() {
   // Handle checking/unchecking a milestone
   const handleCheck = (id) => {
     setMilestones((prev) =>
-      prev.map((m) =>
-        m.id === id ? { ...m, checked: !m.checked } : m
-      )
+      prev.map((m) => (m.id === id ? { ...m, checked: !m.checked } : m)),
     );
   };
 
@@ -114,7 +126,7 @@ export default function Milestones() {
   // Handle journal note change
   const handleNoteChange = (id, note) => {
     setMilestones((prev) =>
-      prev.map((m) => (m.id === id ? { ...m, note } : m))
+      prev.map((m) => (m.id === id ? { ...m, note } : m)),
     );
   };
 
@@ -125,10 +137,8 @@ export default function Milestones() {
     reader.onloadend = () => {
       setMilestones((prev) =>
         prev.map((m) =>
-          m.id === id
-            ? { ...m, image: file, imageUrl: reader.result }
-            : m
-        )
+          m.id === id ? { ...m, image: file, imageUrl: reader.result } : m,
+        ),
       );
     };
     reader.readAsDataURL(file);
@@ -187,14 +197,17 @@ export default function Milestones() {
         <div className="fixed top-0 left-0 w-full h-screen bg-[#fff]/50 backdrop-blur-sm -z-10"></div>
         {/* Main Content */}
         <div className="relative z-10 font-inter">
-
-
           {/* Developmental Milestones Section */}
           <div className="max-w-4xl mx-auto mb-8">
             <div className="bg-[#fff]/20 rounded-2xl shadow-lg p-6 mb-2">
               <div className="flex items-center mb-2">
-                <span className="text-xl font-bold text-[#234451] mr-2">Developmental Milestones</span>
-                <span className="ml-auto text-sm text-[#234451]/50" title="Milestones are general guides!">
+                <span className="text-xl font-bold text-[#234451] mr-2">
+                  Developmental Milestones
+                </span>
+                <span
+                  className="ml-auto text-sm text-[#234451]/50"
+                  title="Milestones are general guides!"
+                >
                   REMINDER: Every baby is different. This is a general guide.
                 </span>
               </div>
@@ -205,7 +218,9 @@ export default function Milestones() {
                       key={month.month}
                       className="relative z-10 min-w-[200px] max-w-[200px] bg-white border border-[#a48bc3] rounded-xl shadow-lg p-4 text-[#234451] flex-shrink-0"
                     >
-                      <h3 className="text-[#a48bc3] font-bold text-lg mb-2 text-left">Month {month.month}</h3>
+                      <h3 className="text-[#a48bc3] font-bold text-lg mb-2 text-left">
+                        Month {month.month}
+                      </h3>
                       <ul className="list-disc pl-4 text-sm space-y-1 text-left">
                         {month.milestones.map((m, i) => (
                           <li key={i}>{m}</li>
@@ -220,13 +235,22 @@ export default function Milestones() {
 
           {/* Customizable Tracker Section */}
           <div className="max-w-4xl mx-auto mb-8">
-            <div ref={trackerRef} className="bg-[#fff]/20 rounded-2xl shadow-lg p-6">
+            <div
+              ref={trackerRef}
+              className="bg-[#fff]/20 rounded-2xl shadow-lg p-6"
+            >
               <div className="flex items-center justify-between mb-4">
-                <span className="text-lg font-bold text-[#234451]">Milestone Tracker</span>
+                <span className="text-lg font-bold text-[#234451]">
+                  Milestone Tracker
+                </span>
                 <select
                   className="rounded-lg border border-[#bcb2da] px-2 py-1 bg-white text-[#234451] focus:outline-none focus:ring-2 focus:ring-[#DFA69F]"
                   value={filterMonth || ""}
-                  onChange={(e) => setFilterMonth(e.target.value ? Number(e.target.value) : null)}
+                  onChange={(e) =>
+                    setFilterMonth(
+                      e.target.value ? Number(e.target.value) : null,
+                    )
+                  }
                 >
                   <option value="">All Months</option>
                   {Array.from({ length: 12 }).map((_, i) => (
@@ -244,94 +268,113 @@ export default function Milestones() {
                   .filter((month) => !filterMonth || month === filterMonth)
                   .sort((a, b) => a - b)
                   .map((month) => {
-                  const list = milestonesByMonth[month] || [];
-                  if (!list.length) return null;
-                  return (
-                    <div key={month} className="mb-6">
-                      <div className="text-[#234451] font-semibold mb-2 text-base">
-                        Month {month}
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {list.map((m) => (
-                          <div
-                            key={m.id}
-                            className="bg-white rounded-xl shadow p-4 flex flex-col"
-                          >
-                            <label className="flex items-center gap-2 mb-1">
-                              <input
-                                type="checkbox"
-                                checked={m.checked}
-                                onChange={() => handleCheck(m.id)}
-                                className="accent-[#DFA69F] w-5 h-5"
-                              />
-                              <span
-                                className={`font-medium ${
-                                  m.checked ? "text-[#a48bc3] line-through" : "text-[#234451]"
-                                }`}
-                              >
-                                {m.text}
-                              </span>
-                              {m.id > MILESTONES_BY_MONTH.flatMap(m => m.milestones).length && (
-                                <button
-                                  type="button"
-                                  onClick={() => handleDeleteMilestone(m.id)}
-                                  className="ml-auto text-xs text-red-500 underline hover:text-red-700"
-                                >
-                                  Delete
-                                </button>
-                              )}
-                            </label>
-                            {/* Photo upload & journal */}
-                            <div className="flex flex-col sm:flex-row gap-3 mt-2">
-                              {/* Image Upload */}
-                              <div className="flex flex-col items-center">
-                                {m.imageUrl ? (
-                                  <img
-                                    src={m.imageUrl}
-                                    alt="Milestone"
-                                    className="w-16 h-16 object-cover rounded-lg shadow mb-1"
-                                  />
-                                ) : (
-                                  <div className="w-16 h-16 bg-[#DFA69F]/20 rounded-lg flex items-center justify-center text-[#DFA69F] mb-1">
-                                    <svg width="24" height="24" fill="currentColor" className="opacity-40">
-                                      <path d="M12 5a1 1 0 0 1 1 1v2h2a1 1 0 1 1 0 2h-2v2a1 1 0 1 1-2 0V10H7a1 1 0 1 1 0-2h2V6a1 1 0 0 1 1-1zm-6 14a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h3.17a3 3 0 0 1 5.66 0H18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6zm6-14a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-6 2v10h12V7H6zm2 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-6a.5.5 0 0 1-.5-.5v-7z"></path>
-                                    </svg>
-                                  </div>
-                                )}
+                    const list = milestonesByMonth[month] || [];
+                    if (!list.length) return null;
+                    return (
+                      <div key={month} className="mb-6">
+                        <div className="text-[#234451] font-semibold mb-2 text-base">
+                          Month {month}
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {list.map((m) => (
+                            <div
+                              key={m.id}
+                              className="bg-white rounded-xl shadow p-4 flex flex-col"
+                            >
+                              <label className="flex items-center gap-2 mb-1">
                                 <input
-                                  type="file"
-                                  accept="image/*"
-                                  className="hidden"
-                                  ref={el => (fileInputs.current[m.id] = el)}
-                                  onChange={e =>
-                                    handleImageChange(m.id, e.target.files && e.target.files[0])
-                                  }
+                                  type="checkbox"
+                                  checked={m.checked}
+                                  onChange={() => handleCheck(m.id)}
+                                  className="accent-[#DFA69F] w-5 h-5"
                                 />
-                                <button
-                                  type="button"
-                                  className="text-xs text-[#DFA69F] underline hover:text-[#a48bc3]"
-                                  onClick={() => fileInputs.current[m.id]?.click()}
+                                <span
+                                  className={`font-medium ${
+                                    m.checked
+                                      ? "text-[#a48bc3] line-through"
+                                      : "text-[#234451]"
+                                  }`}
                                 >
-                                  {m.imageUrl ? "Change Photo" : "Add Photo"}
-                                </button>
-                              </div>
-                              {/* Journal */}
-                              <div className="flex-1">
-                                <textarea
-                                  className="w-full rounded-lg border border-[#bcb2da] bg-[#bcb2da]/10 px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-[#DFA69F]"
-                                  placeholder="Add a note or memory..."
-                                  value={m.note}
-                                  onChange={e => handleNoteChange(m.id, e.target.value)}
-                                  rows={2}
-                                />
+                                  {m.text}
+                                </span>
+                                {m.id >
+                                  MILESTONES_BY_MONTH.flatMap(
+                                    (m) => m.milestones,
+                                  ).length && (
+                                  <button
+                                    type="button"
+                                    onClick={() => handleDeleteMilestone(m.id)}
+                                    className="ml-auto text-xs text-red-500 underline hover:text-red-700"
+                                  >
+                                    Delete
+                                  </button>
+                                )}
+                              </label>
+                              {/* Photo upload & journal */}
+                              <div className="flex flex-col sm:flex-row gap-3 mt-2">
+                                {/* Image Upload */}
+                                <div className="flex flex-col items-center">
+                                  {m.imageUrl ? (
+                                    <img
+                                      src={m.imageUrl}
+                                      alt="Milestone"
+                                      className="w-16 h-16 object-cover rounded-lg shadow mb-1"
+                                    />
+                                  ) : (
+                                    <div className="w-16 h-16 bg-[#DFA69F]/20 rounded-lg flex items-center justify-center text-[#DFA69F] mb-1">
+                                      <svg
+                                        width="24"
+                                        height="24"
+                                        fill="currentColor"
+                                        className="opacity-40"
+                                      >
+                                        <path d="M12 5a1 1 0 0 1 1 1v2h2a1 1 0 1 1 0 2h-2v2a1 1 0 1 1-2 0V10H7a1 1 0 1 1 0-2h2V6a1 1 0 0 1 1-1zm-6 14a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h3.17a3 3 0 0 1 5.66 0H18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6zm6-14a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-6 2v10h12V7H6zm2 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-6a.5.5 0 0 1-.5-.5v-7z"></path>
+                                      </svg>
+                                    </div>
+                                  )}
+                                  <input
+                                    type="file"
+                                    accept="image/*"
+                                    className="hidden"
+                                    ref={(el) =>
+                                      (fileInputs.current[m.id] = el)
+                                    }
+                                    onChange={(e) =>
+                                      handleImageChange(
+                                        m.id,
+                                        e.target.files && e.target.files[0],
+                                      )
+                                    }
+                                  />
+                                  <button
+                                    type="button"
+                                    className="text-xs text-[#DFA69F] underline hover:text-[#a48bc3]"
+                                    onClick={() =>
+                                      fileInputs.current[m.id]?.click()
+                                    }
+                                  >
+                                    {m.imageUrl ? "Change Photo" : "Add Photo"}
+                                  </button>
+                                </div>
+                                {/* Journal */}
+                                <div className="flex-1">
+                                  <textarea
+                                    className="w-full rounded-lg border border-[#bcb2da] bg-[#bcb2da]/10 px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-[#DFA69F]"
+                                    placeholder="Add a note or memory..."
+                                    value={m.note}
+                                    onChange={(e) =>
+                                      handleNoteChange(m.id, e.target.value)
+                                    }
+                                    rows={2}
+                                  />
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
               </div>
               {filterMonth && (
                 <form
@@ -355,7 +398,6 @@ export default function Milestones() {
               )}
             </div>
           </div>
-
         </div>
       </main>
       <Footer />

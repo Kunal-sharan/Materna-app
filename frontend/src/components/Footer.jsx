@@ -6,7 +6,11 @@ export const Footer = () => {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
         <div>
           <div className="flex items-center gap-2 mb-2 ml-[-12px]">
-            <img src="/Logo.png" alt="Materna logo" className="w-15 h-15 object-contain" />
+            <img
+              src="/Logo.png"
+              alt="Materna logo"
+              className="w-15 h-15 object-contain"
+            />
             <h2 className="text-xl font-semibold">Materna</h2>
           </div>
           <p className="text-sm text-white/80 max-w-xs mb-4">
@@ -32,18 +36,32 @@ export const Footer = () => {
           <div>
             <h3 className="font-semibold mb-2">Site Map</h3>
             <ul className="space-y-1 text-sm text-white/90">
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/journal">Symptom Tracker</Link></li>
-              <li><Link to="/normal">Emergency Symptom Help</Link></li>
-              <li><Link to="/wellness">Wellness Hub</Link></li>
-              <li><Link to="/community">Community Forum</Link></li>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/journal">Symptom Tracker</Link>
+              </li>
+              <li>
+                <Link to="/normal">Emergency Symptom Help</Link>
+              </li>
+              <li>
+                <Link to="/wellness">Wellness Hub</Link>
+              </li>
+              <li>
+                <Link to="/community">Community Forum</Link>
+              </li>
             </ul>
           </div>
           <div>
             <h3 className="font-semibold mb-2">Legal</h3>
             <ul className="space-y-1 text-sm text-white/90">
-              <li><Link to="/privacy-policy">Privacy policy</Link></li>
-              <li><Link to="/termsofservice">Terms of services</Link></li>
+              <li>
+                <Link to="/privacy-policy">Privacy policy</Link>
+              </li>
+              <li>
+                <Link to="/termsofservice">Terms of services</Link>
+              </li>
             </ul>
           </div>
         </div>

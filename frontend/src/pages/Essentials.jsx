@@ -37,12 +37,7 @@ const checklistData = [
   },
   {
     title: "Bathing Basics",
-    items: [
-      "Baby tub",
-      "Gentle baby soap",
-      "Soft washcloths",
-      "Hooded towels",
-    ],
+    items: ["Baby tub", "Gentle baby soap", "Soft washcloths", "Hooded towels"],
   },
   {
     title: "Sleep Essentials",
@@ -156,7 +151,8 @@ const productRecommendations = [
     price: "$69.99",
     why: "Longer sleep with white noise",
     link: "https://a.co/d/dYcPVdT",
-    image: "https://www.hatch.co/_next/image?url=https%3A%2F%2Fwww.datocms-assets.com%2F98401%2F1693243315-carousel-5.jpg&w=3840&q=75",
+    image:
+      "https://www.hatch.co/_next/image?url=https%3A%2F%2Fwww.datocms-assets.com%2F98401%2F1693243315-carousel-5.jpg&w=3840&q=75",
   },
   {
     name: "FridaBaby NoseFrida SnotSucker",
@@ -164,7 +160,8 @@ const productRecommendations = [
     price: "$14.97",
     why: "Clearer breathing = better sleep",
     link: "https://a.co/d/hJhXO4g",
-    image: "https://frida.com/cdn/shop/files/NoseFridaSnotSuckerASIN_B00171WXI__NoseFridaASIN_B00171WXII_Frame3_992x.progressive.jpg?v=1706049614",
+    image:
+      "https://frida.com/cdn/shop/files/NoseFridaSnotSuckerASIN_B00171WXI__NoseFridaASIN_B00171WXII_Frame3_992x.progressive.jpg?v=1706049614",
   },
   {
     name: "Aquaphor Baby Healing Ointment",
@@ -172,7 +169,8 @@ const productRecommendations = [
     price: "$18.37",
     why: "Soothes & protects baby skin",
     link: "https://www.amazon.com/dp/B006IB5T4W",
-    image: "https://threebs.co/cdn/shop/files/aquaphor-baby-healing-ointment-advanced-therapy-396g-IMG1-20250701_8827f650-60f3-4f60-9164-7a7baaae05af.jpg?v=1751343261",
+    image:
+      "https://threebs.co/cdn/shop/files/aquaphor-baby-healing-ointment-advanced-therapy-396g-IMG1-20250701_8827f650-60f3-4f60-9164-7a7baaae05af.jpg?v=1751343261",
   },
   {
     name: "Philips Avent Natural Baby Bottles",
@@ -180,7 +178,8 @@ const productRecommendations = [
     price: "$18.53",
     why: "Reduces gas and fussiness",
     link: "https://a.co/d/3Xnzu2p",
-    image: "https://images.philips.com/is/image/philipsconsumer/d984b3980cb84c04b238ac540186670d?$pnglarge$&wid=1250",
+    image:
+      "https://images.philips.com/is/image/philipsconsumer/d984b3980cb84c04b238ac540186670d?$pnglarge$&wid=1250",
   },
   {
     name: "Owlet Dream Sock Baby Monitor",
@@ -188,7 +187,8 @@ const productRecommendations = [
     price: "$273.89",
     why: "Peace of mind for parents",
     link: "https://a.co/d/e1eNRRR",
-    image: "https://owletcare.com/cdn/shop/files/DreamSock-1.jpg?v=1704675164&width=1400",
+    image:
+      "https://owletcare.com/cdn/shop/files/DreamSock-1.jpg?v=1704675164&width=1400",
   },
   {
     name: "Love to Dream Swaddle UP",
@@ -196,14 +196,19 @@ const productRecommendations = [
     price: "$34.95",
     why: "Arms-up = better sleep",
     link: "https://www.amazon.com/dp/B0081GJ038",
-    image: "https://m.media-amazon.com/images/I/61qNHTMjmvL._UF894,1000_QL80_.jpg",
+    image:
+      "https://m.media-amazon.com/images/I/61qNHTMjmvL._UF894,1000_QL80_.jpg",
   },
 ];
 
 const ProductRecommendations = () => (
   <section className="my-16 fade-in">
-    <h2 className="text-3xl font-semibold text-[#234451] mb-6">Product Recommendations</h2>
-    <p className="text-[#234451] mb-4">The very best, vetted by pediatricians, scientists and real moms.</p>
+    <h2 className="text-3xl font-semibold text-[#234451] mb-6">
+      Product Recommendations
+    </h2>
+    <p className="text-[#234451] mb-4">
+      The very best, vetted by pediatricians, scientists and real moms.
+    </p>
     <div className="grid md:grid-cols-2 gap-6">
       {productRecommendations.map((product) => (
         <a
@@ -222,8 +227,12 @@ const ProductRecommendations = () => (
               style={{ backgroundColor: "#f4f4f4" }}
             />
             <div>
-              <h3 className="text-sm font-semibold text-[#234451]">{product.name}</h3>
-              <p className="text-sm text-[#666] mt-1">{product.rating} · {product.price}</p>
+              <h3 className="text-sm font-semibold text-[#234451]">
+                {product.name}
+              </h3>
+              <p className="text-sm text-[#666] mt-1">
+                {product.rating} · {product.price}
+              </p>
               <p className="text-sm text-[#444] mt-2">{product.why}</p>
             </div>
           </div>
@@ -232,7 +241,6 @@ const ProductRecommendations = () => (
     </div>
   </section>
 );
-
 
 const FAQSection = () => {
   const faqs = [
@@ -246,11 +254,13 @@ const FAQSection = () => {
     },
     {
       question: "Is it normal if ___?",
-      answer: "Usually, yes. But when in doubt, don’t hesitate to call your pediatrician.",
+      answer:
+        "Usually, yes. But when in doubt, don’t hesitate to call your pediatrician.",
     },
     {
       question: "Do I need a bottle sterilizer?",
-      answer: "Not necessarily. Boiling water or dishwasher-safe sterilization usually works just fine.",
+      answer:
+        "Not necessarily. Boiling water or dishwasher-safe sterilization usually works just fine.",
     },
     {
       question: "How often should my newborn eat?",
@@ -258,7 +268,8 @@ const FAQSection = () => {
     },
     {
       question: "When should I schedule my baby’s first doctor visit?",
-      answer: "Usually within 3–5 days after birth, or as directed by your hospital or pediatrician.",
+      answer:
+        "Usually within 3–5 days after birth, or as directed by your hospital or pediatrician.",
     },
   ];
 
@@ -270,7 +281,9 @@ const FAQSection = () => {
 
   return (
     <section className="my-16 fade-in">
-      <h2 className="text-3xl font-semibold text-[#234451] mb-6">Newborn FAQ</h2>
+      <h2 className="text-3xl font-semibold text-[#234451] mb-6">
+        Newborn FAQ
+      </h2>
       <ul className="space-y-4">
         {faqs.map((faq, idx) => (
           <li
@@ -284,7 +297,9 @@ const FAQSection = () => {
               aria-controls={`faq-${idx}`}
             >
               {faq.question}
-              <span className="ml-3 text-2xl">{openIndex === idx ? "−" : "+"}</span>
+              <span className="ml-3 text-2xl">
+                {openIndex === idx ? "−" : "+"}
+              </span>
             </button>
             {openIndex === idx && (
               <p id={`faq-${idx}`} className="text-[#444] mt-2 animate-fadeIn">
@@ -375,20 +390,49 @@ const BudgetPicks = () => {
 
   const picks = {
     Amazon: [
-      { name: "Luvs Diapers x19", price: "$5.57", compareUrl: "https://a.co/d/hxc4CpL" },
-      { name: "Lansinoh Bottles x3", price: "$15.57", compareUrl: "https://a.co/d/5c2EVyo" },
-      { name: "Dr.Brown Bottle Warmer (Optional)", price: "$17.47", compareUrl: "https://a.co/d/duB2sDO" },
+      {
+        name: "Luvs Diapers x19",
+        price: "$5.57",
+        compareUrl: "https://a.co/d/hxc4CpL",
+      },
+      {
+        name: "Lansinoh Bottles x3",
+        price: "$15.57",
+        compareUrl: "https://a.co/d/5c2EVyo",
+      },
+      {
+        name: "Dr.Brown Bottle Warmer (Optional)",
+        price: "$17.47",
+        compareUrl: "https://a.co/d/duB2sDO",
+      },
     ],
     Walmart: [
-      { name: "Luvs Platinum Diapers", price: "$7.47", compareUrl: "https://www.walmart.com/ip/Luvs-Platinum-Protection-Baby-Diapers-Size-6-20-Count-Select-for-More-Options/5431562129?classType=VARIANT&from=%2Fsearch&sid=370f42a1-a388-4e85-a3cb-f572b6ba05b6" },
-      { name: "Parent's Choice Baby Wipes", price: "$0.98", compareUrl: "https://www.walmart.com/ip/Parent-s-Choice-Fragrance-Free-Baby-Wipes-Travel-Pack-50-Count/1190727227?classType=REGULAR&athbdg=L1200&from=%2Fsearch&sid=1150ef0b-ce9c-4346-9b0c-ca4935631021" },
-      { name: "Munchkin Wipe Warmer (Optional)", price: "$15.10", compareUrl: "https://www.walmart.com/ip/Munchkin-Warm-Glow-Baby-and-Infant-Wipe-Warmer-White/8032825?classType=VARIANT&athbdg=L1103&from=%2Fsearch&sid=b22283f5-1aa4-4dd2-bf14-ef99d59a3ac9" },
+      {
+        name: "Luvs Platinum Diapers",
+        price: "$7.47",
+        compareUrl:
+          "https://www.walmart.com/ip/Luvs-Platinum-Protection-Baby-Diapers-Size-6-20-Count-Select-for-More-Options/5431562129?classType=VARIANT&from=%2Fsearch&sid=370f42a1-a388-4e85-a3cb-f572b6ba05b6",
+      },
+      {
+        name: "Parent's Choice Baby Wipes",
+        price: "$0.98",
+        compareUrl:
+          "https://www.walmart.com/ip/Parent-s-Choice-Fragrance-Free-Baby-Wipes-Travel-Pack-50-Count/1190727227?classType=REGULAR&athbdg=L1200&from=%2Fsearch&sid=1150ef0b-ce9c-4346-9b0c-ca4935631021",
+      },
+      {
+        name: "Munchkin Wipe Warmer (Optional)",
+        price: "$15.10",
+        compareUrl:
+          "https://www.walmart.com/ip/Munchkin-Warm-Glow-Baby-and-Infant-Wipe-Warmer-White/8032825?classType=VARIANT&athbdg=L1103&from=%2Fsearch&sid=b22283f5-1aa4-4dd2-bf14-ef99d59a3ac9",
+      },
     ],
   };
 
   return (
     <section className="my-16 fade-in">
-      <h2 className="text-3xl font-semibold text-[#234451] mb-6">Budget-Friendly Picks</h2>
+      <h2 className="text-3xl font-semibold text-[#234451] mb-6">
+        Budget-Friendly Picks
+      </h2>
       <div className="flex space-x-4 mb-4">
         {["Amazon", "Walmart"].map((site) => (
           <button

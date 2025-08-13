@@ -48,7 +48,7 @@ export const Post = ({ post, onPostClick }) => {
       <div className="flex justify-between">
         <div className="flex justify-start">
           <Likes currentLikes={likes} />
-          <CommentIcon comments={comments}/>
+          <CommentIcon comments={comments} />
           <Saves />
           {/* TODO: Make sure to add whether saved is true or false */}
         </div>

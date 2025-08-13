@@ -29,7 +29,6 @@ export const Home = () => {
       {/* Navbar */}
       <Navbar />
 
-
       {/* Background Effects + Main Content */}
       <div className="relative z-0">
         <StarStill />

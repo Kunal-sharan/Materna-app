@@ -8,11 +8,13 @@ export const ProjectsSection = () => {
     <section id="waitlist" className="py-24 px-4 relative">
       <div className="container mx-auto max-w-5xl">
         <h2 className="text-3xl md:text-4xl font-bold mb-2 text-center text-[hsl(var(--foreground))]">
-          Be Part of Materna's First Circle<span className="text-primary"></span>
+          Be Part of Materna's First Circle
+          <span className="text-primary"></span>
         </h2>
 
         <p className="text-center text-[hsl(var(--foreground))] mb-10 max-w-xl mx-auto">
-          We're building a space just for you. Sign up to get early access, sneak peeks, and a warm welcome when we launch.
+          We're building a space just for you. Sign up to get early access,
+          sneak peeks, and a warm welcome when we launch.
         </p>
 
         <div className="card-glass p-8 max-w-lg mx-auto">
@@ -28,13 +30,16 @@ export const ProjectsSection = () => {
                 formData.append("name", name);
                 formData.append("email", email);
 
-                await fetch("https://script.google.com/macros/s/AKfycbw-Fc8e_qjZGyCyYQCLwx50MXsLnk8TGJ2sPx2YsRiRg9KIfcjbpLPLHutwQwJhDHUJ/exec", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
+                await fetch(
+                  "https://script.google.com/macros/s/AKfycbw-Fc8e_qjZGyCyYQCLwx50MXsLnk8TGJ2sPx2YsRiRg9KIfcjbpLPLHutwQwJhDHUJ/exec",
+                  {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: formData.toString(),
                   },
-                  body: formData.toString(),
-                });
+                );
 
                 setIsSubmitted(true);
                 alert("Thanks for joining the waitlist!");

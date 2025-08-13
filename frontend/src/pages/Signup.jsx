@@ -43,9 +43,9 @@ export default function Signup() {
     <div
       style={{
         backgroundImage: `url(${signupBg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
       }}
       className="flex items-center justify-center min-h-screen"
     >
@@ -64,7 +64,9 @@ export default function Signup() {
           />
         </div>
 
-        <h2 className="text-3xl font-bold text-[#234451] mb-2 text-center">Join Materna</h2>
+        <h2 className="text-3xl font-bold text-[#234451] mb-2 text-center">
+          Join Materna
+        </h2>
         <p className="text-center text-[#234451]/80 mb-8 text-sm">
           Never face pregnancy alone.
         </p>
@@ -96,7 +98,10 @@ export default function Signup() {
 
         <p className="text-sm text-center text-[#234451] mb-6">
           Already have an account?{" "}
-          <Link to="/login" className="text-[#bcb2da] font-semibold hover:text-[#a48bc3]">
+          <Link
+            to="/login"
+            className="text-[#bcb2da] font-semibold hover:text-[#a48bc3]"
+          >
             Log in
           </Link>
         </p>
@@ -118,12 +123,16 @@ export default function Signup() {
               alt="Google"
               className="w-5 h-5 mr-2"
             />
-            <span className="text-sm text-gray-700 font-medium">Sign up with Google</span>
+            <span className="text-sm text-gray-700 font-medium">
+              Sign up with Google
+            </span>
           </button>
         </div>
 
         {errorMessage && (
-          <p className="text-sm text-red-500 text-center mt-4">{errorMessage}</p>
+          <p className="text-sm text-red-500 text-center mt-4">
+            {errorMessage}
+          </p>
         )}
       </div>
     </div>

@@ -53,8 +53,6 @@ function addDays(date, days) {
   return d;
 }
 
-
-
 function VaccineCard({
   vaccine,
   dueDate,
@@ -69,9 +67,7 @@ function VaccineCard({
     <div
       className={`${pastelCard} rounded-2xl shadow-md p-4 mb-4 transition-all`}
       style={{
-        borderLeft: completed
-          ? "6px solid #bcb2da"
-          : "6px solid #a48bc3",
+        borderLeft: completed ? "6px solid #bcb2da" : "6px solid #a48bc3",
         background: completed ? "#fef6f5" : "rgba(255,255,255,0.9)",
       }}
     >
@@ -111,7 +107,7 @@ function VaccineCard({
               type="date"
               value={completedDate ? formatDate(new Date(completedDate)) : ""}
               disabled={!completed}
-              onChange={e => onDateChange(e.target.value)}
+              onChange={(e) => onDateChange(e.target.value)}
               className="rounded-lg px-2 py-1 bg-gray-50 border border-gray-200"
               style={{ minWidth: 120 }}
             />
@@ -134,7 +130,7 @@ function UpcomingReminders({ schedule, completed, birthdate }) {
         completed: completed[idx]?.completed,
       };
     })
-    .filter(v => !v.completed && v.dueDate >= today)
+    .filter((v) => !v.completed && v.dueDate >= today)
     .sort((a, b) => a.dueDate - b.dueDate)
     .slice(0, 2);
   if (!upcoming.length) return null;
@@ -211,7 +207,7 @@ export default function Vaccines() {
       SCHEDULES[country].map(() => ({
         completed: false,
         completedDate: "",
-      }))
+      })),
     );
     setExpanded({});
   }, [country]);
@@ -233,28 +229,26 @@ export default function Vaccines() {
     };
   }, []);
 
-  const handleComplete = idx => {
-    setCompleted(prev =>
+  const handleComplete = (idx) => {
+    setCompleted((prev) =>
       prev.map((v, i) =>
         i === idx
           ? {
               ...v,
               completed: !v.completed,
-              completedDate: !v.completed
-                ? formatDate(new Date())
-                : "",
+              completedDate: !v.completed ? formatDate(new Date()) : "",
             }
-          : v
-      )
+          : v,
+      ),
     );
   };
   const handleDateChange = (idx, date) => {
-    setCompleted(prev =>
-      prev.map((v, i) => (i === idx ? { ...v, completedDate: date } : v))
+    setCompleted((prev) =>
+      prev.map((v, i) => (i === idx ? { ...v, completedDate: date } : v)),
     );
   };
-  const handleExpand = idx => {
-    setExpanded(prev => ({
+  const handleExpand = (idx) => {
+    setExpanded((prev) => ({
       ...prev,
       [idx]: !prev[idx],
     }));
@@ -293,7 +287,7 @@ export default function Vaccines() {
             </div>
             <select
               value={country}
-              onChange={e => setCountry(e.target.value)}
+              onChange={(e) => setCountry(e.target.value)}
               className="bg-white border border-gray-300 text-[#234451] font-medium px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#a48bc3]"
             >
               <option value="USA">🇺🇸 USA</option>
@@ -310,7 +304,7 @@ export default function Vaccines() {
             <input
               type="date"
               value={birthdate}
-              onChange={e => setBirthdate(e.target.value)}
+              onChange={(e) => setBirthdate(e.target.value)}
               className="rounded-xl px-3 py-2 bg-gray-50 border border-gray-200 text-[#234451] font-semibold"
               style={{ minWidth: 160 }}
             />
@@ -331,7 +325,7 @@ export default function Vaccines() {
                 completed={completed[idx]?.completed}
                 completedDate={completed[idx]?.completedDate}
                 onToggle={() => handleComplete(idx)}
-                onDateChange={date => handleDateChange(idx, date)}
+                onDateChange={(date) => handleDateChange(idx, date)}
                 expanded={!!expanded[idx]}
                 onExpand={() => handleExpand(idx)}
               />

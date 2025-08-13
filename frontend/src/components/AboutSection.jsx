@@ -19,11 +19,16 @@ export const AboutSection = () => {
             </h3>
 
             <p className="text-muted-foreground">
-              Materna is a platform dedicated to supporting health of mothers during and after pregnancy, by providing accessible, empathetic, and expert-backed resources and tools.
+              Materna is a platform dedicated to supporting health of mothers
+              during and after pregnancy, by providing accessible, empathetic,
+              and expert-backed resources and tools.
             </p>
 
             <p className="text-muted-foreground">
-              We believe that every mother deserves personalized, stigma-free care, no matter where she lives or what stage of motherhood she’s in. Our mission is to bridge the gap in maternal healthcare with technology and compassion.
+              We believe that every mother deserves personalized, stigma-free
+              care, no matter where she lives or what stage of motherhood she’s
+              in. Our mission is to bridge the gap in maternal healthcare with
+              technology and compassion.
             </p>
           </div>
 
@@ -34,9 +39,12 @@ export const AboutSection = () => {
                   <Apple className="h-6 w-6 text-[#DFA69F]" />
                 </div>
                 <div className="text-left">
-                  <h4 className="font-semibold text-lg text-[#234451]">Symptom & Wellness Tracking</h4>
+                  <h4 className="font-semibold text-lg text-[#234451]">
+                    Symptom & Wellness Tracking
+                  </h4>
                   <p className="text-[#234451]">
-                    Track symptoms, moods, and get personalized wellness tips to support every stage of your journey.
+                    Track symptoms, moods, and get personalized wellness tips to
+                    support every stage of your journey.
                   </p>
                 </div>
               </div>
@@ -47,9 +55,12 @@ export const AboutSection = () => {
                   <CalendarCheck className="h-6 w-6 text-[#DFA69F]" />
                 </div>
                 <div className="text-left">
-                  <h4 className="font-semibold text-lg text-[#234451]">Doctor Appointments & Partner Access</h4>
+                  <h4 className="font-semibold text-lg text-[#234451]">
+                    Doctor Appointments & Partner Access
+                  </h4>
                   <p className="text-[#234451]">
-                    Stay organized with appointment reminders and let your partner stay in the loop with shared access.
+                    Stay organized with appointment reminders and let your
+                    partner stay in the loop with shared access.
                   </p>
                 </div>
               </div>
@@ -61,9 +72,12 @@ export const AboutSection = () => {
                 </div>
 
                 <div className="text-left">
-                  <h4 className="font-semibold text-lg text-[#234451]">Community & Postpartum Support</h4>
+                  <h4 className="font-semibold text-lg text-[#234451]">
+                    Community & Postpartum Support
+                  </h4>
                   <p className="text-[#234451]">
-                    Connect with other moms, share your experience, and access vital postpartum resources.
+                    Connect with other moms, share your experience, and access
+                    vital postpartum resources.
                   </p>
                 </div>
               </div>

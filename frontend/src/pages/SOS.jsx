@@ -1,20 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import bgVideo from "@/assets/sky1.mp4";
-import { StarStill } from "@/components/StarStill.jsx"
+import { StarStill } from "@/components/StarStill.jsx";
 
 const suggestedComplications = [
   "Preeclampsia",
   "Gestational diabetes",
   "Preterm labor",
   "Stillbirth",
-  "Placenta previa"
+  "Placenta previa",
 ];
 const Normal = () => {
   // Helper to get the local emergency number and country name using IP-based location
   const getEmergencyNumber = () => {
-    const [emergencyInfo, setEmergencyInfo] = useState({ number: "112", country: "Unknown" });
+    const [emergencyInfo, setEmergencyInfo] = useState({
+      number: "112",
+      country: "Unknown",
+    });
 
     useEffect(() => {
       const fetchLocation = async () => {
@@ -85,13 +88,19 @@ const Normal = () => {
               setEmergencyInfo({ number: "999", country: "Kenya" });
               break;
             case "AE":
-              setEmergencyInfo({ number: "999", country: "United Arab Emirates" });
+              setEmergencyInfo({
+                number: "999",
+                country: "United Arab Emirates",
+              });
               break;
             case "SA":
               setEmergencyInfo({ number: "997", country: "Saudi Arabia" });
               break;
             default:
-              setEmergencyInfo({ number: "112", country: data.country_name || "Unknown" });
+              setEmergencyInfo({
+                number: "112",
+                country: data.country_name || "Unknown",
+              });
           }
         } catch (error) {
           console.error("Failed to fetch location:", error);
@@ -107,29 +116,31 @@ const Normal = () => {
   // Initialize and retrieve the emergency info (number and country)
   const [emergencyInfo, setEmergencyInfo] = getEmergencyNumber();
   const [currentStep, setCurrentStep] = useState(0);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [showSeverityDropdown, setShowSeverityDropdown] = useState(false);
   const [showFrequencyDropdown, setShowFrequencyDropdown] = useState(false);
   const [confirmCall911, setConfirmCall911] = useState(false);
   const [formData, setFormData] = useState({
     parity: 0,
-    substanceUse: '',
-    pregnancyType: '',
+    substanceUse: "",
+    pregnancyType: "",
     prevComplications: [],
     symptomType: [],
-    severity: '',
-    duration: '',
-    durationAmount: '',
-    durationUnit: '',
-    frequency: '',
-    associatedFactors: '',
-    fetalMovement: '',
-    mentalHealth: ''
+    severity: "",
+    duration: "",
+    durationAmount: "",
+    durationUnit: "",
+    frequency: "",
+    associatedFactors: "",
+    fetalMovement: "",
+    mentalHealth: "",
   });
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
-  const [newComplication, setNewComplication] = useState('');
-  const [newSymptom, setNewSymptom] = useState('');
-  const [filteredSymptomSuggestions, setFilteredSymptomSuggestions] = useState([]);
+  const [newComplication, setNewComplication] = useState("");
+  const [newSymptom, setNewSymptom] = useState("");
+  const [filteredSymptomSuggestions, setFilteredSymptomSuggestions] = useState(
+    [],
+  );
   const suggestedSymptoms = [
     "Headache",
     "Swelling",
@@ -139,7 +150,7 @@ const Normal = () => {
     "Bleeding",
     "Fatigue",
     "Pain",
-    "Shortness of breath"
+    "Shortness of breath",
   ];
 
   useEffect(() => {
@@ -150,28 +161,39 @@ const Normal = () => {
 
   const nextStep = () => {
     const fields = [
-      'parity', 'substanceUse', 'pregnancyType', 'prevComplications',
-      'symptomType', 'severity', 'duration', 'frequency',
-      'associatedFactors', 'fetalMovement', 'mentalHealth'
+      "parity",
+      "substanceUse",
+      "pregnancyType",
+      "prevComplications",
+      "symptomType",
+      "severity",
+      "duration",
+      "frequency",
+      "associatedFactors",
+      "fetalMovement",
+      "mentalHealth",
     ];
     const currentField = fields[currentStep];
     if (
-      currentField === 'duration' &&
+      currentField === "duration" &&
       (!formData.durationAmount || !formData.durationUnit)
     ) {
-      setError('Please enter both duration amount and unit.');
+      setError("Please enter both duration amount and unit.");
       return;
     }
 
     if (
-      !['associatedFactors', 'prevComplications', 'duration'].includes(currentField) &&
-      (formData[currentField] === '' ||
-       (Array.isArray(formData[currentField]) && formData[currentField].length === 0))
+      !["associatedFactors", "prevComplications", "duration"].includes(
+        currentField,
+      ) &&
+      (formData[currentField] === "" ||
+        (Array.isArray(formData[currentField]) &&
+          formData[currentField].length === 0))
     ) {
-      setError('Please complete this step before continuing.');
+      setError("Please complete this step before continuing.");
       return;
     }
-    setError('');
+    setError("");
     setCurrentStep((prev) => prev + 1);
   };
   const prevStep = () => {
@@ -185,41 +207,53 @@ const Normal = () => {
   const updateField = (field, value) => {
     setFormData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
   return (
     <>
       <Navbar />
-      <video autoPlay muted loop playsInline className="fixed top-0 left-0 w-full h-screen object-cover -z-20">
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="fixed top-0 left-0 w-full h-screen object-cover -z-20"
+      >
         <source src={bgVideo} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <StarStill />
       <div className="fixed top-0 left-0 w-full h-screen bg-white/40 backdrop-blur-md -z-10"></div>
-      
-      <main className="min-h-screen p-6 pt-32 max-w-7xl mx-auto">
-        
 
+      <main className="min-h-screen p-6 pt-32 max-w-7xl mx-auto">
         {/* Middle Section - Symptom Checker and AI Results */}
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-10">
           {/* Check Your Symptoms Card */}
           <div className="bg-white/40 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-8 shadow-xl font-inter">
-            <h2 className="text-[#234451] text-3xl font-bold mb-4 text-center drop-shadow-sm">Check Your Symptoms</h2>
+            <h2 className="text-[#234451] text-3xl font-bold mb-4 text-center drop-shadow-sm">
+              Check Your Symptoms
+            </h2>
 
             {currentStep === 0 && (
               <>
-                <h3 className="text-[#234451] font-semibold text-lg mb-2">Number of Previous Pregnancies</h3>
+                <h3 className="text-[#234451] font-semibold text-lg mb-2">
+                  Number of Previous Pregnancies
+                </h3>
                 <div className="mb-4">
-                  <p className="text-[#234451] text-sm mb-4">Selected: {formData.parity}</p>
+                  <p className="text-[#234451] text-sm mb-4">
+                    Selected: {formData.parity}
+                  </p>
                   <input
                     type="range"
                     min={0}
                     max={10}
                     step={1}
                     value={formData.parity}
-                    onChange={(e) => updateField('parity', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateField("parity", Number(e.target.value))
+                    }
                     className="w-full accent-[#DFA69F] bg-transparent"
                   />
                 </div>
@@ -229,21 +263,27 @@ const Normal = () => {
 
             {currentStep === 1 && (
               <>
-                <h3 className="text-[#234451] font-semibold text-lg mb-2">Substance Use</h3>
+                <h3 className="text-[#234451] font-semibold text-lg mb-2">
+                  Substance Use
+                </h3>
                 <div className="flex flex-wrap justify-center gap-3">
-                  {['None', 'Smoking', 'Alcohol', 'Recreational drugs'].map((option) => (
-                    <button
-                      key={option}
-                      onClick={() => updateField('substanceUse', option.toLowerCase())}
-                      className={`px-4 py-2 rounded-lg font-medium text-sm border ${
-                        formData.substanceUse === option.toLowerCase()
-                          ? 'bg-[#DFA69F] text-[#234451]'
-                          : 'bg-white/30 text-[#234451] hover:bg-[#DFA69F]/20'
-                      } border-[#bcb2da]/50 transition-all`}
-                    >
-                      {option}
-                    </button>
-                  ))}
+                  {["None", "Smoking", "Alcohol", "Recreational drugs"].map(
+                    (option) => (
+                      <button
+                        key={option}
+                        onClick={() =>
+                          updateField("substanceUse", option.toLowerCase())
+                        }
+                        className={`px-4 py-2 rounded-lg font-medium text-sm border ${
+                          formData.substanceUse === option.toLowerCase()
+                            ? "bg-[#DFA69F] text-[#234451]"
+                            : "bg-white/30 text-[#234451] hover:bg-[#DFA69F]/20"
+                        } border-[#bcb2da]/50 transition-all`}
+                      >
+                        {option}
+                      </button>
+                    ),
+                  )}
                 </div>
                 {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
               </>
@@ -251,16 +291,20 @@ const Normal = () => {
 
             {currentStep === 2 && (
               <>
-                <h3 className="text-[#234451] font-semibold text-lg mb-2">Type of Pregnancy</h3>
+                <h3 className="text-[#234451] font-semibold text-lg mb-2">
+                  Type of Pregnancy
+                </h3>
                 <div className="flex flex-wrap justify-center gap-3">
-                  {['Single', 'Twins', 'Triplets or more'].map((option) => (
+                  {["Single", "Twins", "Triplets or more"].map((option) => (
                     <button
                       key={option}
-                      onClick={() => updateField('pregnancyType', option.toLowerCase())}
+                      onClick={() =>
+                        updateField("pregnancyType", option.toLowerCase())
+                      }
                       className={`px-4 py-2 rounded-lg font-medium text-sm border ${
                         formData.pregnancyType === option.toLowerCase()
-                          ? 'bg-[#DFA69F] text-[#234451]'
-                          : 'bg-white/30 text-[#234451] hover:bg-[#DFA69F]/20'
+                          ? "bg-[#DFA69F] text-[#234451]"
+                          : "bg-white/30 text-[#234451] hover:bg-[#DFA69F]/20"
                       } border-[#bcb2da]/50 transition-all`}
                     >
                       {option}
@@ -273,7 +317,9 @@ const Normal = () => {
 
             {currentStep === 3 && (
               <>
-                <h3 className="text-[#234451] font-semibold text-lg mb-2">Previous Pregnancy Complications</h3>
+                <h3 className="text-[#234451] font-semibold text-lg mb-2">
+                  Previous Pregnancy Complications
+                </h3>
                 <div className="mb-3 flex flex-wrap gap-2">
                   {formData.prevComplications.map((item, idx) => (
                     <span
@@ -286,7 +332,7 @@ const Normal = () => {
                         onClick={() => {
                           const updated = [...formData.prevComplications];
                           updated.splice(idx, 1);
-                          updateField('prevComplications', updated);
+                          updateField("prevComplications", updated);
                         }}
                         className="text-[#234451] hover:text-red-600 font-bold text-sm"
                       >
@@ -306,17 +352,26 @@ const Normal = () => {
                         value
                           ? suggestedComplications.filter(
                               (option) =>
-                                option.toLowerCase().includes(value.toLowerCase()) &&
-                                !formData.prevComplications.includes(option)
+                                option
+                                  .toLowerCase()
+                                  .includes(value.toLowerCase()) &&
+                                !formData.prevComplications.includes(option),
                             )
-                          : []
+                          : [],
                       );
                     }}
                     onKeyDown={(e) => {
-                      if (e.key === 'Enter' && newComplication.trim()) {
-                        if (!formData.prevComplications.includes(newComplication.trim())) {
-                          updateField('prevComplications', [...formData.prevComplications, newComplication.trim()]);
-                          setNewComplication('');
+                      if (e.key === "Enter" && newComplication.trim()) {
+                        if (
+                          !formData.prevComplications.includes(
+                            newComplication.trim(),
+                          )
+                        ) {
+                          updateField("prevComplications", [
+                            ...formData.prevComplications,
+                            newComplication.trim(),
+                          ]);
+                          setNewComplication("");
                           setFilteredSuggestions([]);
                         }
                         e.preventDefault();
@@ -331,8 +386,11 @@ const Normal = () => {
                         <li
                           key={index}
                           onClick={() => {
-                            updateField('prevComplications', [...formData.prevComplications, option]);
-                            setNewComplication('');
+                            updateField("prevComplications", [
+                              ...formData.prevComplications,
+                              option,
+                            ]);
+                            setNewComplication("");
                             setFilteredSuggestions([]);
                           }}
                           className="px-4 py-2 cursor-pointer hover:bg-[#DFA69F]/30 text-[#234451] text-sm"
@@ -349,7 +407,9 @@ const Normal = () => {
 
             {currentStep === 4 && (
               <>
-                <h3 className="text-[#234451] font-semibold text-lg mb-2">Symptom Type</h3>
+                <h3 className="text-[#234451] font-semibold text-lg mb-2">
+                  Symptom Type
+                </h3>
                 <div className="mb-3 flex flex-wrap gap-2">
                   {formData.symptomType.map((item, idx) => (
                     <span
@@ -362,7 +422,7 @@ const Normal = () => {
                         onClick={() => {
                           const updated = [...formData.symptomType];
                           updated.splice(idx, 1);
-                          updateField('symptomType', updated);
+                          updateField("symptomType", updated);
                         }}
                         className="text-[#234451] hover:text-red-600 font-bold text-sm"
                       >
@@ -382,17 +442,22 @@ const Normal = () => {
                         value
                           ? suggestedSymptoms.filter(
                               (option) =>
-                                option.toLowerCase().includes(value.toLowerCase()) &&
-                                !formData.symptomType.includes(option)
+                                option
+                                  .toLowerCase()
+                                  .includes(value.toLowerCase()) &&
+                                !formData.symptomType.includes(option),
                             )
-                          : []
+                          : [],
                       );
                     }}
                     onKeyDown={(e) => {
-                      if (e.key === 'Enter' && newSymptom.trim()) {
+                      if (e.key === "Enter" && newSymptom.trim()) {
                         if (!formData.symptomType.includes(newSymptom.trim())) {
-                          updateField('symptomType', [...formData.symptomType, newSymptom.trim()]);
-                          setNewSymptom('');
+                          updateField("symptomType", [
+                            ...formData.symptomType,
+                            newSymptom.trim(),
+                          ]);
+                          setNewSymptom("");
                           setFilteredSymptomSuggestions([]);
                         }
                         e.preventDefault();
@@ -407,8 +472,11 @@ const Normal = () => {
                         <li
                           key={index}
                           onClick={() => {
-                            updateField('symptomType', [...formData.symptomType, option]);
-                            setNewSymptom('');
+                            updateField("symptomType", [
+                              ...formData.symptomType,
+                              option,
+                            ]);
+                            setNewSymptom("");
                             setFilteredSymptomSuggestions([]);
                           }}
                           className="px-4 py-2 cursor-pointer hover:bg-[#DFA69F]/30 text-[#234451] text-sm"
@@ -425,14 +493,21 @@ const Normal = () => {
 
             {currentStep === 5 && (
               <>
-                <h3 className="text-[#234451] font-semibold text-lg mb-2">Severity</h3>
+                <h3 className="text-[#234451] font-semibold text-lg mb-2">
+                  Severity
+                </h3>
                 <div className="relative">
                   <button
                     type="button"
-                    onClick={() => setShowSeverityDropdown(!showSeverityDropdown)}
+                    onClick={() =>
+                      setShowSeverityDropdown(!showSeverityDropdown)
+                    }
                     className="w-full text-left px-4 py-3 border border-[#bcb2da]/50 rounded-lg text-sm bg-white/30 text-[#234451] focus:ring-2 focus:ring-[#DFA69F]/50 transition-all"
                   >
-                    {formData.severity ? formData.severity.charAt(0).toUpperCase() + formData.severity.slice(1) : "Select severity"}
+                    {formData.severity
+                      ? formData.severity.charAt(0).toUpperCase() +
+                        formData.severity.slice(1)
+                      : "Select severity"}
                   </button>
                   {showSeverityDropdown && (
                     <ul className="absolute z-10 w-full mt-2 bg-white/90 border border-[#bcb2da]/50 rounded-lg shadow-md text-[#234451] text-sm backdrop-blur-md">
@@ -457,19 +532,25 @@ const Normal = () => {
 
             {currentStep === 6 && (
               <>
-                <h3 className="text-[#234451] font-semibold text-lg mb-2">Duration</h3>
+                <h3 className="text-[#234451] font-semibold text-lg mb-2">
+                  Duration
+                </h3>
                 <div className="flex gap-3">
                   <input
                     type="number"
                     min={0}
                     placeholder="Amount"
-                    value={formData.durationAmount || ''}
-                    onChange={(e) => updateField('durationAmount', e.target.value)}
+                    value={formData.durationAmount || ""}
+                    onChange={(e) =>
+                      updateField("durationAmount", e.target.value)
+                    }
                     className="w-1/2 px-4 py-3 border border-[#bcb2da]/50 rounded-lg text-sm bg-white/30 placeholder-[#a48bc3] text-[#234451] focus:ring-2 focus:ring-[#DFA69F]/50 transition-all"
                   />
                   <select
-                    value={formData.durationUnit || ''}
-                    onChange={(e) => updateField('durationUnit', e.target.value)}
+                    value={formData.durationUnit || ""}
+                    onChange={(e) =>
+                      updateField("durationUnit", e.target.value)
+                    }
                     className="w-1/2 px-4 py-3 border border-[#bcb2da]/50 rounded-lg text-sm bg-white/30 text-[#234451] focus:ring-2 focus:ring-[#DFA69F]/50 transition-all"
                   >
                     <option value="">Unit</option>
@@ -484,24 +565,29 @@ const Normal = () => {
 
             {currentStep === 7 && (
               <>
-                <h3 className="text-[#234451] font-semibold text-lg mb-2">Frequency</h3>
+                <h3 className="text-[#234451] font-semibold text-lg mb-2">
+                  Frequency
+                </h3>
                 <div className="relative">
                   <button
                     type="button"
-                    onClick={() => setShowFrequencyDropdown(!showFrequencyDropdown)}
+                    onClick={() =>
+                      setShowFrequencyDropdown(!showFrequencyDropdown)
+                    }
                     className="w-full text-left px-4 py-3 border border-[#bcb2da]/50 rounded-lg text-sm bg-white/30 text-[#234451] focus:ring-2 focus:ring-[#DFA69F]/50 transition-all"
                   >
                     {formData.frequency
-                      ? formData.frequency.charAt(0).toUpperCase() + formData.frequency.slice(1)
-                      : 'Select frequency'}
+                      ? formData.frequency.charAt(0).toUpperCase() +
+                        formData.frequency.slice(1)
+                      : "Select frequency"}
                   </button>
                   {showFrequencyDropdown && (
                     <ul className="absolute z-10 w-full mt-2 bg-white/90 border border-[#bcb2da]/50 rounded-lg shadow-md text-[#234451] text-sm backdrop-blur-md">
-                      {['single', 'recurring', 'continuous'].map((option) => (
+                      {["single", "recurring", "continuous"].map((option) => (
                         <li
                           key={option}
                           onClick={() => {
-                            updateField('frequency', option);
+                            updateField("frequency", option);
                             setShowFrequencyDropdown(false);
                           }}
                           className="px-4 py-2 hover:bg-[#DFA69F]/30 cursor-pointer rounded-md"
@@ -518,11 +604,15 @@ const Normal = () => {
 
             {currentStep === 8 && (
               <>
-                <h3 className="text-[#234451] font-semibold text-lg mb-2">Associated Symptoms</h3>
+                <h3 className="text-[#234451] font-semibold text-lg mb-2">
+                  Associated Symptoms
+                </h3>
                 <input
                   type="text"
                   value={formData.associatedFactors}
-                  onChange={(e) => updateField('associatedFactors', e.target.value)}
+                  onChange={(e) =>
+                    updateField("associatedFactors", e.target.value)
+                  }
                   className="w-full px-4 py-3 border border-[#bcb2da]/50 rounded-lg text-sm bg-white/30 placeholder-[#a48bc3] text-[#234451] focus:ring-2 focus:ring-[#DFA69F]/50 transition-all"
                   placeholder="e.g. fever, urination, trauma"
                 />
@@ -532,16 +622,20 @@ const Normal = () => {
 
             {currentStep === 9 && (
               <>
-                <h3 className="text-[#234451] font-semibold text-lg mb-2">Fetal Movement</h3>
+                <h3 className="text-[#234451] font-semibold text-lg mb-2">
+                  Fetal Movement
+                </h3>
                 <div className="flex flex-wrap gap-3 justify-center">
-                  {['Normal', 'Reduced', 'No movement'].map((option) => (
+                  {["Normal", "Reduced", "No movement"].map((option) => (
                     <button
                       key={option}
-                      onClick={() => updateField('fetalMovement', option.toLowerCase())}
+                      onClick={() =>
+                        updateField("fetalMovement", option.toLowerCase())
+                      }
                       className={`px-4 py-2 rounded-lg font-medium text-sm border ${
                         formData.fetalMovement === option.toLowerCase()
-                          ? 'bg-[#DFA69F] text-[#234451]'
-                          : 'bg-white/30 text-[#234451] hover:bg-[#DFA69F]/20'
+                          ? "bg-[#DFA69F] text-[#234451]"
+                          : "bg-white/30 text-[#234451] hover:bg-[#DFA69F]/20"
                       } border-[#bcb2da]/50 transition-all`}
                     >
                       {option}
@@ -554,21 +648,27 @@ const Normal = () => {
 
             {currentStep === 10 && (
               <>
-                <h3 className="text-[#234451] font-semibold text-lg mb-2">How do you feel?</h3>
+                <h3 className="text-[#234451] font-semibold text-lg mb-2">
+                  How do you feel?
+                </h3>
                 <div className="flex flex-wrap gap-3 justify-center">
-                  {['Stable', 'Anxious', 'Sad', 'Overwhelmed', 'Depressed'].map((option) => (
-                    <button
-                      key={option}
-                      onClick={() => updateField('mentalHealth', option.toLowerCase())}
-                      className={`px-4 py-2 rounded-lg font-medium text-sm border ${
-                        formData.mentalHealth === option.toLowerCase()
-                          ? 'bg-[#DFA69F] text-[#234451]'
-                          : 'bg-white/30 text-[#234451] hover:bg-[#DFA69F]/20'
-                      } border-[#bcb2da]/50 transition-all`}
-                    >
-                      {option}
-                    </button>
-                  ))}
+                  {["Stable", "Anxious", "Sad", "Overwhelmed", "Depressed"].map(
+                    (option) => (
+                      <button
+                        key={option}
+                        onClick={() =>
+                          updateField("mentalHealth", option.toLowerCase())
+                        }
+                        className={`px-4 py-2 rounded-lg font-medium text-sm border ${
+                          formData.mentalHealth === option.toLowerCase()
+                            ? "bg-[#DFA69F] text-[#234451]"
+                            : "bg-white/30 text-[#234451] hover:bg-[#DFA69F]/20"
+                        } border-[#bcb2da]/50 transition-all`}
+                      >
+                        {option}
+                      </button>
+                    ),
+                  )}
                 </div>
                 {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
               </>
@@ -607,15 +707,23 @@ const Normal = () => {
 
           {/* AI Assessment Results Card*/}
           <div className="bg-white/40 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-8 shadow-xl">
-            <h2 className="text-[#234451] text-3xl font-bold mb-4 text-center drop-shadow-sm">Assessment Results</h2>
-            <p className="text-[#234451] text-md mb-8 text-center max-w-md mx-auto">Based on your answers, Materna's AI suggests:</p>
+            <h2 className="text-[#234451] text-3xl font-bold mb-4 text-center drop-shadow-sm">
+              Assessment Results
+            </h2>
+            <p className="text-[#234451] text-md mb-8 text-center max-w-md mx-auto">
+              Based on your answers, Materna's AI suggests:
+            </p>
             <div className="space-y-6">
               <div className="bg-white/40 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-6 shadow-md transition-transform hover:scale-[1.01] duration-200">
                 <div className="flex gap-4 items-start">
                   <div className="w-6 h-6 bg-[#fabdb5]/80 rounded-full shadow-lg border border-white"></div>
                   <div>
-                    <h3 className="font-semibold text-[#234451] mb-1 text-lg">Recommendation</h3>
-                    <p className="text-[#234451] text-sm leading-relaxed">Seek immediate care for severe symptoms.</p>
+                    <h3 className="font-semibold text-[#234451] mb-1 text-lg">
+                      Recommendation
+                    </h3>
+                    <p className="text-[#234451] text-sm leading-relaxed">
+                      Seek immediate care for severe symptoms.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -623,8 +731,12 @@ const Normal = () => {
                 <div className="flex gap-4 items-start">
                   <div className="w-6 h-6 bg-[#fabdb5]/80 rounded-full shadow-lg border border-white"></div>
                   <div>
-                    <h3 className="font-semibold text-[#234451] mb-1 text-lg">Recommendation</h3>
-                    <p className="text-[#234451] text-sm leading-relaxed">Monitor symptoms and contact your healthcare provider.</p>
+                    <h3 className="font-semibold text-[#234451] mb-1 text-lg">
+                      Recommendation
+                    </h3>
+                    <p className="text-[#234451] text-sm leading-relaxed">
+                      Monitor symptoms and contact your healthcare provider.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -640,8 +752,12 @@ const Normal = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto items-stretch">
             {/* Emergency Services */}
             <div className="bg-white/40 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-6 shadow-xl h-full flex flex-col justify-between">
-              <h2 className="text-[#234451] text-xl font-semibold mb-4">Emergency</h2>
-              <p className="text-[#234451] text-sm mb-4">Emergency Number for {emergencyInfo.country}</p>
+              <h2 className="text-[#234451] text-xl font-semibold mb-4">
+                Emergency
+              </h2>
+              <p className="text-[#234451] text-sm mb-4">
+                Emergency Number for {emergencyInfo.country}
+              </p>
               {!confirmCall911 ? (
                 <button
                   onClick={() => setConfirmCall911(true)}
@@ -651,7 +767,9 @@ const Normal = () => {
                 </button>
               ) : (
                 <button
-                  onClick={() => window.location.href = `tel:${emergencyInfo.number}`}
+                  onClick={() =>
+                    (window.location.href = `tel:${emergencyInfo.number}`)
+                  }
                   className="font-medium text-sm bg-red-700 text-white px-6 py-4 rounded-lg hover:bg-red-800 transition-all w-full border border-[#a48bc3]/50 flex items-center justify-center gap-2"
                 >
                   Confirm Call to {emergencyInfo.number}
@@ -661,7 +779,9 @@ const Normal = () => {
 
             {/* OB/GYN Contact */}
             <div className="bg-white/40 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-6 shadow-xl h-full flex flex-col justify-between">
-              <h2 className="text-[#234451] text-xl font-semibold mb-4">Your OB/GYN</h2>
+              <h2 className="text-[#234451] text-xl font-semibold mb-4">
+                Your OB/GYN
+              </h2>
               <p className="text-[#234451] text-sm mb-4">Contact your doctor</p>
               <button className="font-medium text-sm bg-[#234451] text-white px-6 py-4 rounded-lg hover:bg-[#1b343f] transition-all w-full border border-[#a48bc3]/50 flex items-center justify-center gap-2">
                 Call Doctor
@@ -671,16 +791,18 @@ const Normal = () => {
           <div className="mt-16 text-center text-xs text-[hsl(var(--foreground))] px-4 max-w-2xl mx-auto">
             <p className="italic leading-relaxed">
               <strong className="block mb-1 text-red-500">DISCLAIMER</strong>
-              Materna is currently in early-stage development and is not intended for clinical use. <br />
-              We do not collect, store, or process any Protected Health Information (PHI). <br />
-              This platform is for educational and demonstration purposes only and is not HIPAA-compliant at this time. <br />
+              Materna is currently in early-stage development and is not
+              intended for clinical use. <br />
+              We do not collect, store, or process any Protected Health
+              Information (PHI). <br />
+              This platform is for educational and demonstration purposes only
+              and is not HIPAA-compliant at this time. <br />
               Please do not submit any personal or health-related data.
             </p>
           </div>
         </section>
-
       </main>
-      
+
       <Footer />
     </>
   );

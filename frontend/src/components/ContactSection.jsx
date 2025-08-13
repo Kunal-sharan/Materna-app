@@ -32,7 +32,7 @@ export const ContactSection = () => {
         {
           method: "POST",
           body: new URLSearchParams({ name, email, message }),
-        }
+        },
       );
 
       const result = await response.json();
@@ -64,7 +64,8 @@ export const ContactSection = () => {
         </h2>
 
         <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Have a question, idea, or just want to say hi? Whether you're a mom, a developer or a healthcare partner, we’d love to hear from you.
+          Have a question, idea, or just want to say hi? Whether you're a mom, a
+          developer or a healthcare partner, we’d love to hear from you.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -116,17 +117,23 @@ export const ContactSection = () => {
             <div className="pt-8">
               <h4 className="font-medium mb-4 text-left"> Connect With Us</h4>
               <div className="flex space-x-4 justify-left">
-                <a href="https://www.linkedin.com/company/materna-women" target="_blank">
+                <a
+                  href="https://www.linkedin.com/company/materna-women"
+                  target="_blank"
+                >
                   <Linkedin />
                 </a>
                 <a href="tel:+19453354766" target="_blank">
-                  <Phone/>
+                  <Phone />
                 </a>
-                <a href="https://www.instagram.com/materna.health/" target="_blank">
+                <a
+                  href="https://www.instagram.com/materna.health/"
+                  target="_blank"
+                >
                   <Instagram />
                 </a>
                 <a href="mailto:shriyakkx@gmail.com" target="_blank">
-                  <Mail/>
+                  <Mail />
                 </a>
               </div>
             </div>
@@ -136,7 +143,10 @@ export const ContactSection = () => {
             className="bg-card p-8 rounded-lg shadow-xs"
             onSubmit={handleSubmit}
           >
-            <h3 className="text-2xl font-semibold mb-6 text-[hsl(var(--primary))]"> Send a Message</h3>
+            <h3 className="text-2xl font-semibold mb-6 text-[hsl(var(--primary))]">
+              {" "}
+              Send a Message
+            </h3>
 
             <form className="space-y-6">
               <div>
@@ -196,7 +206,7 @@ export const ContactSection = () => {
                 type="submit"
                 disabled={isSubmitting}
                 className={cn(
-                  "cosmic-button w-full flex items-center justify-center gap-2"
+                  "cosmic-button w-full flex items-center justify-center gap-2",
                 )}
               >
                 {isSubmitting ? "Sending..." : "Send Message"}

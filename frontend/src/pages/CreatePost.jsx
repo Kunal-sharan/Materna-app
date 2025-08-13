@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 import bgVideo from "@/assets/sky1.mp4";
 import { StarStill } from "@/components/StarStill.jsx";
 import { TopicChip } from "@/components/forum/TopicChip";
-import { Profile } from "@/components/forum/Profile"
+import { Profile } from "@/components/forum/Profile";
 import { TOPIC_COLOR_MAP } from "@/components/forum/constants/topics";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -66,34 +66,37 @@ const CreatePost = ({}) => {
       </video>
 
       <main className="min-h-screen p-8 pt-32">
-         <div className="fixed top-0 left-0 -z-10 h-screen w-full bg-white/25 backdrop-blur-xs"></div>
+        <div className="fixed top-0 left-0 -z-10 h-screen w-full bg-white/25 backdrop-blur-xs"></div>
         <div className="flex flex-row text-left">
           <div className="flex flex-col justify-between">
             <div className="flex flex-col items-center w-72 gap-y-4 rounded-[25px] border border-white/50 bg-[#DFA69F]/25 p-4 backdrop-blur-xs">
-              <label htmlFor="post-title" className="text-lg font-semibold text-gray-800">
+              <label
+                htmlFor="post-title"
+                className="text-lg font-semibold text-gray-800"
+              >
                 Rules
               </label>
               {/* Formatting for displaying rules may be incorrect */}
               <p className="bg-white w-full h-auto rounded-md p-4">
-                  Follow these rules or you will be banned.
+                Follow these rules or you will be banned.
               </p>
             </div>
 
             <div className="rounded-[25px] border border-white/50 bg-[#DFA69F]/25 p-4 pt-12 backdrop-blur-xs">
-                {/* ! Put in the user's profile information here */}
-                <Profile name={"Main User"}/>
+              {/* ! Put in the user's profile information here */}
+              <Profile name={"Main User"} />
             </div>
           </div>
 
           <div className="flex flex-1 flex-row gap-x-4">
             <div className="ml-4 w-full rounded-lg bg-white p-4 text-left">
               {/* Title */}
-                <label
-                  htmlFor="post-title"
-                  className="text-2xl font-semibold text-gray-800"
-                >
-                  Create Post
-                </label>
+              <label
+                htmlFor="post-title"
+                className="text-2xl font-semibold text-gray-800"
+              >
+                Create Post
+              </label>
               <div className="flex flex-col gap-y-2 py-2">
                 <label
                   htmlFor="post-title"
@@ -182,7 +185,7 @@ const CreatePost = ({}) => {
           </div>
         </div>
       </main>
-      
+
       <StarStill />
       <Footer />
     </>

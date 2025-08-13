@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from "react";
 
 // id, size, x, y, opacity, animationDuration
@@ -24,7 +22,7 @@ export const StarBackground = () => {
 
   const generateStars = () => {
     const numberOfStars = Math.floor(
-      (window.innerWidth * window.innerHeight) / 10000
+      (window.innerWidth * window.innerHeight) / 10000,
     );
 
     const newStars = [];
@@ -95,4 +93,3 @@ export const StarBackground = () => {
     </div>
   );
 };
-

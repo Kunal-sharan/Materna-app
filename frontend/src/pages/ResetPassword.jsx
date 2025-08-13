@@ -38,7 +38,9 @@ export default function ResetPassword() {
           ← Back to Home
         </Link>
 
-        <h2 className="text-3xl font-bold text-[#234451] mb-4 text-center">Reset Your Password</h2>
+        <h2 className="text-3xl font-bold text-[#234451] mb-4 text-center">
+          Reset Your Password
+        </h2>
         <p className="text-sm text-[#234451]/80 mb-6 text-center">
           We'll email you a link to reset it.
         </p>
@@ -58,8 +60,12 @@ export default function ResetPassword() {
           Send Reset Link
         </button>
 
-        {message && <p className="text-green-600 text-sm mt-4 text-center">{message}</p>}
-        {error && <p className="text-red-600 text-sm mt-4 text-center">{error}</p>}
+        {message && (
+          <p className="text-green-600 text-sm mt-4 text-center">{message}</p>
+        )}
+        {error && (
+          <p className="text-red-600 text-sm mt-4 text-center">{error}</p>
+        )}
       </div>
     </div>
   );
