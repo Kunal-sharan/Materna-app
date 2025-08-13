@@ -7,8 +7,8 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 const navItems = [
   { name: "Home", href: "/" },
   { name: "Symptom Journal", href: "/journal" },
-  { name: "Emergency Help", href: "/normal" },
-  { name: "Community", href: "/blog" },
+  { name: "Emergency", href: "/normal" },
+  { name: "Community & Wellness", href: "/blog" },
 ];
 
 export const Navbar = () => {
