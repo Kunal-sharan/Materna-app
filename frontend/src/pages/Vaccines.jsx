@@ -271,8 +271,8 @@ export default function Vaccines() {
           <source src={bgVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+        <div className="fixed top-0 left-0 -z-10 h-screen w-full bg-white/40 backdrop-blur-sm"></div>
         <StarStill />
-        <div className="fixed top-0 left-0 w-full h-screen bg-white/50 backdrop-blur-sm -z-10"></div>
 
         <div className="relative z-10 max-w-2xl mx-auto rounded-3xl p-6 sm:p-10 bg-white/30 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_0_rgba(31,38,135,0.2)]">
           {/* Header */}

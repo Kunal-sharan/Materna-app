@@ -438,8 +438,8 @@ const Journal = () => {
             <source src={bgVideo} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
+          <div className="fixed top-0 left-0 -z-10 h-screen w-full bg-white/40 backdrop-blur-sm"></div>
           <StarStill />
-          <div className="fixed top-0 left-0 w-full h-screen bg-white/40 backdrop-blur-sm -z-10"></div>
           <h1 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#234451] text-center mt-4 mb-8">
             Track Your Symptoms
           </h1>

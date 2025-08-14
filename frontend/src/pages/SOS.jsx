@@ -224,8 +224,9 @@ const Normal = () => {
         <source src={bgVideo} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
+      <div className="fixed top-0 left-0 -z-10 h-screen w-full bg-white/40 backdrop-blur-sm"></div>
       <StarStill />
-      <div className="fixed top-0 left-0 w-full h-screen bg-white/40 backdrop-blur-md -z-10"></div>
+      
 
       <main className="min-h-screen p-6 pt-32 max-w-7xl mx-auto">
         {/* Middle Section - Symptom Checker and AI Results */}
