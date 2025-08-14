@@ -339,7 +339,7 @@ const Blog = () => {
                     }}
                     aria-haspopup="dialog"
                   >
-                    + New Post
+                    + New Blog
                   </button>
                 </div>
 
