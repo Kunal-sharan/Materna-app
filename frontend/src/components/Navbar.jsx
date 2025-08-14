@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
@@ -16,6 +16,8 @@ export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [photo, setPhoto] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +26,18 @@ export const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   useEffect(() => {
@@ -72,30 +86,42 @@ export const Navbar = () => {
               {item.name}
             </Link>
           ))}
-          <div className="relative">
-            <button className="peer text-[#234451] hover:text-primary transition-colors duration-300 font-sans">
+          <div
+            ref={dropdownRef}
+            className="relative"
+            onMouseEnter={() => setIsDropdownOpen(true)}
+          >
+            <button
+              onClick={() => setIsDropdownOpen((prev) => !prev)}
+              className="text-[#234451] hover:text-primary transition-colors duration-300 font-sans"
+            >
               Postpartum
             </button>
-            <div className="absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg opacity-0 pointer-events-none peer-hover:opacity-100 peer-hover:pointer-events-auto hover:opacity-100 hover:pointer-events-auto transition-opacity duration-200 z-50">
-              <Link
-                to="/essentials"
-                className="block px-4 py-2 hover:bg-gray-100 font-sans"
-              >
-                Newborn Essentials
-              </Link>
-              <Link
-                to="/vaccination"
-                className="block px-4 py-2 hover:bg-gray-100 font-sans"
-              >
-                Vaccination Reminder
-              </Link>
-              <Link
-                to="/milestones"
-                className="block px-4 py-2 hover:bg-gray-100 font-sans"
-              >
-                My Baby Milestones
-              </Link>
-            </div>
+            {isDropdownOpen && (
+              <div className="absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg z-50">
+                <Link
+                  to="/essentials"
+                  className="block px-4 py-2 hover:bg-gray-100 font-sans"
+                  onClick={() => setIsDropdownOpen(false)}
+                >
+                  Newborn Essentials
+                </Link>
+                <Link
+                  to="/vaccination"
+                  className="block px-4 py-2 hover:bg-gray-100 font-sans"
+                  onClick={() => setIsDropdownOpen(false)}
+                >
+                  Vaccination Reminder
+                </Link>
+                <Link
+                  to="/milestones"
+                  className="block px-4 py-2 hover:bg-gray-100 font-sans"
+                  onClick={() => setIsDropdownOpen(false)}
+                >
+                  My Baby Milestones
+                </Link>
+              </div>
+            )}
           </div>
         </div>
 
