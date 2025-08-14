@@ -440,11 +440,14 @@ const Journal = () => {
           </video>
           <StarStill />
           <div className="fixed top-0 left-0 w-full h-screen bg-white/40 backdrop-blur-sm -z-10"></div>
+          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#234451] text-center mt-6 mb-8">
+            Track Your Symptoms
+          </h1>
           <div className="max-w-7xl mx-auto relative z-10">
             <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
               <div className="lg:col-span-2 bg-white/60 backdrop-blur-md border border-white/20 rounded-lg shadow px-6 pt-9 pb-0">
                 <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-lg font-semibold leading-6">
+                  <h2 className="font-sans text-lg font-semibold text-slate-900 leading-6">
                     {monthNames[currentMonth]} {currentYear}
                   </h2>
                   <div className="flex space-x-2 items-center">
@@ -464,14 +467,14 @@ const Journal = () => {
                     </button>
                   </div>
                 </div>
-                <div className="grid grid-cols-7 text-center text-[#234451] font-medium">
+                <div className="grid grid-cols-7 text-center font-sans text-sm text-slate-700/90">
                   {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(
                     (d) => (
                       <div key={d}>{d}</div>
                     ),
                   )}
                 </div>
-                <div className="grid grid-cols-7 text-center mt-2 gap-y-4 text-[#234451]">
+                <div className="grid grid-cols-7 text-center mt-2 gap-y-4 font-sans text-sm text-slate-700/90">
                   {(() => {
                     const firstDay = new Date(
                       currentYear,
@@ -533,7 +536,7 @@ const Journal = () => {
                     return daysArray;
                   })()}
                 </div>
-                <div className="flex justify-center space-x-4 mt-6 mb-1 text-sm text-[#234451]">
+                <div className="flex justify-center space-x-4 mt-6 mb-1 font-sans text-sm text-slate-700/90">
                   <div className="flex items-center space-x-1">
                     <div className="w-2 h-2 bg-[#99C8C1] rounded-full"></div>
                     <span>Physical Symptoms</span>
@@ -565,7 +568,7 @@ const Journal = () => {
                   )}
                 </div>
                 <div>
-                  <p className="text-sm text-[#234451]">
+                  <p className="font-sans text-lg font-semibold text-slate-900">
                     How are you feeling today?
                   </p>
                   <div className="relative w-48 h-48 mx-auto my-4">
@@ -638,7 +641,7 @@ const Journal = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="mt-2 text-xs text-[#234451]">
+                  <div className="mt-2 font-sans text-xs text-slate-700/90">
                     Energy Level: {energy}%
                   </div>
                   <div className="relative mt-4 w-full h-6 rounded-full bg-[#fff] shadow-inner overflow-hidden">
@@ -672,12 +675,12 @@ const Journal = () => {
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-sm font-medium">Symptoms</h3>
+                  <h3 className="font-sans text-lg font-semibold text-slate-900">Symptoms</h3>
                   <div className="flex flex-wrap gap-2 mt-1">
                     {symptoms.map((s, i) => (
                       <span
                         key={i}
-                        className="bg-[#fff] text-sm px-2 py-1 rounded-full flex items-center gap-1 group"
+                        className="bg-[#fff] font-sans text-sm text-slate-700/90 px-2 py-1 rounded-full flex items-center gap-1 group"
                       >
                         {s}
                         {isEditing && (
@@ -687,7 +690,7 @@ const Journal = () => {
                                 symptoms.filter((_, index) => index !== i),
                               )
                             }
-                            className="text-xs text-[#234451] hidden group-hover:inline"
+                            className="font-sans text-xs text-slate-700/90 hidden group-hover:inline"
                           >
                             ✕
                           </button>
@@ -713,7 +716,7 @@ const Journal = () => {
                                 : [],
                             );
                           }}
-                          className="border text-sm rounded px-2 py-1 flex-1"
+                          className="border font-sans text-sm text-slate-700/90 rounded px-2 py-1 flex-1"
                           placeholder="Add symptom..."
                         />
                         <button
@@ -724,7 +727,7 @@ const Journal = () => {
                         </button>
                       </div>
                       {filteredSuggestions.length > 0 && (
-                        <ul className="border bg-white rounded text-sm max-h-40 overflow-auto mt-1 shadow absolute top-full left-0 right-16 z-10">
+                        <ul className="border bg-white rounded font-sans text-sm text-slate-700/90 max-h-40 overflow-auto mt-1 shadow absolute top-full left-0 right-16 z-10">
                           {filteredSuggestions.map((suggestion, idx) => (
                             <li
                               key={idx}
@@ -743,16 +746,16 @@ const Journal = () => {
                   )}
                 </div>
                 <div>
-                  <h3 className="text-sm font-medium">Notes</h3>
+                  <h3 className="font-sans text-lg font-semibold text-slate-900">Notes</h3>
                   {isEditing ? (
                     <textarea
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
-                      className="w-full border rounded p-2 text-sm mt-1"
+                      className="w-full border rounded p-2 font-sans text-sm text-slate-700/90 mt-1"
                       rows={3}
                     />
                   ) : (
-                    <p className="text-sm text-[#234451] mt-1">{notes}</p>
+                    <p className="font-sans text-sm text-slate-700/90 mt-1">{notes}</p>
                   )}
                 </div>
               </div>
@@ -760,16 +763,16 @@ const Journal = () => {
 
             <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-white/60 backdrop-blur-md border border-white/20 rounded-lg shadow p-4">
-                <h3 className="font-semibold text-[#234451]">
+                <h3 className="font-sans text-lg font-semibold text-slate-900">
                   Mood Trends (Past 7 Days)
                 </h3>
                 <div className="flex justify-between mt-4 text-center">
                   {past7Days.map((date, i) => (
                     <div
                       key={i}
-                      className="flex flex-col items-center text-[#234451]"
+                      className="flex flex-col items-center font-sans text-sm text-slate-700/90"
                     >
-                      <span className="text-xs">
+                      <span className="font-sans text-xs text-slate-700/90">
                         {date.toLocaleDateString("en-US", { weekday: "short" })}
                       </span>
                       {weeklyMoods[i] ? (
@@ -787,11 +790,11 @@ const Journal = () => {
               </div>
 
               <div className="bg-white/60 backdrop-blur-md border border-white/20 rounded-lg shadow p-4">
-                <h3 className="font-semibold text-[#234451]">
+                <h3 className="font-sans text-lg font-semibold text-slate-900">
                   Common Symptoms
                 </h3>
                 {Object.entries(symptomCounts).length === 0 ? (
-                  <p className="text-sm text-[#234451] mt-2">
+                  <p className="font-sans text-sm text-slate-700/90 mt-2">
                     No symptom data yet.
                   </p>
                 ) : (
@@ -805,7 +808,7 @@ const Journal = () => {
                       : 0;
                     return (
                       <div key={i} className="mt-2">
-                        <div className="flex justify-between text-sm text-[#234451]">
+                        <div className="flex justify-between font-sans text-sm text-slate-700/90">
                           <span>{label}</span>
                           <span>{percent}%</span>
                         </div>
@@ -822,8 +825,8 @@ const Journal = () => {
               </div>
 
               <div className="bg-white/60 backdrop-blur-md border border-white/20 rounded-lg shadow p-4">
-                <h3 className="font-semibold text-[#234451]">Wellness Tips</h3>
-                <ul className="list-disc list-inside text-[#234451] text-sm space-y-1 mt-2">
+                <h3 className="font-sans text-lg font-semibold text-slate-900">Wellness Tips</h3>
+                <ul className="list-disc list-inside font-sans text-sm text-slate-700/90 space-y-1 mt-2">
                   <p>
                     <strong>In progress</strong>: this card will display tips
                     based on user data.
@@ -838,10 +841,10 @@ const Journal = () => {
                   className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 cursor-pointer"
                   onClick={() => setLookingAheadOpen((o) => !o)}
                 >
-                  <h3 className="font-semibold text-[#234451]">
+                  <h3 className="font-sans text-lg font-semibold text-slate-900">
                     Looking Ahead
                   </h3>
-                  <div className="flex items-center gap-2 text-xs">
+                  <div className="flex items-center gap-2 font-sans text-xs text-slate-700/90">
                     <span className="px-2 py-1 rounded-full bg-[#bcb2da] text-[#234451]">
                       Trimester {trimester}
                     </span>
@@ -852,7 +855,7 @@ const Journal = () => {
                 </div>
                 {lookingAheadOpen && (
                   <div className="animate-fadeIn">
-                    <p className="text-sm text-[#234451] mt-2">
+                    <p className="font-sans text-sm text-slate-700/90 mt-2">
                       Based on your week and recent logs, you may notice:{" "}
                       {predictions
                         .slice(0, 2)
@@ -902,11 +905,11 @@ const Journal = () => {
                               ) : (
                                 <span className="w-5 h-5 inline-block"></span>
                               )}
-                              <span className="text-sm font-medium text-[#234451]">
+                              <span className="font-sans text-lg font-semibold text-slate-900">
                                 {p.label}
                               </span>
                             </div>
-                            <span className="text-xs text-[#234451]">
+                            <span className="font-sans text-xs text-slate-700/90">
                               {p.prob}%
                             </span>
                           </div>
@@ -916,17 +919,17 @@ const Journal = () => {
                               style={{ width: `${p.prob}%` }}
                             ></div>
                           </div>
-                          <p className="text-xs text-[#234451] mt-2">{p.tip}</p>
+                          <p className="font-sans text-xs text-slate-700/90 mt-2">{p.tip}</p>
                           <div className="mt-3 flex gap-2">
                             <button
                               onClick={() => handleFeedback(p.label, true)}
-                              className={`text-xs px-2 py-1 rounded ${predictionFeedback[p.label] === "yes" ? "bg-[#234451] text-white" : "bg-white text-[#234451]"}`}
+                              className={`font-sans text-xs px-2 py-1 rounded ${predictionFeedback[p.label] === "yes" ? "bg-[#234451] text-white" : "bg-white text-[#234451]"}`}
                             >
                               This happened
                             </button>
                             <button
                               onClick={() => handleFeedback(p.label, false)}
-                              className={`text-xs px-2 py-1 rounded ${predictionFeedback[p.label] === "no" ? "bg-[#234451] text-white" : "bg-white text-[#234451] border border-[#234451]/10"}`}
+                              className={`font-sans text-xs px-2 py-1 rounded ${predictionFeedback[p.label] === "no" ? "bg-[#234451] text-white" : "bg-white text-[#234451] border border-[#234451]/10"}`}
                             >
                               Not me
                             </button>
@@ -939,7 +942,7 @@ const Journal = () => {
               </div>
             </div>
           </div>
-          <div className="mt-16 text-center text-xs text-[hsl(var(--foreground))] px-4 max-w-2xl mx-auto">
+          <div className="mt-16 text-center font-sans text-xs text-slate-700/90 px-4 max-w-2xl mx-auto">
             <p className="italic leading-relaxed">
               <strong className="block mb-1 text-red-500">DISCLAIMER</strong>
               Materna is currently in early-stage development and is not
@@ -963,10 +966,10 @@ const Journal = () => {
             >
               ✕
             </button>
-            <h2 className="text-lg font-semibold text-[#234451]">
+            <h2 className="font-sans text-lg font-semibold text-slate-900">
               Login Required
             </h2>
-            <p className="text-sm text-[#234451]">
+            <p className="font-sans text-lg font-semibold text-slate-900">
               You need to be logged in to use the journal.
             </p>
             <a
