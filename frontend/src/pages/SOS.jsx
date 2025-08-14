@@ -232,17 +232,17 @@ const Normal = () => {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-10">
           {/* Check Your Symptoms Card */}
           <div className="bg-white/40 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-8 shadow-xl font-inter">
-            <h2 className="text-[#234451] text-3xl font-serif mb-4 text-center drop-shadow-sm">
+            <h2 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#234451] mb-4 text-center drop-shadow-sm">
               Check Your Symptoms
             </h2>
 
             {currentStep === 0 && (
               <>
-                <h3 className="text-[#234451] font-sans text-lg mb-2">
+                <h3 className="font-sans text-lg font-semibold text-slate-900 mb-2">
                   Number of Previous Pregnancies
                 </h3>
                 <div className="mb-4">
-                  <p className="text-[#234451] text-sm mb-4">
+                  <p className="font-sans text-sm text-slate-700/90 mb-4">
                     Selected: {formData.parity}
                   </p>
                   <input
@@ -263,7 +263,7 @@ const Normal = () => {
 
             {currentStep === 1 && (
               <>
-                <h3 className="text-[#234451] font-sans text-lg mb-2">
+                <h3 className="font-sans text-lg font-semibold text-slate-900 mb-2">
                   Substance Use
                 </h3>
                 <div className="flex flex-wrap justify-center gap-3">
@@ -291,7 +291,7 @@ const Normal = () => {
 
             {currentStep === 2 && (
               <>
-                <h3 className="text-[#234451] font-sans text-lg mb-2">
+                <h3 className="font-sans text-lg font-semibold text-slate-900 mb-2">
                   Type of Pregnancy
                 </h3>
                 <div className="flex flex-wrap justify-center gap-3">
@@ -317,7 +317,7 @@ const Normal = () => {
 
             {currentStep === 3 && (
               <>
-                <h3 className="text-[#234451] font-sans text-lg mb-2">
+                <h3 className="font-sans text-lg font-semibold text-slate-900 mb-2">
                   Previous Pregnancy Complications
                 </h3>
                 <div className="mb-3 flex flex-wrap gap-2">
@@ -407,7 +407,7 @@ const Normal = () => {
 
             {currentStep === 4 && (
               <>
-                <h3 className="text-[#234451] font-sans text-lg mb-2">
+                <h3 className="font-sans text-lg font-semibold text-slate-900 mb-2">
                   Symptom Type
                 </h3>
                 <div className="mb-3 flex flex-wrap gap-2">
@@ -493,7 +493,7 @@ const Normal = () => {
 
             {currentStep === 5 && (
               <>
-                <h3 className="text-[#234451] font-sans text-lg mb-2">
+                <h3 className="font-sans text-lg font-semibold text-slate-900 mb-2">
                   Severity
                 </h3>
                 <div className="relative">
@@ -532,7 +532,7 @@ const Normal = () => {
 
             {currentStep === 6 && (
               <>
-                <h3 className="text-[#234451] font-sans text-lg mb-2">
+                <h3 className="font-sans text-lg font-semibold text-slate-900 mb-2">
                   Duration
                 </h3>
                 <div className="flex gap-3">
@@ -565,7 +565,7 @@ const Normal = () => {
 
             {currentStep === 7 && (
               <>
-                <h3 className="text-[#234451] font-sans text-lg mb-2">
+                <h3 className="font-sans text-lg font-semibold text-slate-900 mb-2">
                   Frequency
                 </h3>
                 <div className="relative">
@@ -604,7 +604,7 @@ const Normal = () => {
 
             {currentStep === 8 && (
               <>
-                <h3 className="text-[#234451] font-sans text-lg mb-2">
+                <h3 className="font-sans text-lg font-semibold text-slate-900 mb-2">
                   Associated Symptoms
                 </h3>
                 <input
@@ -622,7 +622,7 @@ const Normal = () => {
 
             {currentStep === 9 && (
               <>
-                <h3 className="text-[#234451] font-sans text-lg mb-2">
+                <h3 className="font-sans text-lg font-semibold text-slate-900 mb-2">
                   Fetal Movement
                 </h3>
                 <div className="flex flex-wrap gap-3 justify-center">
@@ -648,7 +648,7 @@ const Normal = () => {
 
             {currentStep === 10 && (
               <>
-                <h3 className="text-[#234451] font-sans text-lg mb-2">
+                <h3 className="font-sans text-lg font-semibold text-slate-900 mb-2">
                   How do you feel?
                 </h3>
                 <div className="flex flex-wrap gap-3 justify-center">
@@ -707,10 +707,10 @@ const Normal = () => {
 
           {/* AI Assessment Results Card*/}
           <div className="bg-white/40 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-8 shadow-xl">
-            <h2 className="text-[#234451] text-3xl font-serif mb-4 text-center drop-shadow-sm">
+            <h2 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#234451] mb-4 text-center drop-shadow-sm">
               Assessment Results
             </h2>
-            <p className="text-[#234451] text-md mb-8 text-center max-w-md mx-auto">
+            <p className="font-sans text-sm text-slate-700/90 mb-8 text-center max-w-md mx-auto">
               Based on your answers, Materna's AI suggests:
             </p>
             <div className="space-y-6">
@@ -718,10 +718,10 @@ const Normal = () => {
                 <div className="flex gap-4 items-start">
                   <div className="w-6 h-6 bg-[#fabdb5]/80 rounded-full shadow-lg border border-white"></div>
                   <div>
-                    <h3 className="font-sans text-[#234451] mb-1 text-lg">
+                    <h3 className="font-sans text-lg font-semibold text-slate-900 mb-1">
                       Recommendation
                     </h3>
-                    <p className="text-[#234451] text-sm leading-relaxed">
+                    <p className="font-sans text-sm text-slate-700/90 leading-relaxed">
                       Seek immediate care for severe symptoms.
                     </p>
                   </div>
@@ -731,10 +731,10 @@ const Normal = () => {
                 <div className="flex gap-4 items-start">
                   <div className="w-6 h-6 bg-[#fabdb5]/80 rounded-full shadow-lg border border-white"></div>
                   <div>
-                    <h3 className="font-sans text-[#234451] mb-1 text-lg">
+                    <h3 className="font-sans text-lg font-semibold text-slate-900 mb-1">
                       Recommendation
                     </h3>
-                    <p className="text-[#234451] text-sm leading-relaxed">
+                    <p className="font-sans text-sm text-slate-700/90 leading-relaxed">
                       Monitor symptoms and contact your healthcare provider.
                     </p>
                   </div>
@@ -746,16 +746,16 @@ const Normal = () => {
 
         {/* Top Section - Emergency Actions */}
         <section className="mt-12 text-center font-inter">
-          <h2 className="text-[#234451] text-3xl font-serif mb-4 text-center drop-shadow-sm">
+          <h2 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#234451] mb-4 text-center drop-shadow-sm">
             Need to talk to someone? Quick Contacts
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto items-stretch">
             {/* Emergency Services */}
             <div className="bg-white/40 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-6 shadow-xl h-full flex flex-col justify-between">
-              <h2 className="text-[#234451] text-xl font-sans font-semibold mb-4">
+              <h2 className="font-sans text-lg font-semibold text-slate-900 mb-4">
                 Emergency
               </h2>
-              <p className="text-[#234451] text-sm mb-4">
+              <p className="font-sans text-sm text-slate-700/90 mb-4">
                 Emergency Number for {emergencyInfo.country}
               </p>
               {!confirmCall911 ? (
@@ -779,10 +779,10 @@ const Normal = () => {
 
             {/* OB/GYN Contact */}
             <div className="bg-white/40 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-6 shadow-xl h-full flex flex-col justify-between">
-              <h2 className="text-[#234451] text-xl font-sans font-semibold mb-4">
+              <h2 className="font-sans text-lg font-semibold text-slate-900 mb-4">
                 Your OB/GYN
               </h2>
-              <p className="text-[#234451] text-sm mb-4">Contact your doctor</p>
+              <p className="font-sans text-sm text-slate-700/90 mb-4">Contact your doctor</p>
               <button className="font-medium text-sm bg-[#234451] text-white px-6 py-4 rounded-lg hover:bg-[#1b343f] transition-all w-full border border-[#a48bc3]/50 flex items-center justify-center gap-2">
                 Call Doctor
               </button>
