@@ -232,7 +232,7 @@ const Normal = () => {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-10">
           {/* Check Your Symptoms Card */}
           <div className="bg-white/40 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-8 shadow-xl font-inter">
-            <h2 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#234451] mb-4 text-center drop-shadow-sm">
+            <h2 className="font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl text-[#234451] mb-4 text-center drop-shadow-sm">
               Check Your Symptoms
             </h2>
 
@@ -707,7 +707,7 @@ const Normal = () => {
 
           {/* AI Assessment Results Card*/}
           <div className="bg-white/40 backdrop-blur-md border border-[#bcb2da]/50 rounded-2xl p-8 shadow-xl">
-            <h2 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#234451] mb-4 text-center drop-shadow-sm">
+            <h2 className="font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl text-[#234451] mb-4 text-center drop-shadow-sm">
               Assessment Results
             </h2>
             <p className="font-sans text-sm text-slate-700/90 mb-8 text-center max-w-md mx-auto">
@@ -746,7 +746,7 @@ const Normal = () => {
 
         {/* Top Section - Emergency Actions */}
         <section className="mt-12 text-center font-inter">
-          <h2 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#234451] mb-4 text-center drop-shadow-sm">
+          <h2 className="font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl text-[#234451] mb-4 text-center drop-shadow-sm">
             Need to talk to someone? Quick Contacts
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto items-stretch">

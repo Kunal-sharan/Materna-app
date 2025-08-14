@@ -440,7 +440,7 @@ const Journal = () => {
           </video>
           <StarStill />
           <div className="fixed top-0 left-0 w-full h-screen bg-white/40 backdrop-blur-sm -z-10"></div>
-          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#234451] text-center mt-6 mb-8">
+          <h1 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#234451] text-center mt-4 mb-8">
             Track Your Symptoms
           </h1>
           <div className="max-w-7xl mx-auto relative z-10">
