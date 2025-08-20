@@ -5,21 +5,11 @@ import { Footer } from "@/components/Footer";
 
 /* ------------------------- Copy & config ------------------------- */
 const TAGS = [
-  "Pregnancy",
-  "Postpartum",
   "Wellness",
-  "Nutrition",
-  "Mental Health",
-  "Lactation",
-  "Birth",
-  "Fitness",
   "Relationships",
-  "Work",
   "Question",
   "Rant",
-  "Advice",
   "Tips",
-  "Milestones",
   "Product Recommendations"
 ];
 
