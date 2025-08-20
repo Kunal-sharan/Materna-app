@@ -343,6 +343,19 @@ const Blog = () => {
                   </button>
                 </div>
 
+                <div className="animate-soft-in hover-lift mt-3">
+                  <button
+                    onClick={() => window.location.href = "/community"}
+                    className="w-full rounded-xl px-5 py-3 text-sm font-medium hover-lift"
+                    style={{
+                      background: MAT_COLORS.navy,
+                      color: "#ffffff",
+                    }}
+                  >
+                    Go to Community Posts
+                  </button>
+                </div>
+
                 <div className="mt-4 flex flex-wrap gap-2">
                   {categories.map((c) => (
                     <button
@@ -541,19 +554,6 @@ const Blog = () => {
               
               <Newsletter colors={MAT_COLORS} />
 
-              
-              <div className="animate-soft-in hover-lift">
-                <button
-                  onClick={() => window.location.href = "/community"}
-                  className="w-full rounded-xl px-5 py-3 text-sm font-medium hover-lift"
-                  style={{
-                    background: MAT_COLORS.navy,
-                    color: "#ffffff",
-                  }}
-                >
-                  Go to Community Posts
-                </button>
-              </div>
             </aside>
           </div>
         </section>
