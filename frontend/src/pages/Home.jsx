@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { auth } from "@/firebase";
 import Chatbot from "../pages/Chatbot";
 import { Navbar } from "../components/Navbar";
 import { StarStill } from "@/components/StarStill";
@@ -9,6 +12,22 @@ import { Footer } from "../components/Footer";
 import bgVideo from "@/assets/sky1.mp4";
 
 export const Home = () => {
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigate("/community");
+      } else {
+        setLoading(false);
+      }
+    });
+    return () => unsubscribe();
+  }, [navigate]);
+
+  if (loading) return null;
+
   return (
     <div className="relative min-h-screen text-foreground overflow-x-hidden">
       {/* Background Video */}

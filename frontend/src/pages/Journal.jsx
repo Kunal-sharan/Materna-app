@@ -1,3 +1,19 @@
+// Glassmorphism utility class
+// You may move this to your CSS/SCSS if preferred.
+const glassStyle = `
+.glass {
+  background: rgba(255,255,255,0.58);
+  border: 1px solid rgba(255,255,255,0.35);
+  backdrop-filter: blur(8px);
+}
+`;
+
+if (typeof document !== "undefined" && !document.getElementById("glass-style")) {
+  const style = document.createElement("style");
+  style.id = "glass-style";
+  style.innerHTML = glassStyle;
+  document.head.appendChild(style);
+}
 import bgVideo from "@/assets/sky1.mp4";
 import editIcon from "@/assets/editing.png";
 import nextIcon from "@/assets/next.png";
@@ -445,7 +461,7 @@ const Journal = () => {
           </h1>
           <div className="max-w-7xl mx-auto relative z-10">
             <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <div className="lg:col-span-2 bg-white/60 backdrop-blur-md border border-white/20 rounded-lg shadow px-6 pt-9 pb-0">
+              <div className="lg:col-span-2 glass rounded-lg shadow px-6 pt-9 pb-0">
                 <div className="flex justify-between items-center mb-4">
                   <h2 className="font-sans text-lg font-semibold text-slate-900 leading-6">
                     {monthNames[currentMonth]} {currentYear}
@@ -548,7 +564,7 @@ const Journal = () => {
                 </div>
               </div>
 
-              <div className="bg-white/60 backdrop-blur-md border border-white/20 rounded-lg shadow p-6 space-y-4">
+              <div className="glass rounded-lg shadow p-6 space-y-4">
                 <div className="flex justify-end items-center">
                   {isEditing ? (
                     <button
@@ -762,7 +778,7 @@ const Journal = () => {
             </div>
 
             <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-white/60 backdrop-blur-md border border-white/20 rounded-lg shadow p-4">
+              <div className="glass rounded-lg shadow p-4">
                 <h3 className="font-sans text-lg font-semibold text-slate-900">
                   Mood Trends (Past 7 Days)
                 </h3>
@@ -789,7 +805,7 @@ const Journal = () => {
                 </div>
               </div>
 
-              <div className="bg-white/60 backdrop-blur-md border border-white/20 rounded-lg shadow p-4">
+              <div className="glass rounded-lg shadow p-4">
                 <h3 className="font-sans text-lg font-semibold text-slate-900">
                   Common Symptoms
                 </h3>
@@ -824,7 +840,7 @@ const Journal = () => {
                 )}
               </div>
 
-              <div className="bg-white/60 backdrop-blur-md border border-white/20 rounded-lg shadow p-4">
+              <div className="glass rounded-lg shadow p-4">
                 <h3 className="font-sans text-lg font-semibold text-slate-900">Wellness Tips</h3>
                 <ul className="list-disc list-inside font-sans text-sm text-slate-700/90 space-y-1 mt-2">
                   <p>
@@ -835,7 +851,7 @@ const Journal = () => {
               </div>
               {/* Looking Ahead Card */}
               <div
-                className={`bg-white/70 backdrop-blur-md border border-white/20 rounded-lg shadow p-4 md:col-span-3 transition-all duration-500 ease-out overflow-hidden ${lookingAheadOpen ? "max-h-[1000px] opacity-100" : "max-h-20 opacity-90"}`}
+                className={`glass rounded-lg shadow p-4 md:col-span-3 transition-all duration-500 ease-out overflow-hidden ${lookingAheadOpen ? "max-h-[1000px] opacity-100" : "max-h-20 opacity-90"}`}
               >
                 <div
                   className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 cursor-pointer"
@@ -892,7 +908,7 @@ const Journal = () => {
                       {predictions.map((p, i) => (
                         <div
                           key={i}
-                          className="min-w-[240px] snap-start bg-white/80 border border-white/30 rounded-lg p-3 shadow transition-all duration-300 ease-out"
+                          className="min-w-[240px] snap-start glass rounded-lg p-3 shadow transition-all duration-300 ease-out"
                         >
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">

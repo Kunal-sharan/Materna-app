@@ -93,7 +93,6 @@ function TagChip({ label, active, onToggle }) {
 
 /* ------------------------- Post Card (feed) ------------------------- */
 import React from "react";
-// Helper to recursively count comments (including replies)
 function countThreadedComments(comments) {
   if (!Array.isArray(comments)) return 0;
   let count = 0;
@@ -109,20 +108,17 @@ function countThreadedComments(comments) {
 function PostCard({ post }) {
   const [votes, setVotes] = useState(post.votes || 0);
   const [showComments, setShowComments] = useState(false);
-  // Comments are an array of threaded comments
   const [commentList, setCommentList] = useState(
     post.commentList || []
   );
   const [commentText, setCommentText] = useState("");
 
-  // For total comments count (including all nested replies)
   const totalComments = countThreadedComments(commentList);
 
   const handleToggleComments = () => {
     setShowComments((prev) => !prev);
   };
 
-  // Add a new top-level comment
   const handleCommentSubmit = (e) => {
     e.preventDefault();
     if (commentText.trim().length === 0) return;
@@ -137,7 +133,6 @@ function PostCard({ post }) {
     setCommentText("");
   };
 
-  // Like a comment by id (recursive)
   const handleLikeComment = (id) => {
     function likeRecursive(comments) {
       return comments.map((c) => {
@@ -153,7 +148,6 @@ function PostCard({ post }) {
     setCommentList((prev) => likeRecursive(prev));
   };
 
-  // Toggle reply form for a comment by id (recursive)
   const handleToggleReply = (id) => {
     function toggleRecursive(comments) {
       return comments.map((c) => {
@@ -169,7 +163,6 @@ function PostCard({ post }) {
     setCommentList((prev) => toggleRecursive(prev));
   };
 
-  // Add a reply to a comment by id (recursive)
   const handleAddReply = (parentId, replyText) => {
     function addRecursive(comments) {
       return comments.map((c) => {
@@ -196,7 +189,6 @@ function PostCard({ post }) {
     setCommentList((prev) => addRecursive(prev));
   };
 
-  // Consistent heart icon for both post upvotes and comment likes
   const HeartIcon = ({ filled = true, className = "w-4 h-4" }) => (
     <svg
       viewBox="0 0 24 24"
@@ -214,14 +206,11 @@ function PostCard({ post }) {
     </svg>
   );
 
-  // Recursive comment rendering with vertical line for nested replies
   const CommentThread = ({ comments, depth = 0, isLast = true }) => {
     const [localReply, setLocalReply] = useState({});
     return (
       <ul className="space-y-2">
         {comments.map((c, idx) => {
-          // For vertical line: only show for depth > 0
-          // If not last child, extend line down; if last, line stops at bottom of comment
           const isChild = depth > 0;
           const isLastChild = idx === comments.length - 1;
           return (
@@ -232,7 +221,6 @@ function PostCard({ post }) {
                 marginLeft: isChild ? 18 : 0,
               }}
             >
-              {/* Vertical connector line for nested replies */}
               {isChild && (
                 <span
                   aria-hidden="true"
@@ -317,7 +305,6 @@ function PostCard({ post }) {
                       </div>
                     </form>
                   )}
-                  {/* Render replies recursively */}
                   {c.replies && c.replies.length > 0 && (
                     <div className="mt-2">
                       <CommentThread comments={c.replies} depth={depth + 1} isLast={isLastChild} />
@@ -518,7 +505,6 @@ function Composer({
     return Object.keys(e).length === 0;
   };
 
-  // Save draft to localStorage
   const handleSaveDraft = () => {
     const draft = {
       title,
@@ -687,7 +673,6 @@ const Community = () => {
     setPosts((p) => [newPost, ...p]);
   };
 
-  // Scroll to composer section (for accessibility, but composer is modal-like)
   const openComposer = () => {
     setShowComposer(true);
     setTimeout(() => {
@@ -695,17 +680,14 @@ const Community = () => {
     }, 10);
   };
 
-  // Handler for tag filter click (now used by dropdown)
   const handleFilterClick = (tag) => {
     setActiveFilter(tag);
   };
 
-  // Filtered posts for feed (by tag)
   const filteredByTag = activeFilter
     ? posts.filter((p) => p.tags.includes(activeFilter))
     : posts;
 
-  // Further filter by search query (case-insensitive, title or body)
   const filteredPosts = useMemo(() => {
     if (!searchQuery.trim()) return filteredByTag;
     const q = searchQuery.trim().toLowerCase();
@@ -809,7 +791,6 @@ const Community = () => {
             </div>
           </section>
 
-          {/* Only render Composer when showComposer is true */}
           {showComposer && (
             <section ref={composerRef} className="mt-10 md:mt-12">
               <Composer

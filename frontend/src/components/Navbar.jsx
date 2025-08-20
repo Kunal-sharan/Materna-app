@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
 const navItems = [
@@ -18,6 +18,11 @@ export const Navbar = () => {
   const [photo, setPhoto] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
+
+  const filteredNavItems = user
+    ? navItems.filter(item => item.name !== "Home")
+    : navItems;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,6 +49,9 @@ export const Navbar = () => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
+      if (user && window.location.pathname === "/") {
+        navigate("/blog");
+      }
       const storedPhoto = localStorage.getItem("maternaUserPhoto");
       if (storedPhoto) setPhoto(storedPhoto);
     });
@@ -76,7 +84,7 @@ export const Navbar = () => {
 
         {/* desktop nav */}
         <div className="hidden md:flex space-x-8">
-          {navItems.map((item, key) => (
+          {filteredNavItems.map((item, key) => (
             <Link
               key={key}
               to={item.href}
@@ -170,7 +178,7 @@ export const Navbar = () => {
           )}
         >
           <div className="flex flex-col space-y-8 text-xl font-sans">
-            {navItems.map((item, key) => (
+            {filteredNavItems.map((item, key) => (
               <Link
                 key={key}
                 to={item.href}
