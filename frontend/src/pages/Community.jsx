@@ -341,6 +341,9 @@ function PostCard({ post }) {
         <h3 className="text-lg md:text-xl font-semibold leading-snug text-[#234451]">
           {post.title}
         </h3>
+        <p className="text-xs text-[#234451]/70 mt-1">
+          {post.anonymous ? "Posted anonymously" : "Posted by You"}
+        </p>
         <div className="mt-2 flex flex-wrap gap-2">
           {post.tags.map((t) => (
             <span
@@ -487,6 +490,7 @@ function Composer({
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [errors, setErrors] = useState({});
+  const [anonymous, setAnonymous] = useState(false);
   const formRef = useRef(null);
 
   useEffect(() => {
@@ -520,6 +524,7 @@ function Composer({
       title,
       body,
       tags: selectedTags,
+      anonymous,
     };
     try {
       localStorage.setItem("communityDraft", JSON.stringify(draft));
@@ -534,6 +539,7 @@ function Composer({
       title: title.trim(),
       body: body.trim(),
       tags: selectedTags,
+      anonymous,
     });
     setTitle("");
     setBody("");
@@ -597,6 +603,18 @@ function Composer({
             {errors.tags && (
               <p className="mt-2 text-xs text-rose-200">{errors.tags}</p>
             )}
+            <div className="flex items-center gap-2 mt-2">
+              <input
+                type="checkbox"
+                id="anonymous"
+                checked={anonymous}
+                onChange={(e) => setAnonymous(e.target.checked)}
+                className="h-4 w-4 text-[#234451] border-white/30 rounded focus:ring-white/40"
+              />
+              <label htmlFor="anonymous" className="text-sm text-[#234451]/80">
+                Post anonymously
+              </label>
+            </div>
           </div>
 
           <div className="flex flex-wrap items-center gap-3 pt-2">
@@ -656,12 +674,13 @@ const Community = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const composerRef = useRef(null);
 
-  const handlePost = ({ title, body, tags }) => {
+  const handlePost = ({ title, body, tags, anonymous }) => {
     const newPost = {
       id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
       title,
       body,
       tags,
+      anonymous,
       votes: 1,
       comments: 0,
     };
