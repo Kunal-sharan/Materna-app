@@ -9,5 +9,5 @@ class CustomUserProfileSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = CustomUserProfile
-        fields = ['due_date', 'pregnancy_week', 'doctor_info']  
+        fields = ['due_date', 'pregnancy_week', 'doctor_info', 'dob', 'phone_number']  
 

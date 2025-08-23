@@ -11,7 +11,9 @@ class CustomUserProfileModelTest(TestCase):
             trimester=2,
             due_date='2025-12-31',
             pregnancy_week=20,
-            doctor_info='Dr. Smith, 555-1234'
+            doctor_info='Dr. Smith, 555-1234',
+            dob='1999-05-01',           # NEW
+            phone_number='+15551234567' # NEW
         )
         self.assertEqual(user.username, 'testuser')
         self.assertEqual(user.firebase_uid, 'firebase123')
@@ -20,3 +22,5 @@ class CustomUserProfileModelTest(TestCase):
         self.assertEqual(str(user.due_date), '2025-12-31')
         self.assertEqual(user.pregnancy_week, 20)
         self.assertEqual(user.doctor_info, 'Dr. Smith, 555-1234')
+        self.assertEqual(str(user.dob), '1999-05-01')            # NEW
+        self.assertEqual(user.phone_number, '+15551234567')      # NEW
