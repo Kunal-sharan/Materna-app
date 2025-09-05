@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import RegexValidator
 # Create your models here.
 
 class CustomUserProfile(AbstractUser):
@@ -11,6 +12,22 @@ class CustomUserProfile(AbstractUser):
     due_date = models.DateField(null=True, blank=True, help_text="Expected due date for pregnant users.")
     pregnancy_week = models.PositiveIntegerField(null=True, blank=True, help_text="Current week of pregnancy.")
     doctor_info = models.TextField(null=True, blank=True, help_text="Information about the user's doctor.")
+
+    # NEW FIELDS
+    dob = models.DateField(null=True, blank=True, help_text="User's date of birth.")
+    phone_number = models.CharField(
+        max_length=20,
+        null=True,
+        blank=True,
+        help_text="Phone number in E.164 or local format.",
+        validators=[
+            RegexValidator(
+                regex=r'^\+?[0-9()\-\s]{7,20}$',
+                message="Enter a valid phone number (e.g., +15551234567)."
+            )
+        ],
+    )
+    # If you want phone numbers to be unique across users, add: unique=True
 
     
     def __str__(self):
