@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import bgVideo from "@/assets/sky1.mp4";
@@ -210,6 +212,70 @@ const Normal = () => {
       [field]: value,
     }));
   };
+
+  // --- Leaflet Map Integration as useEffect ---
+  useEffect(() => {
+    const mapContainer = document.getElementById("materna-map");
+    if (!mapContainer) return;
+
+    let map, userMarker;
+    let radiusMiles = 5;
+    const clinics = [
+      { name: "Sunrise Women’s Health", lat: 37.7749, lon: -122.4194 },
+      { name: "MaterCare Clinic", lat: 37.7849, lon: -122.4094 },
+      { name: "Bloom OB/GYN", lat: 37.7649, lon: -122.4294 },
+    ];
+
+    function initMap(lat, lon) {
+      map = L.map(mapContainer).setView([lat, lon], 12);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "© OpenStreetMap contributors",
+      }).addTo(map);
+      userMarker = L.marker([lat, lon]).addTo(map).bindPopup("You are here");
+      renderClinics(lat, lon);
+    }
+
+    function renderClinics(lat, lon) {
+      clinics.forEach((c) => {
+        const dist =
+          3959 *
+          Math.acos(
+            Math.cos((lat * Math.PI) / 180) *
+              Math.cos((c.lat * Math.PI) / 180) *
+              Math.cos(((c.lon - lon) * Math.PI) / 180) +
+            Math.sin((lat * Math.PI) / 180) *
+              Math.sin((c.lat * Math.PI) / 180)
+          );
+        if (dist <= radiusMiles) {
+          L.marker([c.lat, c.lon])
+            .addTo(map)
+            .bindPopup(`${c.name} (within ${radiusMiles} mi)`);
+        }
+      });
+    }
+
+    const locationHandler = (e) => {
+      const { latitude, longitude } = e.detail;
+      if (!map) initMap(latitude, longitude);
+      else map.setView([latitude, longitude], 12);
+    };
+
+    const radiusHandler = (e) => {
+      radiusMiles = Number(e.detail.radius);
+      if (map && userMarker) {
+        const { lat, lng } = userMarker.getLatLng();
+        renderClinics(lat, lng);
+      }
+    };
+
+    window.addEventListener("materna-location-granted", locationHandler);
+    window.addEventListener("materna-radius-change", radiusHandler);
+
+    return () => {
+      window.removeEventListener("materna-location-granted", locationHandler);
+      window.removeEventListener("materna-radius-change", radiusHandler);
+    };
+  }, []);
 
   return (
     <>
@@ -802,6 +868,81 @@ const Normal = () => {
             </p>
           </div>
         </section>
+        {/* Nearby Certified Clinics Section */}
+        <section className="mt-20 text-center font-inter">
+          <h2 className="font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl text-[#234451] mb-4 text-center drop-shadow-sm">
+            Find Certified Clinics Near You
+          </h2>
+          <p className="font-sans text-sm text-slate-700/90 mb-6 max-w-2xl mx-auto">
+            With your consent, Materna can show nearby certified clinics to help you find care quickly.
+          </p>
+
+          <div className="mb-6">
+            <button
+              onClick={async () => {
+                if (!navigator.geolocation) {
+                  alert("Geolocation is not supported by your browser.");
+                  return;
+                }
+                const consent = window.confirm("Allow Materna to access your location?");
+                if (!consent) return;
+
+                navigator.geolocation.getCurrentPosition(
+                  (pos) => {
+                    const { latitude, longitude } = pos.coords;
+                    window.dispatchEvent(
+                      new CustomEvent("materna-location-granted", {
+                        detail: { latitude, longitude },
+                      })
+                    );
+                  },
+                  (err) => {
+                    console.error(err);
+                    alert("Unable to access location.");
+                  }
+                );
+              }}
+              className="font-medium text-sm px-6 py-3 bg-[#234451] text-[#fabdb5] rounded-lg hover:bg-[#1b343f] transition-all"
+            >
+              Share My Location
+            </button>
+          </div>
+
+          <div id="clinic-map-section" className="max-w-4xl mx-auto">
+            <div className="flex justify-center items-center gap-4 mb-4">
+              <label htmlFor="radius" className="text-sm font-medium text-[#234451]">
+                Search radius:
+              </label>
+              <select
+                id="radius"
+                onChange={(e) => {
+                  window.dispatchEvent(
+                    new CustomEvent("materna-radius-change", {
+                      detail: { radius: e.target.value },
+                    })
+                  );
+                }}
+                className="px-3 py-2 border border-[#bcb2da]/50 rounded-lg text-sm bg-white/30 text-[#234451] focus:ring-2 focus:ring-[#DFA69F]/50 transition-all"
+              >
+                <option value="5">5 miles</option>
+                <option value="10">10 miles</option>
+                <option value="20">20 miles</option>
+                <option value="50">50 miles</option>
+              </select>
+            </div>
+
+            {/* Placeholder for live map */}
+            <div
+              id="materna-map"
+              className="w-full h-96 rounded-xl border border-[#bcb2da]/50 shadow-md bg-white/60"
+            >
+              <p className="text-sm text-[#234451] mt-40 text-center italic">
+                Map loading... please allow location access.
+              </p>
+            </div>
+          </div>
+        </section>
+
       </main>
 
       <Footer />
